@@ -20,13 +20,10 @@ class Response
      * Construct a new response.
      *
      * @param \Psr\Http\Message\ResponseInterface  $original
-     * @param  \Laravie\Codex\Sanitizer|null  $sanitizer
      */
-    public function __construct(ResponseInterface $original, Sanitizer $sanitizer = null)
+    public function __construct(ResponseInterface $original)
     {
         $this->original = $original;
-
-        $this->setSanitizer($sanitizer);
     }
 
     /**

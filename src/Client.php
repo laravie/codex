@@ -65,7 +65,7 @@ abstract class Client
     public function useVersion($version)
     {
         if (! array_key_exists($version, $this->supportedVersions)) {
-            throw new InvalidArgumentException("API version {$version} is not supported");
+            throw new InvalidArgumentException("API version {$version} is not supported.");
         }
 
         $this->defaultVersion = $version;
@@ -152,6 +152,18 @@ abstract class Client
     }
 
     /**
+     * Resolve the responder class.
+     *
+     * @param  \Psr\Http\Message\ResponseInterface  $response
+     *
+     * @return \Laravie\Codex\Response
+     */
+    protected function responseWith(ResponseInterface $response)
+    {
+        return new Response($response);
+    }
+
+    /**
      * Prepare request headers.
      *
      * @param  array  $headers
@@ -187,15 +199,6 @@ abstract class Client
 
         return [$headers, $body];
     }
-
-    /**
-     * Resolve the responder class.
-     *
-     * @param  \Psr\Http\Message\ResponseInterface  $response
-     *
-     * @return \Laravie\Codex\Response
-     */
-    abstract protected function responseWith(ResponseInterface $response);
 
     /**
      * Resolve the sanitizer class.
