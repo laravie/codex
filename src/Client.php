@@ -203,7 +203,7 @@ abstract class Client
     /**
      * Resolve the sanitizer class.
      *
-     * @return \Laravie\Codex\Sanitizer
+     * @return \Laravie\Codex\Sanitizer|null
      */
     abstract protected function sanitizeWith();
 
