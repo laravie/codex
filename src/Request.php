@@ -3,6 +3,7 @@
 namespace Laravie\Codex;
 
 use GuzzleHttp\Psr7\Uri;
+use Laravie\Codex\WithSanitizer;
 
 abstract class Request
 {
@@ -51,13 +52,13 @@ abstract class Request
      * @param  string  $method
      * @param  string  $path
      * @param  array  $headers
-     * @param  array  $body
+     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
      * @return \Laravie\Codex\Reponse
      */
-    protected function send($method, $path, array $headers = [], array $body = [])
+    protected function send($method, $path, array $headers = [], $body = [])
     {
-        if ($this->hasSanitizer()) {
+        if ($this->hasSanitizer() && is_array($body)) {
             $body = $this->getSanitizer()->from($body);
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Codex;
+namespace Laravie\Codex\Support;
 
 trait WithSanitizer
 {

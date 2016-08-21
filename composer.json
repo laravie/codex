@@ -20,6 +20,7 @@
         "php-http/client-common": "^1.1",
         "php-http/client-implementation": "^1.0",
         "php-http/discovery": "^1.0",
+        "php-http/multipart-stream-builder": "^0.1.1",
         "guzzlehttp/psr7": "^1.0",
         "igorw/get-in": "^1.0"
     },
@@ -31,7 +32,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1-dev"
+            "dev-master": "0.2-dev"
         }
     },
     "minimum-stability": "dev"
