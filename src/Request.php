@@ -3,7 +3,7 @@
 namespace Laravie\Codex;
 
 use GuzzleHttp\Psr7\Uri;
-use Laravie\Codex\WithSanitizer;
+use Laravie\Codex\Support\WithSanitizer;
 
 abstract class Request
 {

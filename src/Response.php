@@ -3,8 +3,8 @@
 namespace Laravie\Codex;
 
 use BadMethodCallException;
-use Laravie\Codex\WithSanitizer;
 use Psr\Http\Message\ResponseInterface;
+use Laravie\Codex\Support\WithSanitizer;
 
 class Response
 {
