@@ -40,6 +40,19 @@ abstract class Client
     protected $supportedVersions = [];
 
     /**
+     * Make HTTP client through Discovery.
+     *
+     * @return \Http\Client\Common\HttpMethodsClient
+     */
+    protected static function makeHttpClient()
+    {
+        return new HttpClient(
+            HttpClientDiscovery::find(),
+            MessageFactoryDiscovery::find()
+        );
+    }
+
+    /**
      * Use custom API Endpoint.
      *
      * @param  string  $endpoint
@@ -135,19 +148,6 @@ abstract class Client
 
         return $this->responseWith(
             $this->http->send($method, $uri, $headers, $body)
-        );
-    }
-
-    /**
-     * Make HTTP client through Discovery.
-     *
-     * @return \Http\Client\Common\HttpMethodsClient
-     */
-    protected function makeHttpClient()
-    {
-        return new HttpClient(
-            HttpClientDiscovery::find(),
-            MessageFactoryDiscovery::find()
         );
     }
 
