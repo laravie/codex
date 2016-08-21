@@ -7,7 +7,7 @@ use Http\Message\MultipartStream\MultipartStreamBuilder;
 
 trait MultipartRequest
 {
-    use WithSerializer;
+    use WithSanitizer;
 
     /**
      * Prepare multipart request payloads.
