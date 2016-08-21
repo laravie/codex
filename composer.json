@@ -1,0 +1,38 @@
+{
+    "name": "laravie/codex",
+    "description": "PHP library for building API Client SDK for PHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mior Muhammad Zaki",
+            "email": "crynobone@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Laravie\\Codex\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "php-http/httplug": "~1.0",
+        "php-http/client-common": "^1.1",
+        "php-http/client-implementation": "^1.0",
+        "php-http/discovery": "^1.0",
+        "guzzlehttp/psr7": "^1.0",
+        "igorw/get-in": "^1.0"
+    },
+    "require-dev": {
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/curl-client": "^1.1",
+        "phpunit/phpunit": "~4.8 || ~5.0",
+        "mockery/mockery": "^0.9.4"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
