@@ -36,6 +36,16 @@ abstract class Request
     }
 
     /**
+     * Get API version.
+     *
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
      * Send API request.
      *
      * @param  string  $method
@@ -62,10 +72,5 @@ abstract class Request
      *
      * @return \GuzzleHttp\Psr7\Uri
      */
-    protected function getUriEndpoint($endpoint)
-    {
-        $domain = $this->client->getApiEndpoint();
-
-        return new Uri(sprintf('%s/%s/%s', $domain, $this->version, $endpoint));
-    }
+    abstract protected function getUriEndpoint($endpoint);
 }
