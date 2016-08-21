@@ -2,6 +2,8 @@
 
 namespace Laravie\Codex\Support;
 
+use Laravie\Codex\Sanitizer;
+
 trait WithSanitizer
 {
     /**
