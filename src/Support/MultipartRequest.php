@@ -7,8 +7,6 @@ use Http\Message\MultipartStream\MultipartStreamBuilder;
 
 trait MultipartRequest
 {
-    use WithSanitizer;
-
     /**
      * Prepare multipart request payloads.
      *
@@ -20,7 +18,7 @@ trait MultipartRequest
      */
     public function prepareMultipartRequestPayloads(array $headers = [], array $body = [], array $files = [])
     {
-        if (empty($files)) {
+        if (empty($files) && ! (isset($headers['Content-Type']) && $headers['Content-Type'] == 'multipart/form-data')) {
             return [$headers, $body];
         }
 
@@ -84,4 +82,18 @@ trait MultipartRequest
             }
         }
     }
+
+    /**
+     * Check if sanitizaer exists.
+     *
+     * @return bool
+     */
+    abstract public function hasSanitizer();
+
+    /**
+     * Get sanitizer.
+     *
+     * @return \Laravie\Codex\Sanitizer|null
+     */
+    abstract public function getSanitizer();
 }
