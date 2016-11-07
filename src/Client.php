@@ -148,7 +148,7 @@ abstract class Client
 
         return $this->responseWith(
             $this->http->send($method, $uri, $headers, $body)
-        );
+        )->validate();
     }
 
     /**
@@ -160,7 +160,7 @@ abstract class Client
      */
     protected function responseWith(ResponseInterface $response)
     {
-        return (new Response($response))->validate();
+        return new Response($response);
     }
 
     /**
