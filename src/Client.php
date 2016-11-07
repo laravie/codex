@@ -160,7 +160,7 @@ abstract class Client
      */
     protected function responseWith(ResponseInterface $response)
     {
-        return new Response($response);
+        return (new Response($response))->validate();
     }
 
     /**
