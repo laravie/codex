@@ -76,6 +76,45 @@ abstract class Request
     }
 
     /**
+     * Get API Header.
+     *
+     * @return array
+     */
+    abstract protected function getApiHeaders();
+
+    /**
+     * Get API Body.
+     *
+     * @return array
+     */
+    abstract protected function getApiBody();
+
+    /**
+     * Merge API Headers.
+     *
+     * @param  array  $headers
+     *
+     * @return array
+     */
+    protected function mergeApiHeaders(array $headers = [])
+    {
+        return array_merge($this->getApiHeaders(), $headers);
+    }
+
+
+    /**
+     * Merge API Body.
+     *
+     * @param  array  $headers
+     *
+     * @return array
+     */
+    protected function mergeApiBody(array $body = [])
+    {
+        return array_merge($this->getApiBody(), $body);
+    }
+
+    /**
      * Get URI Endpoint.
      *
      * @param  string  $endpoint
