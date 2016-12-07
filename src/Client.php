@@ -148,7 +148,7 @@ abstract class Client
 
         return $this->responseWith(
             $this->http->send($method, $uri, $headers, $body)
-        );
+        )->validate();
     }
 
     /**

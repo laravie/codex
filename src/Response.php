@@ -28,6 +28,16 @@ class Response
     }
 
     /**
+     * Validate the response object.
+     *
+     * @return $this
+     */
+    public function validate()
+    {
+        return $this;
+    }
+
+    /**
      * Convert response body to array.
      *
      * @return array
