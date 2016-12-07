@@ -80,14 +80,20 @@ abstract class Request
      *
      * @return array
      */
-    abstract protected function getApiHeaders();
+    protected function getApiHeaders()
+    {
+        return [];
+    }
 
     /**
      * Get API Body.
      *
      * @return array
      */
-    abstract protected function getApiBody();
+    protected function getApiBody()
+    {
+        return [];
+    }
 
     /**
      * Merge API Headers.
