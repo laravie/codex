@@ -32,7 +32,7 @@ class Response
      *
      * @return $this
      */
-    protected function validate()
+    public function validate()
     {
         return $this;
     }
