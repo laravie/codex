@@ -76,7 +76,7 @@ trait MultipartRequest
      */
     protected function addFilesToMultipartBuilder(MultipartStreamBuilder $builder, array $files = [])
     {
-        foreach($files as $key => $file) {
+        foreach ($files as $key => $file) {
             if (! is_null($file)) {
                 $builder->addResource($key, fopen($file, 'r'));
             }
