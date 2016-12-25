@@ -107,7 +107,6 @@ abstract class Request
         return array_merge($this->getApiHeaders(), $headers);
     }
 
-
     /**
      * Merge API Body.
      *
