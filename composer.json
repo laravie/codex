@@ -27,7 +27,7 @@
         "mockery/mockery": "^0.9.4",
         "php-http/curl-client": "^1.1",
         "php-http/guzzle6-adapter": "^1.1",
-        "phpunit/phpunit": "~4.8 || ~5.0"
+        "phpunit/phpunit": "~4.8 || ~5.7"
     },
     "suggest": {
         "php-http/multipart-stream-builder": "Allow to send multipart form request (^0.1)"
