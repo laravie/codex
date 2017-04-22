@@ -59,7 +59,7 @@ abstract class Request
      * Send API request.
      *
      * @param  string  $method
-     * @param  string  $path
+     * @param  \Laravie\Codex\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -71,7 +71,13 @@ abstract class Request
             $body = $this->getSanitizer()->from($body);
         }
 
-        return $this->client->send($method, $this->getUriEndpoint($path), $headers, $body)
+        $endpoint = new Endpoint($this->client->getApiEndpoint(), $path);
+
+        if (strtoupper($method) === 'GET') {
+            $endpoint->addQuery($body);
+        }
+
+        return $this->client->send($method, $this->getUriFromEndpoint($endpoint), $headers, $body)
                     ->setSanitizer($this->getSanitizer());
     }
 
@@ -124,7 +130,7 @@ abstract class Request
      *
      * @param  string  $endpoint
      *
-     * @return \GuzzleHttp\Psr7\Uri
+     * @return \Laravie\Codex\Endpoint
      */
-    abstract protected function getUriEndpoint($endpoint);
+    abstract protected function getUriEndpoint(Endpoint $endpoint);
 }
