@@ -2,6 +2,8 @@
 
 namespace Laravie\Codex;
 
+use GuzzleHttp\Psr7\Uri;
+
 class Endpoint
 {
     /**
@@ -69,6 +71,6 @@ class Endpoint
     {
         $query = http_build_query($this->query, null, '&');
 
-        return new Uri(sprintf('%s/%s?%s'), $this->uri, $this->path, $query);
+        return new Uri(sprintf('%s/%s?%s', $this->uri, $this->path, $query));
     }
 }
