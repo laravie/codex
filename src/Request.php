@@ -126,5 +126,10 @@ abstract class Request
      *
      * @return \GuzzleHttp\Psr7\Uri
      */
-    abstract protected function getUriEndpoint($endpoint);
+    protected function getUriEndpoint($endpoint)
+    {
+        $to = sprintf('%s/%s', $this->client->getApiEndpoint(), $endpoint);
+
+        return new Uri($to);
+    }
 }
