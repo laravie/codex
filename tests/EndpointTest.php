@@ -16,6 +16,14 @@ class EndpointTest extends TestCase
     }
 
     /** @test */
+    public function it_can_build_endpoint_with_multiple_paths()
+    {
+        $endpoint = new Endpoint('https://laravel.com', ['docs', '5.4']);
+
+        $this->assertEquals('https://laravel.com/docs/5.4', (string) $endpoint->get());
+    }
+
+    /** @test */
     public function it_can_build_basic_endpoint_with_query_string()
     {
         $endpoint = new Endpoint('https://laravel.com', 'docs', ['search' => 'controller']);
