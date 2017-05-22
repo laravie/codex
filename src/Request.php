@@ -127,11 +127,11 @@ abstract class Request
     /**
      * Get API Endpoint.
      *
-     * @param  string  $path
+     * @param  string|array  $path
      *
      * @return \Laravie\Codex\Endpoint
      */
-    protected function getApiEndpoint($path)
+    protected function getApiEndpoint($path = [])
     {
         return new Endpoint($this->client->getApiEndpoint(), $path);
     }
