@@ -139,9 +139,12 @@ abstract class Request
     /**
      * Resolve URI.
      *
-     * @param  string  $path
+     * @param  \Laravie\Codex\Endpoint  $endpoint
      *
      * @return \GuzzleHttp\Psr7\Uri
      */
-    abstract protected function resolveUri($path);
+    protected function resolveUri(Endpoint $endpoint)
+    {
+        return $endpoint->get();
+    }
 }
