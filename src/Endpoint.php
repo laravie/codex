@@ -31,13 +31,13 @@ class Endpoint
      * Construct API Endpoint.
      *
      * @param string  $uri
-     * @param string  $path
+     * @param array|string  $path
      * @param array   $query
      */
-    public function __construct($uri, $path, array $query = [])
+    public function __construct($uri, $path = [], array $query = [])
     {
         $this->uri = $uri;
-        $this->path = $path;
+        $this->path = (array) $path;
         $this->query = $query;
     }
 
@@ -70,7 +70,8 @@ class Endpoint
     public function get()
     {
         $query = http_build_query($this->query, null, '&');
+        $to    = implode('/', $this->path);
 
-        return new Uri(sprintf('%s/%s?%s', $this->uri, $this->path, $query));
+        return new Uri(sprintf('%s/%s?%s', $this->uri, $to, $query));
     }
 }

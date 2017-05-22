@@ -2,7 +2,6 @@
 
 namespace Laravie\Codex;
 
-use GuzzleHttp\Psr7\Uri;
 use Laravie\Codex\Support\WithSanitizer;
 
 abstract class Request
@@ -59,7 +58,7 @@ abstract class Request
      * Send API request.
      *
      * @param  string  $method
-     * @param  \Laravie\Codex\Endpoint|string  $path
+     * @param  string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -71,13 +70,13 @@ abstract class Request
             $body = $this->getSanitizer()->from($body);
         }
 
-        $endpoint = new Endpoint($this->client->getApiEndpoint(), $path);
+        $endpoint = $this->getApiEndpoint($path);
 
         if (strtoupper($method) === 'GET') {
             $endpoint->addQuery($body);
         }
 
-        return $this->client->send($method, $this->getUriFromEndpoint($endpoint), $headers, $body)
+        return $this->client->send($method, $this->resolveUri($endpoint), $headers, $body)
                     ->setSanitizer($this->getSanitizer());
     }
 
@@ -126,11 +125,23 @@ abstract class Request
     }
 
     /**
-     * Get URI Endpoint.
+     * Get API Endpoint.
      *
-     * @param  string  $endpoint
+     * @param  string  $path
      *
      * @return \Laravie\Codex\Endpoint
      */
-    abstract protected function getUriEndpoint(Endpoint $endpoint);
+    protected function getApiEndpoint($path)
+    {
+        return new Endpoint($this->client->getApiEndpoint(), $path);
+    }
+
+    /**
+     * Resolve URI.
+     *
+     * @param  string  $path
+     *
+     * @return \GuzzleHttp\Psr7\Uri
+     */
+    abstract protected function resolveUri($path);
 }
