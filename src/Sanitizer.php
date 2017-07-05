@@ -81,13 +81,9 @@ abstract class Sanitizer
             return $this->from($value, $group);
         }
 
-        $caster = $this->getCaster($group);
-
-        if (is_null($caster)) {
-            return $value;
-        }
-
-        return $caster->from($value);
+        return ! is_null($caster = $this->getCaster($group))
+                    ? $caster->from($value)
+                    : $value;
     }
 
     /**
@@ -107,13 +103,9 @@ abstract class Sanitizer
             return $this->to($value, $group);
         }
 
-        $caster = $this->getCaster($group);
-
-        if (is_null($caster)) {
-            return $value;
-        }
-
-        return $caster->to($value);
+        return ! is_null($caster = $this->getCaster($group))
+                    ? $caster->to($value)
+                    : $value;
     }
 
     /**

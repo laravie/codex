@@ -13,11 +13,9 @@ abstract class Cast
      */
     public function from($value)
     {
-        if (! $this->isValid($value)) {
-            return $value;
-        }
-
-        return $this->fromCast($value);
+        return $this->isValid($value)
+                    ? $this->fromCast($value)
+                    : $value;
     }
 
     /**
@@ -29,11 +27,9 @@ abstract class Cast
      */
     public function to($value)
     {
-        if (is_null($value)) {
-            return ;
-        }
-
-        return $this->toCast($value);
+        return ! is_null($value)
+                    ? $this->toCast($value)
+                    : null;
     }
 
     /**
