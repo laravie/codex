@@ -62,6 +62,18 @@ abstract class Client
     }
 
     /**
+     * Make Fresh HTTP client through Discovery.
+     *
+     * @return \Http\Client\Common\HttpMethodsClient
+     */
+    protected static function makeFreshHttpClient()
+    {
+        unset(static::$discoveredHttpClient);
+
+        return static::makeHttpClient();
+    }
+
+    /**
      * Use custom API Endpoint.
      *
      * @param  string  $endpoint
