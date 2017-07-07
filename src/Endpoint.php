@@ -70,7 +70,7 @@ class Endpoint
     public function get()
     {
         $query = http_build_query($this->query, null, '&');
-        $to    = implode('/', $this->path);
+        $to = implode('/', $this->path);
 
         return new Uri(sprintf('%s/%s?%s', $this->uri, $to, $query));
     }
