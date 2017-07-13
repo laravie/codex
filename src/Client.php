@@ -4,10 +4,7 @@ namespace Laravie\Codex;
 
 use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
-use Http\Discovery\HttpClientDiscovery;
 use Psr\Http\Message\ResponseInterface;
-use Http\Discovery\MessageFactoryDiscovery;
-use Http\Client\Common\HttpMethodsClient as HttpClient;
 
 abstract class Client
 {
@@ -40,25 +37,13 @@ abstract class Client
     protected $supportedVersions = [];
 
     /**
-     * Cache discovered HTTP Client.
-     *
-     * @var
-     */
-    protected static $discoveredHttpClient;
-
-    /**
      * Make HTTP client through Discovery.
      *
      * @return \Http\Client\Common\HttpMethodsClient
      */
     protected static function makeHttpClient()
     {
-        return isset(static::$discoveredHttpClient)
-            ? static::$discoveredHttpClient
-            : static::$discoveredHttpClient = new HttpClient(
-                HttpClientDiscovery::find(),
-                MessageFactoryDiscovery::find()
-            );
+        return Discovery::client();
     }
 
     /**
@@ -68,9 +53,7 @@ abstract class Client
      */
     protected static function makeFreshHttpClient()
     {
-        unset(static::$discoveredHttpClient);
-
-        return static::makeHttpClient();
+        return Discovery::refreshClient();
     }
 
     /**
