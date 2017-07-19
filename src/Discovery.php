@@ -41,4 +41,18 @@ class Discovery
 
         return static::client();
     }
+
+    /**
+     * Override existing HTTP client.
+     *
+     * @param  \Http\Client\Common\HttpMethodsClient  $client
+     *
+     * @return \Http\Client\Common\HttpMethodsClient
+     */
+    public static function override(HttpClient $client)
+    {
+        static::$discoveredClient = $client;
+
+        return $client;
+    }
 }
