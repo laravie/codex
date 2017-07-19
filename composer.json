@@ -20,8 +20,8 @@
         "igorw/get-in": "^1.0",
         "php-http/client-common": "^1.1",
         "php-http/client-implementation": "^1.0",
-        "php-http/discovery": "^1.0",
-        "php-http/httplug": "^1.0"
+        "php-http/discovery": "^1.1",
+        "php-http/httplug": "^1.1"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
