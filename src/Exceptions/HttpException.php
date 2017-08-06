@@ -4,9 +4,9 @@ namespace Laravie\Codex\Exceptions;
 
 use Exception;
 use RuntimeException;
-use Http\Client\Exception;
+use Http\Client\Exception as HttpClientException;
 
-class HttpException extends RuntimeException implements Exception
+class HttpException extends RuntimeException implements HttpClientException
 {
     /**
      * Response headers.
