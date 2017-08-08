@@ -4,6 +4,9 @@ namespace Laravie\Codex\Exceptions;
 
 use Exception;
 use RuntimeException;
+use Laravie\Codex\Response;
+use InvalidArgumentException;
+use Psr\Http\Message\ResponseInterface;
 use Http\Client\Exception as HttpClientException;
 
 class HttpException extends RuntimeException implements HttpClientException
@@ -18,21 +21,20 @@ class HttpException extends RuntimeException implements HttpClientException
     /**
      * Construct a new HTTP exception.
      *
-     * @param int  $statusCode
+     * @param \Psr\Http\Message\ResponseInterface|\Laravie\Codex\Response  $response
      * @param string  $message
      * @param \Exception|null  $previous
-     * @param \Laravie\Codex\Response  $response
      * @param int  $code
      */
     public function __construct(
-        Response $response,
+        $response,
         $message = null,
         Exception $previous = null,
         $code = 0
     ) {
-        $this->response = $response;
-
         parent::__construct($message, $code, $previous);
+
+        $this->setResponse($response);
     }
 
     /**
@@ -48,7 +50,7 @@ class HttpException extends RuntimeException implements HttpClientException
     /**
      * Get response object.
      *
-     * @return \Laravie\Codex\Response
+     * @return \Psr\Http\Message\ResponseInterface|\Laravie\Codex\Response
      */
     public function getResponse()
     {
@@ -58,12 +60,18 @@ class HttpException extends RuntimeException implements HttpClientException
     /**
      * Set response object.
      *
-     * @param  \Laravie\Codex\Response $response
+     * @param  \Psr\Http\Message\ResponseInterface|\Laravie\Codex\Response  $response
      *
      * @return $this
+     *
+     * @throws \InvalidArgumentException
      */
-    public function setResponse(Response $response)
+    public function setResponse($response)
     {
+        if (! ($response instanceof Response || $response instanceof ResponseInterface)) {
+            throw new InvalidArgumentException('$response is not an acceptable response object!');
+        }
+
         $this->response = $response;
 
         return $this;
