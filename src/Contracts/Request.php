@@ -7,11 +7,11 @@ interface Request
     /**
      * Constants for base HTTP Method.
      */
-    const GET_HTTP = 'GET';
-    const POST_HTTP = 'POST';
-    const PUT_HTTP = 'PUT';
-    const PATCH_HTTP = 'PATCH';
-    const DELETE_HTTP = 'DELETE';
+    const METHOD_GET = 'GET';
+    const METHOD_POST = 'POST';
+    const METHOD_PUT = 'PUT';
+    const METHOD_PATCH = 'PATCH';
+    const METHOD_DELETE = 'DELETE';
 
     /**
      * Get API version.

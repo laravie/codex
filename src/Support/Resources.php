@@ -2,6 +2,8 @@
 
 namespace Laravie\Codex\Support;
 
+use Laravie\Codex\Contracts\Request;
+
 trait Resources
 {
     /**
@@ -15,7 +17,7 @@ trait Resources
      */
     protected function get($path, array $headers = [], $body = [])
     {
-        return $this->send('GET', $path, $headers, $body);
+        return $this->send(Request::METHOD_GET, $path, $headers, $body);
     }
 
     /**
@@ -29,7 +31,7 @@ trait Resources
      */
     protected function post($path, array $headers = [], $body = [])
     {
-        return $this->send('POST', $path, $headers, $body);
+        return $this->send(Request::METHOD_POST, $path, $headers, $body);
     }
 
     /**
@@ -43,7 +45,7 @@ trait Resources
      */
     protected function put($path, array $headers = [], $body = [])
     {
-        return $this->send('PUT', $path, $headers, $body);
+        return $this->send(Request::METHOD_PUT, $path, $headers, $body);
     }
 
     /**
@@ -57,7 +59,7 @@ trait Resources
      */
     protected function patch($path, array $headers = [], $body = [])
     {
-        return $this->send('PATCH', $path, $headers, $body);
+        return $this->send(Request::METHOD_PATCH, $path, $headers, $body);
     }
 
     /**
@@ -71,7 +73,7 @@ trait Resources
      */
     protected function delete($path, array $headers = [], $body = [])
     {
-        return $this->send('DELETE', $path, $headers, $body);
+        return $this->send(Request::METHOD_DELETE, $path, $headers, $body);
     }
 
     /**

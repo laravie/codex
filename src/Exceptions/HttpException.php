@@ -62,9 +62,9 @@ class HttpException extends RuntimeException implements HttpClientException
      *
      * @param  \Psr\Http\Message\ResponseInterface|\Laravie\Codex\Response  $response
      *
-     * @return $this
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return $this
      */
     public function setResponse($response)
     {

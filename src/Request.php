@@ -2,13 +2,9 @@
 
 namespace Laravie\Codex;
 
-use Laravie\Codex\Contracts\Sanitizable;
-use Laravie\Codex\Support\WithSanitizer;
-use Laravie\Codex\Contracts\Request as RequestContract;
-
-abstract class Request implements RequestContract
+abstract class Request implements Contracts\Request
 {
-    use WithSanitizer;
+    use Support\WithSanitizer;
 
     /**
      * Version namespace.
@@ -33,7 +29,7 @@ abstract class Request implements RequestContract
     {
         $this->client = $client;
 
-        if ($this instanceof Sanitizable) {
+        if ($this instanceof Contracts\Sanitizable) {
             $this->setSanitizer($this->sanitizeWith());
         }
     }

@@ -4,11 +4,10 @@ namespace Laravie\Codex;
 
 use BadMethodCallException;
 use Psr\Http\Message\ResponseInterface;
-use Laravie\Codex\Support\WithSanitizer;
 
 class Response
 {
-    use WithSanitizer;
+    use Support\WithSanitizer;
 
     /**
      * The original response.
