@@ -14,6 +14,11 @@
             "Laravie\\Codex\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Laravie\\Codex\\TestCase\\": "tests/"
+        }
+    },
     "require": {
         "php": ">=5.5",
         "guzzlehttp/psr7": "^1.0",
