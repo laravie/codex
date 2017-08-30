@@ -28,3 +28,4 @@ Released: `<YYYY-MM-DD>`
 
 * Move declaration `sanitizeWith()` from `Laravie\Codex\Client` to `Request` class, ignore this if sanitization isn't needed.
 * `Laravie\Codex\Request` should set sanitizer to `Laravie\Codex\Response` before running `Response::validate()` method.
+* Improves sanitization supports.
