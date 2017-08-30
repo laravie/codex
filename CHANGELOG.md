@@ -29,3 +29,7 @@ Released: `<YYYY-MM-DD>`
 * Move declaration `sanitizeWith()` from `Laravie\Codex\Client` to `Request` class, ignore this if sanitization isn't needed.
 * `Laravie\Codex\Request` should set sanitizer to `Laravie\Codex\Response` before running `Response::validate()` method.
 * Improves sanitization supports.
+
+### Removed
+
+* Remove `makeHttpClient()` and `makeFreshHttpClient()` `Laravie\Codex\Client`, add `Laravie\Codex\Support\MakeHttpClient` trait if you need the functionality.

@@ -8,8 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class Client implements Contracts\Client
 {
-    use Support\MakeHttpClient;
-
     /**
      * Http Client instance.
      *
