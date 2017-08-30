@@ -22,9 +22,8 @@ class Discovery
      */
     public static function client()
     {
-        return isset(static::$discoveredClient)
-            ? static::$discoveredClient
-            : static::$discoveredClient = static::make();
+        return static::$discoveredClient
+                    ?? static::$discoveredClient = static::make();
     }
 
     /**
