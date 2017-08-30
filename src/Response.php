@@ -44,13 +44,21 @@ class Response
      */
     public function toArray()
     {
-        $body = json_decode($this->original->getBody(), true);
+        $body = $this->getContent();
 
-        if (! $this->hasSanitizer()) {
-            return $body;
-        }
+        return $this->hasSanitizer()
+                    ? $this->getSanitizer()->to($body)
+                    : $body;
+    }
 
-        return $this->getSanitizer()->to($body);
+    /**
+     * Get content from body, by default we assume it returning JSON.
+     *
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return json_decode($this->original->getBody(), true);
     }
 
     /**
