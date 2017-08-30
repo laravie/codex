@@ -43,11 +43,7 @@ class Response implements Contracts\Response
      */
     public function toArray()
     {
-        $body = $this->getContent();
-
-        return $this->hasSanitizer()
-                    ? $this->getSanitizer()->to($body)
-                    : $body;
+        return $this->sanitizeTo($this->getContent());
     }
 
     /**

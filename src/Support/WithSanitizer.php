@@ -46,4 +46,34 @@ trait WithSanitizer
     {
         return $this->sanitizer;
     }
+
+    /**
+     * Sanitize "from" for content.
+     *
+     * @param  array  $content
+     * @param  bool  $condition
+     *
+     * @return array
+     */
+    public function sanitizeFrom(array $content, $condition = true)
+    {
+        return ($this->hasSanitizer() && $condition)
+                    ? $this->getSanitizer()->from($content)
+                    : $content;
+    }
+
+    /**
+     * Sanitize "to" for content.
+     *
+     * @param  array  $content
+     * @param  bool  $condition
+     *
+     * @return array
+     */
+    public function sanitizeTo(array $content, $condition = true)
+    {
+        return ($this->hasSanitizer() && $condition)
+                    ? $this->getSanitizer()->to($content)
+                    : $content;
+    }
 }

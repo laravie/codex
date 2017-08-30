@@ -24,13 +24,9 @@ trait MultipartRequest
             return [$headers, $body];
         }
 
-        if ($this->hasSanitizer()) {
-            $body = $this->getSanitizer()->from($body);
-        }
-
         $builder = new MultipartStreamBuilder(StreamFactoryDiscovery::find());
 
-        $this->addBodyToMultipartBuilder($builder, $body);
+        $this->addBodyToMultipartBuilder($builder, $this->sanitizeFrom($body));
         $this->addFilesToMultipartBuilder($builder, $files);
 
         $content = $builder->build();

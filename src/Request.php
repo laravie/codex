@@ -56,10 +56,7 @@ abstract class Request implements Contracts\Request
      */
     protected function send($method, $path, array $headers = [], $body = [])
     {
-        if ($this->hasSanitizer() && is_array($body)) {
-            $body = $this->getSanitizer()->from($body);
-        }
-
+        $body = $this->sanitizeFrom($body, is_array($body));
         $endpoint = $this->getApiEndpoint($path);
 
         if (strtoupper($method) === 'GET') {
