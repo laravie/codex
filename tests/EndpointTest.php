@@ -12,7 +12,8 @@ class EndpointTest extends TestCase
     {
         $endpoint = new Endpoint('https://laravel.com', 'docs');
 
-        $this->assertEquals('https://laravel.com/docs', (string) $endpoint->get());
+        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertSame('https://laravel.com/docs', (string) $endpoint->get());
     }
 
     /** @test */
@@ -20,7 +21,8 @@ class EndpointTest extends TestCase
     {
         $endpoint = new Endpoint('https://laravel.com', ['docs', '5.4']);
 
-        $this->assertEquals('https://laravel.com/docs/5.4', (string) $endpoint->get());
+        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertSame('https://laravel.com/docs/5.4', (string) $endpoint->get());
     }
 
     /** @test */
@@ -28,16 +30,17 @@ class EndpointTest extends TestCase
     {
         $endpoint = new Endpoint('https://laravel.com', 'docs', ['search' => 'controller']);
 
-        $this->assertEquals('https://laravel.com/docs?search=controller', (string) $endpoint->get());
+        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertSame('https://laravel.com/docs?search=controller', (string) $endpoint->get());
     }
 
     /** @test */
     function it_can_build_basic_endpoint_appended_query_string()
     {
-        $endpoint = new Endpoint('https://laravel.com', 'docs');
+        $endpoint = (new Endpoint('https://laravel.com', 'docs'))
+                        ->addQuery(['search' => 'controller', 'page' => 3]);
 
-        $endpoint->addQuery(['search' => 'controller', 'page' => 3]);
-
-        $this->assertEquals('https://laravel.com/docs?search=controller&page=3', (string) $endpoint->get());
+        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertSame('https://laravel.com/docs?search=controller&page=3', (string) $endpoint->get());
     }
 }
