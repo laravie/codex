@@ -80,18 +80,4 @@ trait MultipartRequest
             }
         }
     }
-
-    /**
-     * Check if sanitizaer exists.
-     *
-     * @return bool
-     */
-    abstract public function hasSanitizer();
-
-    /**
-     * Get sanitizer.
-     *
-     * @return \Laravie\Codex\Sanitizer|null
-     */
-    abstract public function getSanitizer();
 }

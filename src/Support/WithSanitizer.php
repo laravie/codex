@@ -58,7 +58,7 @@ trait WithSanitizer
     public function sanitizeFrom(array $content, $condition = true)
     {
         return ($this->hasSanitizer() && $condition)
-                    ? $this->getSanitizer()->from($content)
+                    ? $this->sanitizer->from($content)
                     : $content;
     }
 
@@ -73,7 +73,7 @@ trait WithSanitizer
     public function sanitizeTo(array $content, $condition = true)
     {
         return ($this->hasSanitizer() && $condition)
-                    ? $this->getSanitizer()->to($content)
+                    ? $this->sanitizer->to($content)
                     : $content;
     }
 }
