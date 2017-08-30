@@ -48,4 +48,24 @@ class SanitizerTest extends TestCase
 
         $this->assertEquals($expected, $stub->to($given));
     }
+
+    /** @test */
+    function it_can_sanitize_from_inputs_on_nested_array()
+    {
+        $stub = new Sanitizer();
+        $stub->add(['meta', 'circles'], new Arr());
+        $stub->add('created_at', new Carbon());
+
+        $given = [
+            'meta' => ['circles' => [1, 2, 3]],
+            'created_at' => new \DateTime('2017-08-31'),
+        ];
+
+        $expected = [
+            'meta' => ['circles' => '[1,2,3]'],
+            'created_at' => '2017-08-31',
+        ];
+
+        $this->assertEquals($expected, $stub->from($given));
+    }
 }

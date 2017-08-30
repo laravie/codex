@@ -117,10 +117,12 @@ class Sanitizer implements Contracts\Sanitizer
      *
      * @param  string|array  $group
      *
-     * @return \Laravie\Codex\Contracts\Cast
+     * @return \Laravie\Codex\Contracts\Cast|null
      */
     protected function getCaster($group)
     {
-        return \igorw\get_in($this->casts, (array) $group);
+        $cast = \igorw\get_in($this->casts, (array) $group);
+
+        return $cast instanceof Contracts\Cast ? $cast : null;
     }
 }
