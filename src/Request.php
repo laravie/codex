@@ -2,6 +2,7 @@
 
 namespace Laravie\Codex;
 
+use Laravie\Codex\Contracts\Sanitizable;
 use Laravie\Codex\Support\WithSanitizer;
 
 abstract class Request
@@ -35,13 +36,14 @@ abstract class Request
      * Construct a new Collection.
      *
      * @param \Laravie\Codex\Client  $client
-     * @param \Laravie\Codex\Sanitizer|null  $sanitizer
      */
-    public function __construct(Client $client, Sanitizer $sanitizer = null)
+    public function __construct(Client $client)
     {
         $this->client = $client;
 
-        $this->setSanitizer($sanitizer);
+        if ($this instanceof Sanitizable) {
+            $this->setSanitizer($this->sanitizeWith());
+        }
     }
 
     /**

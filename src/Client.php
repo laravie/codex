@@ -133,7 +133,7 @@ abstract class Client
             throw new InvalidArgumentException("Resource [{$service}] for version [{$version}] is not available");
         }
 
-        return new $class($this, $this->sanitizeWith());
+        return new $class($this);
     }
 
     /**
@@ -203,13 +203,6 @@ abstract class Client
 
         return [$headers, $body];
     }
-
-    /**
-     * Resolve the sanitizer class.
-     *
-     * @return \Laravie\Codex\Sanitizer|null
-     */
-    abstract protected function sanitizeWith();
 
     /**
      * Get resource default namespace.
