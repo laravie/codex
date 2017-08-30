@@ -28,6 +28,7 @@ class HttpExceptionTest extends TestCase
         $this->assertInstanceOf('Http\Client\Exception', $stub);
     }
 
+    /** @test */
     function it_require_proper_response_object()
     {
         $response1 = m::mock(Response::class);

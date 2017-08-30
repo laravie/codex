@@ -82,7 +82,7 @@ abstract class Client implements Contracts\Client
     public function useVersion($version)
     {
         if (! array_key_exists($version, $this->supportedVersions)) {
-            throw new InvalidArgumentException("API version {$version} is not supported.");
+            throw new InvalidArgumentException("API version [{$version}] is not supported.");
         }
 
         $this->defaultVersion = $version;
@@ -130,7 +130,7 @@ abstract class Client implements Contracts\Client
         $class = sprintf('%s\%s\%s', $this->getResourceNamespace(), $this->supportedVersions[$version], $name);
 
         if (! class_exists($class)) {
-            throw new InvalidArgumentException("Resource [{$service}] for version [{$version}] is not available");
+            throw new InvalidArgumentException("Resource [{$service}] for version [{$version}] is not available.");
         }
 
         return new $class($this);

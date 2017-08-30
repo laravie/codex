@@ -20,7 +20,7 @@ class Welcome extends Request
      */
     public function show()
     {
-        return $this->send('GET', 'welcome', $this->getApiHeaders(), $this->getApiBody());
+        return $this->send('GET', 'welcome', $this->mergeApiHeaders([]), $this->mergeApiBody([]));
     }
 
     /**

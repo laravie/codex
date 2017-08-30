@@ -50,10 +50,22 @@ class ClientTest extends TestCase
     /**
      * @test
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage API version v10 is not supported.
+     * @expectedExceptionMessage API version [v10] is not supported.
      */
     function it_cant_use_unsupported_version_should_throw_exception()
     {
         Client::make('abc')->useVersion('v10');
+    }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Resource [Foobar] for version [v1] is not available.
+     */
+    function it_cant_find_unknown_resource()
+    {
+        $http = m::mock('Http\Client\Common\HttpMethodsClient');
+
+        $response = (new Client($http, 'abc'))->resource('Foobar');
     }
 }
