@@ -2,7 +2,7 @@
 
 namespace Laravie\Codex;
 
-class Sanitizer
+class Sanitizer implements Contracts\Sanitizer
 {
     /**
      * Sanitization rules.
