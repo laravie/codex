@@ -18,7 +18,9 @@ trait MultipartRequest
      */
     public function prepareMultipartRequestPayloads(array $headers = [], array $body = [], array $files = [])
     {
-        if (empty($files) && ! (isset($headers['Content-Type']) && $headers['Content-Type'] == 'multipart/form-data')) {
+        $multipart = isset($headers['Content-Type']) && $headers['Content-Type'] == 'multipart/form-data';
+
+        if (empty($files) && ! $multipart) {
             return [$headers, $body];
         }
 
