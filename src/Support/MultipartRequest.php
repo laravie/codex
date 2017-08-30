@@ -29,12 +29,9 @@ trait MultipartRequest
         $this->addBodyToMultipartBuilder($builder, $this->sanitizeFrom($body));
         $this->addFilesToMultipartBuilder($builder, $files);
 
-        $content = $builder->build();
-        $boundary = $builder->getBoundary();
+        $headers['Content-Type'] = 'multipart/form-data; boundary='.$builder->getBoundary();
 
-        $headers['Content-Type'] = "multipart/form-data; boundary={$boundary}";
-
-        return [$headers, $content];
+        return [$headers, $builder->build()];
     }
 
     /**
