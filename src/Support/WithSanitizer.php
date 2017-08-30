@@ -50,14 +50,13 @@ trait WithSanitizer
     /**
      * Sanitize "from" for content.
      *
-     * @param  array  $content
-     * @param  bool  $condition
+     * @param  array|mixed  $content
      *
      * @return array
      */
-    public function sanitizeFrom(array $content, $condition = true)
+    public function sanitizeFrom($content)
     {
-        return ($this->hasSanitizer() && $condition)
+        return ($this->hasSanitizer() && is_array($content))
                     ? $this->sanitizer->from($content)
                     : $content;
     }
@@ -65,14 +64,13 @@ trait WithSanitizer
     /**
      * Sanitize "to" for content.
      *
-     * @param  array  $content
-     * @param  bool  $condition
+     * @param  array|mixed  $content
      *
      * @return array
      */
-    public function sanitizeTo(array $content, $condition = true)
+    public function sanitizeTo($content)
     {
-        return ($this->hasSanitizer() && $condition)
+        return ($this->hasSanitizer() && is_array($content))
                     ? $this->sanitizer->to($content)
                     : $content;
     }

@@ -39,7 +39,31 @@ class ClientTest extends TestCase
     }
 
     /** @test */
-    function it_can_send_api_request()
+    function it_can_send_api_request_on_version_one()
+    {
+        $http = m::mock('Http\Client\Common\HttpMethodsClient');
+        $message = m::mock('Psr\Http\Message\ResponseInterface');
+
+        $http->shouldReceive('send')->once()
+            ->with('GET', m::type('GuzzleHttp\Psr7\Uri'), [], '')
+            ->andReturn($message);
+
+        $message->shouldReceive('getStatusCode')->andReturn(200)
+            ->shouldReceive('getBody')->andReturn('{"success":true}');
+
+        $response = (new Client($http, 'abc'))
+                            ->resource('Welcome')
+                            ->show();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"success":true}', $response->getBody());
+        $this->assertSame(['success' => true], $response->getContent());
+        $this->assertSame(['success' => true], $response->toArray());
+        $this->assertTrue($response->hasSanitizer());
+    }
+
+    /** @test */
+    function it_can_send_api_request_on_version_two()
     {
         $http = m::mock('Http\Client\Common\HttpMethodsClient');
         $message = m::mock('Psr\Http\Message\ResponseInterface');
@@ -51,7 +75,59 @@ class ClientTest extends TestCase
         $message->shouldReceive('getStatusCode')->andReturn(200)
             ->shouldReceive('getBody')->andReturn('{"success":true}');
 
-        $response = (new Client($http, 'abc'))->resource('Welcome')->show();
+        $response = (new Client($http, 'abc'))
+                            ->useVersion('v2')
+                            ->resource('Welcome')
+                            ->show();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"success":true}', $response->getBody());
+        $this->assertSame(['success' => true], $response->getContent());
+        $this->assertSame(['success' => true], $response->toArray());
+        $this->assertTrue($response->hasSanitizer());
+    }
+
+    /** @test */
+    function it_can_send_api_request_by_sending_stream_data()
+    {
+        $http = m::mock('Http\Client\Common\HttpMethodsClient');
+        $message = m::mock('Psr\Http\Message\ResponseInterface');
+        $stream = m::mock('Psr\Http\Message\StreamInterface');
+
+        $http->shouldReceive('send')->once()
+            ->with('POST', m::type('GuzzleHttp\Psr7\Uri'), [], $stream)
+            ->andReturn($message);
+
+        $message->shouldReceive('getStatusCode')->andReturn(200)
+            ->shouldReceive('getBody')->andReturn('{"success":true}');
+
+        $response = (new Client($http, 'abc'))->resource('Welcome')->ping($stream);
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"success":true}', $response->getBody());
+        $this->assertSame(['success' => true], $response->getContent());
+        $this->assertSame(['success' => true], $response->toArray());
+        $this->assertTrue($response->hasSanitizer());
+    }
+
+    /** @test */
+    function it_can_send_api_request_by_sending_json_data()
+    {
+        $http = m::mock('Http\Client\Common\HttpMethodsClient');
+        $message = m::mock('Psr\Http\Message\ResponseInterface');
+
+        $headers = ['Content-Type' => 'application/json'];
+
+        $http->shouldReceive('send')->once()
+            ->with('POST', m::type('GuzzleHttp\Psr7\Uri'), $headers, '{"meta":["foo","bar"]}')
+            ->andReturn($message);
+
+        $message->shouldReceive('getStatusCode')->andReturn(200)
+            ->shouldReceive('getBody')->andReturn('{"success":true}');
+
+        $response = (new Client($http, 'abc'))
+                        ->resource('Welcome')
+                        ->ping(["meta" => ["foo", "bar"]], $headers);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());

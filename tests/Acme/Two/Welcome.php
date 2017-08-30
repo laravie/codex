@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Codex\TestCase\Acme\One;
+namespace Laravie\Codex\TestCase\Acme\Two;
 
 use Laravie\Codex\Request;
 use Laravie\Codex\Sanitizer;
@@ -32,6 +32,18 @@ class Welcome extends Request
     public function ping($body, array $headers = [])
     {
         return $this->send('POST', 'welcome', $this->mergeApiHeaders($headers), $body);
+    }
+
+    /**
+     * Get API Header.
+     *
+     * @return array
+     */
+    protected function getApiHeaders()
+    {
+        return [
+            'Authorization' => 'Bearer '.$this->client->getApiKey(),
+        ];
     }
 
     /**

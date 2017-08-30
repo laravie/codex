@@ -56,10 +56,10 @@ abstract class Request implements Contracts\Request
      */
     protected function send($method, $path, array $headers = [], $body = [])
     {
-        $body = $this->sanitizeFrom($body, is_array($body));
+        $body = $this->sanitizeFrom($body);
         $endpoint = $this->getApiEndpoint($path);
 
-        if (strtoupper($method) === 'GET') {
+        if (strtoupper($method) === 'GET' && ! $body instanceof StreamInterface) {
             $endpoint->addQuery($body);
             $body = [];
         }
