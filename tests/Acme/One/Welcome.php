@@ -3,6 +3,7 @@
 namespace Laravie\Codex\TestCase\Acme\One;
 
 use Laravie\Codex\Request;
+use Laravie\Codex\Sanitizer;
 
 class Welcome extends Request
 {
@@ -45,5 +46,15 @@ class Welcome extends Request
     protected function getApiEndpoint($path = [])
     {
         return parent::getApiEndpoint([$this->getVersion(), $path]);
+    }
+
+    /**
+     * Sanitize with.
+     *
+     * @return Laravie\Codex\Contracts\Sanitizer
+     */
+    public function sanitizeWith()
+    {
+        return new Sanitizer();
     }
 }

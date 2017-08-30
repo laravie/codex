@@ -37,5 +37,6 @@ class RequestTest extends TestCase
 
         $this->assertInstanceOf(RequestContract::class, $stub);
         $this->assertSame('v1', $stub->getVersion());
+        $this->assertTrue($stub->hasSanitizer());
     }
 }

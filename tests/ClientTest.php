@@ -45,6 +45,7 @@ class ClientTest extends TestCase
         $this->assertSame('{"success":true}', $response->getBody());
         $this->assertSame(['success' => true], $response->getContent());
         $this->assertSame(['success' => true], $response->toArray());
+        $this->assertTrue($response->hasSanitizer());
     }
 
     /**

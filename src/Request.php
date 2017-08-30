@@ -61,6 +61,7 @@ abstract class Request implements Contracts\Request
 
         if (strtoupper($method) === 'GET') {
             $endpoint->addQuery($body);
+            $body = [];
         }
 
         return $this->client->send($method, $this->resolveUri($endpoint), $headers, $body)
