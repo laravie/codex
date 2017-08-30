@@ -2,7 +2,7 @@
 
 namespace Laravie\Codex;
 
-abstract class Cast
+abstract class Cast implements Contracts\Cast
 {
     /**
      * Cast value from object.

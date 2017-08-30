@@ -14,12 +14,12 @@ class Sanitizer implements Contracts\Sanitizer
     /**
      * Add sanitization rules.
      *
-     * @param  string|array  $name
-     * @param  \Laravie\Codex\Cast  $cast
+     * @param  string|array  $group
+     * @param  \Laravie\Codex\Contracts\Cast  $cast
      *
      * @return $this
      */
-    public function add($group, Cast $cast)
+    public function add($group, Contracts\Cast $cast)
     {
         $this->casts = \igorw\assoc_in($this->casts, (array) $group, $cast);
 
@@ -113,7 +113,7 @@ class Sanitizer implements Contracts\Sanitizer
      *
      * @param  string|array  $group
      *
-     * @return \Laravie\Codex\Cast
+     * @return \Laravie\Codex\Contracts\Cast
      */
     protected function getCaster($group)
     {

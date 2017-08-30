@@ -14,6 +14,7 @@ Released: `<YYYY-MM-DD>`
 ### Added
 
 * Added following contracts:
+    - `Laravie\Codex\Contracts\Cast`.
     - `Laravie\Codex\Contracts\Client`.
     - `Laravie\Codex\Contracts\Request`.
     - `Laravie\Codex\Contracts\Response`.
