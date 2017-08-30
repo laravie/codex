@@ -36,7 +36,7 @@ class Endpoint
      */
     public function __construct($uri, $path = [], array $query = [])
     {
-        $this->uri = $uri;
+        $this->uri = rtrim($uri, '/');
         $this->path = (array) $path;
         $this->query = $query;
     }

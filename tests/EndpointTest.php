@@ -17,6 +17,15 @@ class EndpointTest extends TestCase
     }
 
     /** @test */
+    function it_can_build_basic_endpoint_with_tailing_slash()
+    {
+        $endpoint = new Endpoint('https://laravel.com/', 'docs');
+
+        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertSame('https://laravel.com/docs', (string) $endpoint->get());
+    }
+
+    /** @test */
     function it_can_build_endpoint_with_multiple_paths()
     {
         $endpoint = new Endpoint('https://laravel.com', ['docs', '5.4']);
