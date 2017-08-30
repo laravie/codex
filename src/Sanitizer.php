@@ -39,7 +39,7 @@ abstract class Sanitizer
         $data = [];
 
         foreach ($inputs as $name => $input) {
-            $data[$name] = $this->sanitizeFrom($input, $name, $group = []);
+            $data[$name] = $this->sanitizeFrom($input, $name, $group);
         }
 
         return $data;
