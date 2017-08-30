@@ -8,6 +8,8 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class Client implements Contracts\Client
 {
+    use Support\MakeHttpClient;
+
     /**
      * Http Client instance.
      *
@@ -35,26 +37,6 @@ abstract class Client implements Contracts\Client
      * @var array
      */
     protected $supportedVersions = [];
-
-    /**
-     * Make HTTP client through Discovery.
-     *
-     * @return \Http\Client\Common\HttpMethodsClient
-     */
-    protected static function makeHttpClient()
-    {
-        return Discovery::client();
-    }
-
-    /**
-     * Make Fresh HTTP client through Discovery.
-     *
-     * @return \Http\Client\Common\HttpMethodsClient
-     */
-    protected static function makeFreshHttpClient()
-    {
-        return Discovery::refreshClient();
-    }
 
     /**
      * Use custom API Endpoint.
