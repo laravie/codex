@@ -68,12 +68,12 @@ class HttpException extends RuntimeException implements HttpClientException
      */
     public function setResponse($response)
     {
-        if (! ($response instanceof Response || $response instanceof ResponseInterface)) {
-            throw new InvalidArgumentException('$response is not an acceptable response object!');
+        if ($response instanceof Response || $response instanceof ResponseInterface) {
+            $this->response = $response;
+
+            return $this;
         }
 
-        $this->response = $response;
-
-        return $this;
+        throw new InvalidArgumentException('$response is not an acceptable response object!');
     }
 }
