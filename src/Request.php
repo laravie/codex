@@ -23,9 +23,9 @@ abstract class Request implements Contracts\Request
     /**
      * Construct a new Collection.
      *
-     * @param \Laravie\Codex\Client  $client
+     * @param \Laravie\Codex\Contracts\Client  $client
      */
-    public function __construct(Client $client)
+    public function __construct(Contracts\Client $client)
     {
         $this->client = $client;
 

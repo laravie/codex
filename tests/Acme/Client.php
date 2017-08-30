@@ -3,6 +3,7 @@
 namespace Laravie\Codex\TestCase\Acme;
 
 use Laravie\Codex\Client as BaseClient;
+use Http\Client\Common\HttpMethodsClient as HttpClient;
 
 class Client extends BaseClient
 {
@@ -24,11 +25,44 @@ class Client extends BaseClient
     ];
 
     /**
-     * Construct a new Client.
+     * API Key.
+     *
+     * @var string
      */
-    public function __construct()
+    protected $apiKey;
+
+    /**
+     * Construct a new Billplz Client.
+     *
+     * @param \Http\Client\Common\HttpMethodsClient  $http
+     * @param string  $apiKey
+     */
+    public function __construct(HttpClient $http, $apiKey)
     {
-        $this->http = static::makeHttpClient();
+        $this->http = $http;
+        $this->apiKey = $apiKey;
+    }
+
+    /**
+     * Make a client.
+     *
+     * @param string  $apiKey
+     *
+     * @return $this
+     */
+    public static function make($apiKey)
+    {
+        return new static(static::makeHttpClient(), $apiKey);
+    }
+
+    /**
+     * Get API Key.
+     *
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
     }
 
     /**
