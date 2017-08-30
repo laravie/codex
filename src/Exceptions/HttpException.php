@@ -4,8 +4,8 @@ namespace Laravie\Codex\Exceptions;
 
 use Exception;
 use RuntimeException;
-use Laravie\Codex\Response;
 use InvalidArgumentException;
+use Laravie\Codex\Contracts\Response;
 use Psr\Http\Message\ResponseInterface;
 use Http\Client\Exception as HttpClientException;
 
@@ -14,14 +14,14 @@ class HttpException extends RuntimeException implements HttpClientException
     /**
      * Response headers.
      *
-     * @var \Laravie\Codex\Response
+     * @var \Laravie\Codex\Contracts\Response
      */
     private $response;
 
     /**
      * Construct a new HTTP exception.
      *
-     * @param \Psr\Http\Message\ResponseInterface|\Laravie\Codex\Response  $response
+     * @param \Psr\Http\Message\ResponseInterface|\Laravie\Codex\Contracts\Response  $response
      * @param string  $message
      * @param \Exception|null  $previous
      * @param int  $code
@@ -50,7 +50,7 @@ class HttpException extends RuntimeException implements HttpClientException
     /**
      * Get response object.
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Laravie\Codex\Response
+     * @return \Psr\Http\Message\ResponseInterface|\Laravie\Codex\Contracts\Response
      */
     public function getResponse()
     {
@@ -60,7 +60,7 @@ class HttpException extends RuntimeException implements HttpClientException
     /**
      * Set response object.
      *
-     * @param  \Psr\Http\Message\ResponseInterface|\Laravie\Codex\Response  $response
+     * @param  \Psr\Http\Message\ResponseInterface|\Laravie\Codex\Contracts\Response  $response
      *
      * @throws \InvalidArgumentException
      *

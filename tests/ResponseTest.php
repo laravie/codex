@@ -18,6 +18,14 @@ class ResponseTest extends TestCase
     }
 
     /** @test */
+    function it_implements_proper_contract()
+    {
+        $stub = new Response(m::mock(ResponseInterface::class));
+
+        $this->assertInstanceOf('Laravie\Codex\Contracts\Response', $stub);
+    }
+
+    /** @test */
     function it_can_build_a_basic_response()
     {
         $json = '{"name":"Laravie Codex"}';

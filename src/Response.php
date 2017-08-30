@@ -5,7 +5,7 @@ namespace Laravie\Codex;
 use BadMethodCallException;
 use Psr\Http\Message\ResponseInterface;
 
-class Response
+class Response implements Contracts\Response
 {
     use Support\WithSanitizer;
 
@@ -51,13 +51,33 @@ class Response
     }
 
     /**
+     * Get body.
+     *
+     * @return int
+     */
+    public function getBody()
+    {
+        return $this->original->getBody();
+    }
+
+    /**
      * Get content from body, by default we assume it returning JSON.
      *
      * @return mixed
      */
     public function getContent()
     {
-        return json_decode($this->original->getBody(), true);
+        return json_decode($this->getBody(), true);
+    }
+
+    /**
+     * Get status code.
+     *
+     * @return int
+     */
+    public function getStatusCode()
+    {
+        return $this->original->getStatusCode();
     }
 
     /**
