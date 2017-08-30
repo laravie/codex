@@ -77,11 +77,13 @@ class Sanitizer implements Contracts\Sanitizer
     {
         array_push($group, $name);
 
-        if (is_array($value)) {
+        $caster = $this->getCaster($group);
+
+        if (is_array($value) && is_null($caster)) {
             return $this->from($value, $group);
         }
 
-        return ! is_null($caster = $this->getCaster($group))
+        return ! is_null($caster)
                     ? $caster->from($value)
                     : $value;
     }
@@ -99,11 +101,13 @@ class Sanitizer implements Contracts\Sanitizer
     {
         array_push($group, $name);
 
-        if (is_array($value)) {
+        $caster = $this->getCaster($group);
+
+        if (is_array($value) && is_null($caster)) {
             return $this->to($value, $group);
         }
 
-        return ! is_null($caster = $this->getCaster($group))
+        return ! is_null($caster)
                     ? $caster->to($value)
                     : $value;
     }

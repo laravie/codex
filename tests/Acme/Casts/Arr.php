@@ -1,10 +1,10 @@
 <?php
 
-namespace Laravie\Codex\TestCase\Acme;
+namespace Laravie\Codex\TestCase\Acme\Casts;
 
 use Laravie\Codex\Cast;
 
-class ArrayCast extends Cast
+class Arr extends Cast
 {
     /**
      * Is value a valid object.
@@ -39,6 +39,6 @@ class ArrayCast extends Cast
      */
     protected function toCast($value)
     {
-        return json_decode($value);
+        return json_decode($value, true);
     }
 }

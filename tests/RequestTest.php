@@ -35,7 +35,7 @@ class RequestTest extends TestCase
 
         $stub = new Welcome($client);
 
-        $this->assertInstanceOf('Laravie\Codex\Contracts\Request', $stub);
+        $this->assertInstanceOf(RequestContract::class, $stub);
         $this->assertSame('v1', $stub->getVersion());
     }
 }

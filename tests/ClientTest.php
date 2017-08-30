@@ -46,4 +46,14 @@ class ClientTest extends TestCase
         $this->assertSame(['success' => true], $response->getContent());
         $this->assertSame(['success' => true], $response->toArray());
     }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage API version v10 is not supported.
+     */
+    function it_cant_use_unsupported_version_should_throw_exception()
+    {
+        Client::make('abc')->useVersion('v10');
+    }
 }
