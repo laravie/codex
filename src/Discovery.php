@@ -24,10 +24,20 @@ class Discovery
     {
         return isset(static::$discoveredClient)
             ? static::$discoveredClient
-            : static::$discoveredClient = new HttpClient(
-                HttpClientDiscovery::find(),
-                MessageFactoryDiscovery::find()
-            );
+            : static::$discoveredClient = static::make();
+    }
+
+    /**
+     * Make a HTTP Client.
+     *
+     * @return \Http\Client\Common\HttpMethodsClient
+     */
+    public static function make()
+    {
+        return new HttpClient(
+            HttpClientDiscovery::find(),
+            MessageFactoryDiscovery::find()
+        );
     }
 
     /**
@@ -37,7 +47,7 @@ class Discovery
      */
     public static function refreshClient()
     {
-        unset(static::$discoveredClient);
+        static::flush();
 
         return static::client();
     }
@@ -54,5 +64,15 @@ class Discovery
         static::$discoveredClient = $client;
 
         return $client;
+    }
+
+    /**
+     * Flush any existing HTTP Client.
+     *
+     * @return void
+     */
+    public static function flush()
+    {
+        static::$discoveredClient = null;
     }
 }

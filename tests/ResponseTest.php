@@ -20,15 +20,17 @@ class ResponseTest extends TestCase
     /** @test */
     function it_can_build_a_basic_response()
     {
+        $json = '{"name":"Laravie Codex"}';
         $data = ['name' => 'Laravie Codex'];
 
         $api = m::mock(ResponseInterface::class);
 
-        $api->shouldReceive('getBody')->once()->andReturn(json_encode($data));
+        $api->shouldReceive('getBody')->twice()->andReturn($json);
 
         $stub = new Response($api);
 
-        $this->assertEquals($data, $stub->toArray());
+        $this->assertSame($data, $stub->toArray());
+        $this->assertSame($json, $stub->getBody());
     }
 
     /** @test */
@@ -40,6 +42,6 @@ class ResponseTest extends TestCase
 
         $stub = new Response($api);
 
-        $this->assertEquals(201, $stub->getStatusCode());
+        $this->assertSame(201, $stub->getStatusCode());
     }
 }
