@@ -5,7 +5,7 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 ## 1.0.0
 
-Released: `<YYYY-MM-DD>`
+Released: 2017-08-31
 
 ### New
 
@@ -29,6 +29,7 @@ Released: `<YYYY-MM-DD>`
 * Move declaration `sanitizeWith()` from `Laravie\Codex\Client` to `Request` class, ignore this if sanitization isn't needed.
 * `Laravie\Codex\Request` should set sanitizer to `Laravie\Codex\Response` before running `Response::validate()` method.
 * Improves sanitization supports.
+* Body shouldn't be converted to query string if it's an instance of `StreamInterface`.
 
 ### Removed
 
