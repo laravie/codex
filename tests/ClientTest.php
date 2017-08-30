@@ -27,6 +27,18 @@ class ClientTest extends TestCase
     }
 
     /** @test */
+    function it_can_set_custom_endpoint()
+    {
+        $stub = Client::make('abc');
+
+        $this->assertSame('https://acme.laravie/', $stub->getApiEndpoint());
+
+        $stub->useCustomApiEndpoint('https://beta.acme.laravie/');
+
+        $this->assertSame('https://beta.acme.laravie/', $stub->getApiEndpoint());
+    }
+
+    /** @test */
     function it_can_send_api_request()
     {
         $http = m::mock('Http\Client\Common\HttpMethodsClient');

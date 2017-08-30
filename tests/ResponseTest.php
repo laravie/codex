@@ -52,4 +52,26 @@ class ResponseTest extends TestCase
 
         $this->assertSame(201, $stub->getStatusCode());
     }
+
+    /** @test */
+    function it_can_return_parent_methods()
+    {
+        $api = m::mock(ResponseInterface::class);
+
+        $api->shouldReceive('getProtocolVersion')->andReturn('1.1');
+
+        $stub = new Response($api);
+
+        $this->assertSame('1.1', $stub->getProtocolVersion());
+    }
+
+    /**
+     * @test
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Method [getRequest] doesn't exists.
+     */
+    function it_cant_return_unknown_parent_methods_should_throw_exception()
+    {
+        (new Response(m::mock(ResponseInterface::class)))->getRequest();
+    }
 }
