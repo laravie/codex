@@ -4,19 +4,11 @@ namespace Laravie\Codex;
 
 use Laravie\Codex\Contracts\Sanitizable;
 use Laravie\Codex\Support\WithSanitizer;
+use Laravie\Codex\Contracts\Request as RequestContract;
 
-abstract class Request
+abstract class Request implements RequestContract
 {
     use WithSanitizer;
-
-    /**
-     * Constants for base HTTP Method.
-     */
-    const GET_HTTP = 'GET';
-    const POST_HTTP = 'POST';
-    const PUT_HTTP = 'PUT';
-    const PATCH_HTTP = 'PATCH';
-    const DELETE_HTTP = 'DELETE';
 
     /**
      * Version namespace.
