@@ -29,7 +29,7 @@ abstract class Request implements Contracts\Request
     {
         $this->client = $client;
 
-        if ($this instanceof Contracts\Sanitizable) {
+        if (method_exists($this, 'sanitizeWith')) {
             $this->setSanitizer($this->sanitizeWith());
         }
     }

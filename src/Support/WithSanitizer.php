@@ -2,14 +2,14 @@
 
 namespace Laravie\Codex\Support;
 
-use Laravie\Codex\Sanitizer;
+use Laravie\Codex\Contracts\Sanitizer;
 
 trait WithSanitizer
 {
     /**
      * The Sanitizer.
      *
-     * @var \Laravie\Codex\Sanitizer
+     * @var \Laravie\Codex\Contracts\Sanitizer
      */
     protected $sanitizer;
 
@@ -26,7 +26,7 @@ trait WithSanitizer
     /**
      * Set sanitizer.
      *
-     * @param  \Laravie\Codex\Sanitizer|null  $sanitizer
+     * @param  \Laravie\Codex\Contracts\Sanitizer|null  $sanitizer
      *
      * @return $this
      */
@@ -40,7 +40,7 @@ trait WithSanitizer
     /**
      * Get sanitizer.
      *
-     * @return \Laravie\Codex\Sanitizer|null
+     * @return \Laravie\Codex\Contracts\Sanitizer|null
      */
     public function getSanitizer()
     {
