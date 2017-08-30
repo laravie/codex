@@ -64,7 +64,8 @@ abstract class Request implements Contracts\Request
         }
 
         return $this->client->send($method, $this->resolveUri($endpoint), $headers, $body)
-                    ->setSanitizer($this->getSanitizer());
+                    ->setSanitizer($this->getSanitizer())
+                    ->validate();
     }
 
     /**
