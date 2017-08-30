@@ -9,7 +9,7 @@ abstract class Sanitizer
      *
      * @var array
      */
-    protected $rules = [];
+    protected $casts = [];
 
     /**
      * Add sanitization rules.
