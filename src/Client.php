@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class Client
+abstract class Client implements Contracts\Client
 {
     /**
      * Http Client instance.
@@ -144,7 +144,7 @@ abstract class Client
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Response
+     * @return \Laravie\Codex\Contracts\Response
      */
     public function send($method, $uri, array $headers = [], $body = [])
     {
@@ -160,7 +160,7 @@ abstract class Client
      *
      * @param  \Psr\Http\Message\ResponseInterface  $response
      *
-     * @return \Laravie\Codex\Response
+     * @return \Laravie\Codex\Contracts\Response
      */
     protected function responseWith(ResponseInterface $response)
     {
