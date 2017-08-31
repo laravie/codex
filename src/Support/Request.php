@@ -28,6 +28,8 @@ trait Request
     {
         list($headers, $body) = $this->prepareRequestPayloads($headers, $body);
 
+        $method = strtoupper($method);
+
         return $this->responseWith(
             $this->http->send($method, $uri, $headers, $body)
         );
