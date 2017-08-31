@@ -39,7 +39,6 @@ class HttpException extends RuntimeException implements HttpClientException
             ($code > 0) ? $code : $response->getStatusCode(),
             $previous
         );
-
     }
 
     /**
