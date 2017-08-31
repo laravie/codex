@@ -2,8 +2,13 @@
 
 namespace Laravie\Codex\Support;
 
+use GuzzleHttp\Psr7\Uri;
+use Laravie\Codex\Endpoint;
+use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\StreamInterface;
+use Laravie\Codex\Adapters\UriEndpoint;
 use Psr\Http\Message\ResponseInterface;
+use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 
 trait Request
 {
@@ -18,7 +23,7 @@ trait Request
      * Send the HTTP request.
      *
      * @param  string  $method
-     * @param  \Psr\Http\Message\UriInterface|string  $uri
+     * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -26,12 +31,18 @@ trait Request
      */
     public function send($method, $uri, array $headers = [], $body = [])
     {
+        $method = strtoupper($method);
+        $endpoint = $this->convertUriToEndpoint($uri);
+
+        if ($method === 'GET' && ! $body instanceof StreamInterface) {
+            $endpoint->addQuery($body);
+            $body = [];
+        }
+
         list($headers, $body) = $this->prepareRequestPayloads($headers, $body);
 
-        $method = strtoupper($method);
-
         return $this->responseWith(
-            $this->http->send($method, $uri, $headers, $body)
+            $this->http->send($method, $endpoint->get(), $headers, $body)
         );
     }
 
@@ -58,6 +69,23 @@ trait Request
         }
 
         return [$headers, $body];
+    }
+
+    /**
+     * Convert URI to Endpoint object.
+     *
+     * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
+     * @return \Laravie\Codex\Contracts\Endpoint
+     */
+    protected function convertUriToEndpoint($uri)
+    {
+        if ($uri instanceof EndpointContract) {
+            return $uri;
+        } elseif ($uri instanceof UriInterface) {
+            return new UriEndpoint($uri);
+        }
+
+        return new UriEndpoint(new Uri($uri));
     }
 
     /**

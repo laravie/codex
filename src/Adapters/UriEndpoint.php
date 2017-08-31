@@ -1,24 +1,18 @@
 <?php
 
-namespace Laravie\Codex;
+namespace Laravie\Codex\Adapters;
 
-use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\UriInterface;
+use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 
-class Endpoint implements Contracts\Endpoint
+class UriEndpoint implements EndpointContract
 {
     /**
-     * Base URL.
+     * URL implementations.
      *
-     * @var string
+     * @var \Psr\Http\Message\UriInterface
      */
     protected $uri;
-
-    /**
-     * Request Path Endpoint.
-     *
-     * @var string
-     */
-    protected $path;
 
     /**
      * Request query strings.
@@ -28,19 +22,29 @@ class Endpoint implements Contracts\Endpoint
     protected $query = [];
 
     /**
-     * Construct API Endpoint.
+     * Construct a new Endpoint Adapter.
      *
-     * @param string  $uri
-     * @param array|string  $path
-     * @param array   $query
+     * @param \Psr\Http\Message\UriInterface $uri
      */
-    public function __construct($uri, $path = [], array $query = [])
+    public function __construct(UriInterface $uri)
     {
-        $this->path = (array) $path;
-        $this->query = $query;
+        $this->uri = $uri;
 
-        if (! is_null($uri)) {
-            $this->uri = rtrim($uri, '/');
+        $this->prepareQuery($uri->getQuery());
+    }
+
+    protected function prepareQuery($query)
+    {
+        if (empty($query)) {
+            return;
+        }
+
+        foreach (explode('&', $query) as $pair) {
+            if (strpos($pair, '=') >= 0) {
+                list($key, $value) = explode('=', $pair, 2);
+
+                $this->addQuery($key, $value);
+            }
         }
     }
 
@@ -72,7 +76,9 @@ class Endpoint implements Contracts\Endpoint
      */
     public function getUri()
     {
-        return $this->uri;
+        if (! empty($this->uri->getHost())) {
+            return $this->uri->getScheme().'://'.$this->uri->getHost();
+        }
     }
 
     /**
@@ -82,7 +88,9 @@ class Endpoint implements Contracts\Endpoint
      */
     public function getPath()
     {
-        return $this->path;
+        $path = trim($this->uri->getPath(), '/');
+
+        return explode('/', $path);
     }
 
     /**
@@ -102,9 +110,8 @@ class Endpoint implements Contracts\Endpoint
      */
     public function get()
     {
-        $query = http_build_query($this->getQuery(), null, '&');
-        $to = implode('/', $this->getPath());
+        $this->uri->withQuery(http_build_query($this->getQuery(), null, '&'));
 
-        return new Uri(sprintf('%s/%s?%s', $this->getUri(), $to, $query));
+        return $this->uri;
     }
 }

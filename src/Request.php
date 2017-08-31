@@ -61,12 +61,6 @@ abstract class Request implements Contracts\Request
         $endpoint = ($path instanceof Endpoint)
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
-
-        if (strtoupper($method) === 'GET' && ! $body instanceof StreamInterface) {
-            $endpoint->addQuery($body);
-            $body = [];
-        }
-
         return $this->client->send($method, $this->resolveUri($endpoint), $headers, $body)
                     ->setSanitizer($this->getSanitizer())
                     ->validate();
@@ -133,7 +127,7 @@ abstract class Request implements Contracts\Request
      *
      * @param  \Laravie\Codex\Contracts\Endpoint  $endpoint
      *
-     * @return \GuzzleHttp\Psr7\Uri
+     * @return \Psr\Http\Message\UriInterface
      */
     protected function resolveUri(Contracts\Endpoint $endpoint)
     {
