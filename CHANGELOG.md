@@ -7,10 +7,13 @@ This changelog references the relevant changes (bug and security fixes) done to 
 ### Added
 
 * Add `Laravie\Codex\Contracts\Endpoint` contract.
+* Add `Laravie\Codex\Adapters\UriEndpoint` class.
 
 ### Changes
 
 * `Laravie\Codex\Exceptions\HttpException` now pre-populate `$message` and `$code` from `$response` if both is not populated.
+* Abstract http related request from `Laravie\Codex\Client` to `Laravie\Codex\Support\Request`.
+* Move populating body to query string from `Laravie\Codex\Request` to `Laravie\Codex\Support\Request`.
 
 ## 1.0.1
 
