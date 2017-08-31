@@ -3,6 +3,7 @@
 namespace Laravie\Codex\TestCase\Acme\One;
 
 use Laravie\Codex\Request;
+use Laravie\Codex\Endpoint;
 use Laravie\Codex\Sanitizer;
 
 class Welcome extends Request
@@ -35,6 +36,16 @@ class Welcome extends Request
     }
 
     /**
+     * Pong welcome.
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    public function pong()
+    {
+        return $this->send('GET', new Endpoint(null, 'welcome'));
+    }
+
+    /**
      * Get API Endpoint.
      *
      * @param  string|array  $path
@@ -43,7 +54,13 @@ class Welcome extends Request
      */
     protected function getApiEndpoint($path = [])
     {
-        return parent::getApiEndpoint([$this->getVersion(), $path]);
+        if (is_array($path)) {
+            array_unshift($path, $this->getVersion());
+        } else {
+            $path = [$this->getVersion(), $path];
+        }
+
+        return parent::getApiEndpoint($path);
     }
 
     /**

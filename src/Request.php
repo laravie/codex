@@ -48,7 +48,7 @@ abstract class Request implements Contracts\Request
      * Send API request.
      *
      * @param  string  $method
-     * @param  string  $path
+     * @param  \Laravie\Codex\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -57,7 +57,10 @@ abstract class Request implements Contracts\Request
     protected function send($method, $path, array $headers = [], $body = [])
     {
         $body = $this->sanitizeFrom($body);
-        $endpoint = $this->getApiEndpoint($path);
+
+        $endpoint = ($path instanceof Endpoint)
+                        ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
+                        : $this->getApiEndpoint($path);
 
         if (strtoupper($method) === 'GET' && ! $body instanceof StreamInterface) {
             $endpoint->addQuery($body);
