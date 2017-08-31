@@ -4,11 +4,15 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 ## 1.0.1
 
-Released: Not yet
+Released: 2018-08-31
+
+## Added
+
+* Added `getUri()`, `getPath()` and `getQuery()` on `Laravie\Codex\Endpoint` class.
 
 ### Changes
 
-* Allow `Laravie\Codex\Request::send()` to properly build URI if `$path` is given as `Laravie\Codex\Endpoint`.
+* Allow `Laravie\Codex\Request::send()` to properly build URI if `$path` is an instance of `Laravie\Codex\Endpoint`.
 
 ## 1.0.0
 
