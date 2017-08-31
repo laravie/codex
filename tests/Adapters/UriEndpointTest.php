@@ -61,6 +61,19 @@ class UriEndpointTest extends TestCase
     }
 
     /** @test */
+    function it_can_build_basic_endpoint_encoded_query_string()
+    {
+        $endpoint = new UriEndpoint(new Uri('https://laravel.com/docs?search=controller%26resource'));
+
+        $this->assertSame('https://laravel.com', $endpoint->getUri());
+        $this->assertSame(['docs'], $endpoint->getPath());
+        $this->assertEquals(['search' => 'controller&resource'], $endpoint->getQuery());
+
+        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertSame('https://laravel.com/docs?search=controller%26resource', (string) $endpoint->get());
+    }
+
+    /** @test */
     function it_can_set_endpoint_with_no_uri()
     {
         $endpoint = new UriEndpoint(new Uri('/docs'));

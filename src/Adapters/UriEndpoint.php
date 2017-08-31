@@ -43,7 +43,7 @@ class UriEndpoint implements EndpointContract
             if (strpos($pair, '=') >= 0) {
                 list($key, $value) = explode('=', $pair, 2);
 
-                $this->addQuery($key, $value);
+                $this->addQuery($key, urldecode($value));
             }
         }
     }
