@@ -36,9 +36,12 @@ class Endpoint
      */
     public function __construct($uri, $path = [], array $query = [])
     {
-        $this->uri = rtrim($uri, '/');
         $this->path = (array) $path;
         $this->query = $query;
+
+        if (! is_null($uri)) {
+            $this->uri = rtrim($uri, '/');
+        }
     }
 
     /**
@@ -63,15 +66,45 @@ class Endpoint
     }
 
     /**
+     * Get URI.
+     *
+     * @return string
+     */
+    public function getUri()
+    {
+        return $this->uri;
+    }
+
+    /**
+     * Get path(s).
+     *
+     * @return array
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Get query string(s).
+     *
+     * @return array
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
      * Get URI instance.
      *
      * @return \GuzzleHttp\Psr7\Uri
      */
     public function get()
     {
-        $query = http_build_query($this->query, null, '&');
-        $to = implode('/', $this->path);
+        $query = http_build_query($this->getQuery(), null, '&');
+        $to = implode('/', $this->getPath());
 
-        return new Uri(sprintf('%s/%s?%s', $this->uri, $to, $query));
+        return new Uri(sprintf('%s/%s?%s', $this->getUri(), $to, $query));
     }
 }

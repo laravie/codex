@@ -136,6 +136,30 @@ class ClientTest extends TestCase
         $this->assertTrue($response->hasSanitizer());
     }
 
+    /** @test */
+    function it_can_send_api_request_by_providing_endpoint()
+    {
+        $http = m::mock('Http\Client\Common\HttpMethodsClient');
+        $message = m::mock('Psr\Http\Message\ResponseInterface');
+
+        $http->shouldReceive('send')->once()
+            ->with('GET', m::type('GuzzleHttp\Psr7\Uri'), [], '')
+            ->andReturn($message);
+
+        $message->shouldReceive('getStatusCode')->andReturn(200)
+            ->shouldReceive('getBody')->andReturn('{"success":true}');
+
+        $response = (new Client($http, 'abc'))
+                        ->resource('Welcome')
+                        ->pong();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"success":true}', $response->getBody());
+        $this->assertSame(['success' => true], $response->getContent());
+        $this->assertSame(['success' => true], $response->toArray());
+        $this->assertTrue($response->hasSanitizer());
+    }
+
     /**
      * @test
      * @expectedException \InvalidArgumentException

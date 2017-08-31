@@ -12,7 +12,7 @@ class Welcome extends Request
      *
      * @var string
      */
-    protected $version = 'v1';
+    protected $version = 'v2';
 
     /**
      * Show welcome.

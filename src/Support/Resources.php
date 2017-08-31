@@ -9,7 +9,7 @@ trait Resources
     /**
      * Send API request using GET.
      *
-     * @param  string  $path
+     * @param  \Laravie\Codex\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -23,7 +23,7 @@ trait Resources
     /**
      * Send API request using POST.
      *
-     * @param  string  $path
+     * @param  \Laravie\Codex\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -37,7 +37,7 @@ trait Resources
     /**
      * Send API request using PUT.
      *
-     * @param  string  $path
+     * @param  \Laravie\Codex\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -51,7 +51,7 @@ trait Resources
     /**
      * Send API request using PATCH.
      *
-     * @param  string  $path
+     * @param  \Laravie\Codex\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -65,7 +65,7 @@ trait Resources
     /**
      * Send API request using DELETE.
      *
-     * @param  string  $path
+     * @param  \Laravie\Codex\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
