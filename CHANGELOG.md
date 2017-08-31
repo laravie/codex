@@ -2,6 +2,12 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.0.x
+
+### Changes
+
+* `Laravie\Codex\Exceptions\HttpException` now pre-populate `$message` and `$code` from `$response` if both is not populated.
+
 ## 1.0.1
 
 Released: 2018-08-31
