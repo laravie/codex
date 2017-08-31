@@ -2,6 +2,13 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.0.1
+
+Released: Not yet
+
+### Changes
+
+* Allow `Laravie\Codex\Request::send()` to properly build URI if `$path` is given as `Laravie\Codex\Endpoint`.
 
 ## 1.0.0
 
