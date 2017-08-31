@@ -4,6 +4,10 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 ## 1.0.x
 
+### Added
+
+* Add `Laravie\Codex\Contracts\Endpoint` contract.
+
 ### Changes
 
 * `Laravie\Codex\Exceptions\HttpException` now pre-populate `$message` and `$code` from `$response` if both is not populated.

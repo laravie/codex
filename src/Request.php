@@ -48,7 +48,7 @@ abstract class Request implements Contracts\Request
      * Send API request.
      *
      * @param  string  $method
-     * @param  \Laravie\Codex\Endpoint|string  $path
+     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -121,7 +121,7 @@ abstract class Request implements Contracts\Request
      *
      * @param  string|array  $path
      *
-     * @return \Laravie\Codex\Endpoint
+     * @return \Laravie\Codex\Contracts\Endpoint
      */
     protected function getApiEndpoint($path = [])
     {
@@ -131,11 +131,11 @@ abstract class Request implements Contracts\Request
     /**
      * Resolve URI.
      *
-     * @param  \Laravie\Codex\Endpoint  $endpoint
+     * @param  \Laravie\Codex\Contracts\Endpoint  $endpoint
      *
      * @return \GuzzleHttp\Psr7\Uri
      */
-    protected function resolveUri(Endpoint $endpoint)
+    protected function resolveUri(Contracts\Endpoint $endpoint)
     {
         return $endpoint->get();
     }

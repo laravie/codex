@@ -4,7 +4,7 @@ namespace Laravie\Codex;
 
 use GuzzleHttp\Psr7\Uri;
 
-class Endpoint
+class Endpoint implements Contracts\Endpoint
 {
     /**
      * Base URL.
