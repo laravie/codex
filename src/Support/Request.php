@@ -75,6 +75,7 @@ trait Request
      * Convert URI to Endpoint object.
      *
      * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
+     *
      * @return \Laravie\Codex\Contracts\Endpoint
      */
     protected function convertUriToEndpoint($uri)

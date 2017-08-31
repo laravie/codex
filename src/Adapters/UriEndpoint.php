@@ -30,10 +30,29 @@ class UriEndpoint implements EndpointContract
     {
         $this->uri = $uri;
 
-        $this->prepareQuery($uri->getQuery());
+        $this->createFromUri($uri);
     }
 
-    protected function prepareQuery($query)
+    /**
+     * Create from UriInterface.
+     *
+     * @param \Psr\Http\Message\UriInterface  $uri
+     *
+     * @return void
+     */
+    protected function createFromUri(UriInterface $uri)
+    {
+        $this->createQuery($uri->getQuery());
+    }
+
+    /**
+     * Prepare query string.
+     *
+     * @param  string  $query
+     *
+     * @return void
+     */
+    protected function createQuery($query)
     {
         if (empty($query)) {
             return;
