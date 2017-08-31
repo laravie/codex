@@ -80,7 +80,7 @@ trait Resources
      * Send API request.
      *
      * @param  string  $method
-     * @param  string  $path
+     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
