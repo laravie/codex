@@ -3,17 +3,11 @@
 namespace Laravie\Codex;
 
 use InvalidArgumentException;
-use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class Client implements Contracts\Client
 {
-    /**
-     * Http Client instance.
-     *
-     * @var \Http\Client\Common\HttpMethodsClient
-     */
-    protected $http;
+    use Support\Request;
 
     /**
      * The API endpoint.
@@ -117,25 +111,6 @@ abstract class Client implements Contracts\Client
     }
 
     /**
-     * Send the HTTP request.
-     *
-     * @param  string  $method
-     * @param  \Psr\Http\Message\UriInterface|string  $uri
-     * @param  array  $headers
-     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
-     *
-     * @return \Laravie\Codex\Contracts\Response
-     */
-    public function send($method, $uri, array $headers = [], $body = [])
-    {
-        list($headers, $body) = $this->prepareRequestPayloads($headers, $body);
-
-        return $this->responseWith(
-            $this->http->send($method, $uri, $headers, $body)
-        );
-    }
-
-    /**
      * Resolve the responder class.
      *
      * @param  \Psr\Http\Message\ResponseInterface  $response
@@ -157,31 +132,6 @@ abstract class Client implements Contracts\Client
     protected function prepareRequestHeaders(array $headers = [])
     {
         return $headers;
-    }
-
-    /**
-     * Prepare request payloads.
-     *
-     * @param  array  $headers
-     * @param  mixed  $body
-     *
-     * @return array
-     */
-    protected function prepareRequestPayloads(array $headers = [], $body = [])
-    {
-        $headers = $this->prepareRequestHeaders($headers);
-
-        if ($body instanceof StreamInterface) {
-            return [$headers, $body];
-        }
-
-        if (isset($headers['Content-Type']) && $headers['Content-Type'] == 'application/json') {
-            $body = json_encode($body);
-        } elseif (is_array($body)) {
-            $body = http_build_query($body, null, '&');
-        }
-
-        return [$headers, $body];
     }
 
     /**

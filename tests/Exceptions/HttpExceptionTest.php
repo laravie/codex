@@ -22,6 +22,10 @@ class HttpExceptionTest extends TestCase
     function it_implements_the_contracts()
     {
         $response = m::mock(Response::class);
+
+        $response->shouldReceive('getReasonPhrase')->andReturn('Not Found')
+            ->shouldReceive('getStatusCode')->andReturn(404);
+
         $stub = new HttpException($response);
 
         $this->assertInstanceOf('RuntimeException', $stub);
@@ -34,8 +38,10 @@ class HttpExceptionTest extends TestCase
         $response1 = m::mock(Response::class);
         $response2 = m::mock(ResponseInterface::class);
 
-        $response1->shouldReceive('getStatusCode')->once()->andReturn(401);
-        $response2->shouldReceive('getStatusCode')->once()->andReturn(500);
+        $response1->shouldReceive('getReasonPhrase')->andReturn('Not Authorized')
+            ->shouldReceive('getStatusCode')->andReturn(401);
+        $response2->shouldReceive('getReasonPhrase')->andReturn('Server error')
+            ->shouldReceive('getStatusCode')->andReturn(500);
 
         $stub1 = new HttpException($response1);
         $stub2 = new HttpException($response2);

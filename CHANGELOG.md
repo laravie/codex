@@ -2,6 +2,19 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.0.x
+
+### Added
+
+* Add `Laravie\Codex\Contracts\Endpoint` contract.
+
+### Changes
+
+* `Laravie\Codex\Exceptions\HttpException` now pre-populate `$message` and `$code` from `$response` if both is not populated.
+* Abstract http related request from `Laravie\Codex\Client` to `Laravie\Codex\Support\Request`.
+* `Laravie\Codex\Endpoint` now cache and build `GuzzleHttp\Psr7\Uri` immediately.
+* Move populating body to query string from `Laravie\Codex\Request` to `Laravie\Codex\Support\Request`.
+
 ## 1.0.1
 
 Released: 2018-08-31

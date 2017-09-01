@@ -32,9 +32,13 @@ class HttpException extends RuntimeException implements HttpClientException
         Exception $previous = null,
         $code = 0
     ) {
-        parent::__construct($message, $code, $previous);
-
         $this->setResponse($response);
+
+        parent::__construct(
+            $message ?: $response->getReasonPhrase(),
+            ($code > 0) ? $code : $response->getStatusCode(),
+            $previous
+        );
     }
 
     /**
