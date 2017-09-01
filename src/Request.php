@@ -129,7 +129,7 @@ abstract class Request implements Contracts\Request
      *
      * @return \Psr\Http\Message\UriInterface
      */
-    protected function resolveUri(Contracts\Endpoint $endpoint)
+    protected function resolveUri(Endpoint $endpoint)
     {
         return $endpoint->get();
     }
