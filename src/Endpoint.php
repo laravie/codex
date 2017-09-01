@@ -3,6 +3,7 @@
 namespace Laravie\Codex;
 
 use GuzzleHttp\Psr7\Uri;
+use BadMethodCallException;
 use Psr\Http\Message\UriInterface;
 
 class Endpoint implements Contracts\Endpoint

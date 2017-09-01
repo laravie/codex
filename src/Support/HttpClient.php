@@ -9,7 +9,7 @@ use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 
-trait Request
+trait HttpClient
 {
     /**
      * Http Client instance.
