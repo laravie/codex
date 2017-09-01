@@ -46,6 +46,30 @@ trait HttpClient
     }
 
     /**
+     * Stream (multipart) the HTTP request.
+     *
+     * @param  string  $method
+     * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
+     * @param  array  $headers
+     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
+     * @param  array  $files
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    public function stream($method, $uri, array $headers = [], $body = [], array $files = [])
+    {
+        list($headers, $stream) = $this->prepareMultipartRequestPayloads(
+            $this->prepareRequestHeaders($headers), $body, $files
+        );
+
+        return $this->responseWith(
+            $this->http->send(
+                strtoupper($method), $this->convertUriToEndpoint($uri)->get(), $headers, $stream
+            )
+        );
+    }
+
+    /**
      * Prepare request payloads.
      *
      * @param  array  $headers
