@@ -6,7 +6,6 @@ use GuzzleHttp\Psr7\Uri;
 use Laravie\Codex\Endpoint;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\StreamInterface;
-use Laravie\Codex\Adapters\UriEndpoint;
 use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 
@@ -83,10 +82,10 @@ trait Request
         if ($uri instanceof EndpointContract) {
             return $uri;
         } elseif ($uri instanceof UriInterface) {
-            return new UriEndpoint($uri);
+            return new Endpoint($uri);
         }
 
-        return new UriEndpoint(new Uri($uri));
+        return new Endpoint(new Uri($uri));
     }
 
     /**

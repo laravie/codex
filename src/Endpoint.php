@@ -3,22 +3,16 @@
 namespace Laravie\Codex;
 
 use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\UriInterface;
 
 class Endpoint implements Contracts\Endpoint
 {
     /**
      * Base URL.
      *
-     * @var string
+     * @var \Psr\Http\Message\UriInterface
      */
     protected $uri;
-
-    /**
-     * Request Path Endpoint.
-     *
-     * @var string
-     */
-    protected $path;
 
     /**
      * Request query strings.
@@ -30,17 +24,53 @@ class Endpoint implements Contracts\Endpoint
     /**
      * Construct API Endpoint.
      *
-     * @param string  $uri
+     * @param \Psr\Http\Message\UriInterface|string  $uri
      * @param array|string  $path
      * @param array   $query
      */
     public function __construct($uri, $path = [], array $query = [])
     {
-        $this->path = (array) $path;
-        $this->query = $query;
+        if ($uri instanceof UriInterface) {
+            $this->createFromUri($uri);
+        } else {
+            $uri = new Uri(sprintf('%s/%s', rtrim($uri, '/'), implode('/', (array) $path)));
+        }
 
-        if (! is_null($uri)) {
-            $this->uri = rtrim($uri, '/');
+        $this->addQuery($query);
+        $this->uri = $uri;
+    }
+
+    /**
+     * Create from UriInterface.
+     *
+     * @param \Psr\Http\Message\UriInterface  $uri
+     *
+     * @return void
+     */
+    protected function createFromUri(UriInterface $uri)
+    {
+        $this->createQuery($uri->getQuery());
+    }
+
+    /**
+     * Prepare query string.
+     *
+     * @param  string  $query
+     *
+     * @return void
+     */
+    protected function createQuery($query)
+    {
+        if (empty($query)) {
+            return;
+        }
+
+        foreach (explode('&', $query) as $pair) {
+            if (strpos($pair, '=') >= 0) {
+                list($key, $value) = explode('=', $pair, 2);
+
+                $this->addQuery($key, urldecode($value));
+            }
         }
     }
 
@@ -72,7 +102,9 @@ class Endpoint implements Contracts\Endpoint
      */
     public function getUri()
     {
-        return $this->uri;
+        if (! empty($this->uri->getHost())) {
+            return $this->uri->getScheme().'://'.$this->uri->getHost();
+        }
     }
 
     /**
@@ -82,7 +114,9 @@ class Endpoint implements Contracts\Endpoint
      */
     public function getPath()
     {
-        return $this->path;
+        $path = trim($this->uri->getPath(), '/');
+
+        return explode('/', $path);
     }
 
     /**
@@ -102,9 +136,35 @@ class Endpoint implements Contracts\Endpoint
      */
     public function get()
     {
-        $query = http_build_query($this->getQuery(), null, '&');
-        $to = implode('/', $this->getPath());
+        return $this->uri->withQuery(
+            http_build_query($this->getQuery(), null, '&')
+        );
+    }
 
-        return new Uri(sprintf('%s/%s?%s', $this->getUri(), $to, $query));
+    /**
+     * Call method under \Psr\Http\Message\UriInterface.
+     *
+     * @param  string  $method
+     * @param  array  $parameters
+     *
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        if (! method_exists($this->uri, $method)) {
+            throw new BadMethodCallException("Method [{$method}] doesn't exists.");
+        }
+
+        return call_user_func_array([$this->uri, $method], $parameters);
+    }
+
+    /**
+     * Return the string representation as a URI reference.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->get();
     }
 }

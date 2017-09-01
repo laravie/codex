@@ -3,11 +3,11 @@
 namespace Laravie\Codex\TestCase\Support;
 
 use Mockery as m;
+use Laravie\Codex\Endpoint;
 use Laravie\Codex\Response;
 use PHPUnit\Framework\TestCase;
 use Laravie\Codex\Support\Request;
 use Psr\Http\Message\UriInterface;
-use Laravie\Codex\Adapters\UriEndpoint;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 
 class RequestTest extends TestCase
@@ -32,7 +32,7 @@ class RequestTest extends TestCase
     }
 
     /** @test */
-    function it_can_return_adapter_when_given_uri()
+    function it_can_return_endpoint_when_given_uri()
     {
         $endpoint = m::mock(UriInterface::class);
 
@@ -40,18 +40,18 @@ class RequestTest extends TestCase
 
         $stub = $this->convertUriToEndpoint($endpoint);
 
-        $this->assertInstanceOf(UriEndpoint::class, $stub);
+        $this->assertInstanceOf(Endpoint::class, $stub);
         $this->assertSame(['foo' => 'bar'], $stub->getQuery());
     }
 
     /** @test */
-    function it_can_return_adapter_when_given_string()
+    function it_can_return_endpoint_when_given_string()
     {
         $endpoint = m::mock(UriInterface::class);
 
         $stub = $this->convertUriToEndpoint('https://laravel.com/docs/5.4?search=controller');
 
-        $this->assertInstanceOf(UriEndpoint::class, $stub);
+        $this->assertInstanceOf(Endpoint::class, $stub);
         $this->assertSame('https://laravel.com', $stub->getUri());
         $this->assertSame(['docs', '5.4'], $stub->getPath());
         $this->assertSame(['search' => 'controller'], $stub->getQuery());
