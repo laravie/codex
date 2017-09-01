@@ -6,13 +6,13 @@ use Mockery as m;
 use Laravie\Codex\Endpoint;
 use Laravie\Codex\Response;
 use PHPUnit\Framework\TestCase;
-use Laravie\Codex\Support\Request;
 use Psr\Http\Message\UriInterface;
+use Laravie\Codex\Support\HttpClient;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 
-class RequestTest extends TestCase
+class HttpClientTest extends TestCase
 {
-    use Request;
+    use HttpClient;
 
     /**
      * Teardown the test environment.

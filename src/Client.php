@@ -7,7 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class Client implements Contracts\Client
 {
-    use Support\Request;
+    use Support\HttpClient;
 
     /**
      * The API endpoint.

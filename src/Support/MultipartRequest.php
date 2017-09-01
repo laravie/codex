@@ -77,4 +77,13 @@ trait MultipartRequest
             }
         }
     }
+
+    /**
+     * Sanitize "to" for content.
+     *
+     * @param  array|mixed  $content
+     *
+     * @return array
+     */
+    abstract public function sanitizeTo($content);
 }

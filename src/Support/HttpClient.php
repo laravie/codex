@@ -9,7 +9,7 @@ use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 
-trait Request
+trait HttpClient
 {
     /**
      * Http Client instance.
@@ -42,6 +42,30 @@ trait Request
 
         return $this->responseWith(
             $this->http->send($method, $endpoint->get(), $headers, $body)
+        );
+    }
+
+    /**
+     * Stream (multipart) the HTTP request.
+     *
+     * @param  string  $method
+     * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
+     * @param  array  $headers
+     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
+     * @param  array  $files
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    public function stream($method, $uri, array $headers = [], $body = [], array $files = [])
+    {
+        list($headers, $stream) = $this->prepareMultipartRequestPayloads(
+            $this->prepareRequestHeaders($headers), $body, $files
+        );
+
+        return $this->responseWith(
+            $this->http->send(
+                strtoupper($method), $this->convertUriToEndpoint($uri)->get(), $headers, $stream
+            )
         );
     }
 
