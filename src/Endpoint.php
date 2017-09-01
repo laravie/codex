@@ -155,7 +155,7 @@ class Endpoint implements Contracts\Endpoint
             throw new BadMethodCallException("Method [{$method}] doesn't exists.");
         }
 
-        return call_user_func_array([$this->uri, $method], $parameters);
+        return $this->uri->{$method}(...$parameters);
     }
 
     /**

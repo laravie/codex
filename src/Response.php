@@ -90,6 +90,6 @@ class Response implements Contracts\Response
             throw new BadMethodCallException("Method [{$method}] doesn't exists.");
         }
 
-        return call_user_func([$this->original, $method], ...$parameters);
+        return $this->original->{$method}(...$parameters);
     }
 }
