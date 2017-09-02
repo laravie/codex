@@ -8,7 +8,6 @@ use Laravie\Codex\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UriInterface;
 use Laravie\Codex\Support\HttpClient;
-use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 
 class HttpClientTest extends TestCase
 {
@@ -25,7 +24,7 @@ class HttpClientTest extends TestCase
     /** @test */
     function it_can_return_same_instance_when_given_contract()
     {
-        $endpoint = m::mock(EndpointContract::class);
+        $endpoint = m::mock(Endpoint::class);
         $stub = $this->convertUriToEndpoint($endpoint);
 
         $this->assertSame($endpoint, $stub);

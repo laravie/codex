@@ -102,7 +102,7 @@ trait HttpClient
      */
     protected function convertUriToEndpoint($uri)
     {
-        if ($uri instanceof EndpointContract) {
+        if ($uri instanceof Endpoint) {
             return $uri;
         } elseif ($uri instanceof UriInterface) {
             return new Endpoint($uri);
