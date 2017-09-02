@@ -9,7 +9,7 @@ trait Resources
     /**
      * Send API request using GET.
      *
-     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
+     * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -23,7 +23,7 @@ trait Resources
     /**
      * Send API request using POST.
      *
-     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
+     * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -37,7 +37,7 @@ trait Resources
     /**
      * Send API request using PUT.
      *
-     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
+     * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -51,7 +51,7 @@ trait Resources
     /**
      * Send API request using PATCH.
      *
-     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
+     * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -65,7 +65,7 @@ trait Resources
     /**
      * Send API request using DELETE.
      *
-     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
+     * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -80,7 +80,7 @@ trait Resources
      * Send API request.
      *
      * @param  string  $method
-     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
+     * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *

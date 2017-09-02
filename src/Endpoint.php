@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Uri;
 use BadMethodCallException;
 use Psr\Http\Message\UriInterface;
 
-class Endpoint implements Contracts\Endpoint
+class Endpoint
 {
     /**
      * Base URL.
