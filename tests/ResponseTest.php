@@ -18,7 +18,7 @@ class ResponseTest extends TestCase
     }
 
     /** @test */
-    function it_implements_proper_contract()
+    public function it_implements_proper_contract()
     {
         $stub = new Response(m::mock(ResponseInterface::class));
 
@@ -26,7 +26,7 @@ class ResponseTest extends TestCase
     }
 
     /** @test */
-    function it_can_build_a_basic_response()
+    public function it_can_build_a_basic_response()
     {
         $json = '{"name":"Laravie Codex"}';
         $data = ['name' => 'Laravie Codex'];
@@ -42,7 +42,7 @@ class ResponseTest extends TestCase
     }
 
     /** @test */
-    function it_can_return_status_code()
+    public function it_can_return_status_code()
     {
         $api = m::mock(ResponseInterface::class);
 
@@ -54,7 +54,7 @@ class ResponseTest extends TestCase
     }
 
     /** @test */
-    function it_can_return_parent_methods()
+    public function it_can_return_parent_methods()
     {
         $api = m::mock(ResponseInterface::class);
 
@@ -70,7 +70,7 @@ class ResponseTest extends TestCase
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Method [getRequest] doesn't exists.
      */
-    function it_cant_return_unknown_parent_methods_should_throw_exception()
+    public function it_cant_return_unknown_parent_methods_should_throw_exception()
     {
         (new Response(m::mock(ResponseInterface::class)))->getRequest();
     }

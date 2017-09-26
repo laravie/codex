@@ -61,6 +61,7 @@ abstract class Request implements Contracts\Request
         $endpoint = ($path instanceof Endpoint)
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
+
         return $this->client->send($method, $this->resolveUri($endpoint), $headers, $body)
                     ->setSanitizer($this->getSanitizer())
                     ->validate();

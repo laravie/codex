@@ -19,7 +19,7 @@ class RequestTest extends TestCase
     }
 
     /** @test */
-    function it_define_http_methods_as_consts()
+    public function it_define_http_methods_as_consts()
     {
         $this->assertSame('GET', RequestContract::METHOD_GET);
         $this->assertSame('POST', RequestContract::METHOD_POST);
@@ -29,7 +29,7 @@ class RequestTest extends TestCase
     }
 
     /** @test */
-    function it_has_proper_signature()
+    public function it_has_proper_signature()
     {
         $client = m::mock(Client::class);
 

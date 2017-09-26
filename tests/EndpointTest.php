@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class EndpointTest extends TestCase
 {
     /** @test */
-    function it_can_build_basic_endpoint()
+    public function it_can_build_basic_endpoint()
     {
         $endpoint = new Endpoint('https://laravel.com', 'docs');
 
@@ -24,7 +24,7 @@ class EndpointTest extends TestCase
     }
 
     /** @test */
-    function it_can_build_basic_endpoint_with_tailing_slash()
+    public function it_can_build_basic_endpoint_with_tailing_slash()
     {
         $endpoint = new Endpoint('https://laravel.com/', 'docs');
 
@@ -40,7 +40,7 @@ class EndpointTest extends TestCase
     }
 
     /** @test */
-    function it_can_build_endpoint_with_multiple_paths()
+    public function it_can_build_endpoint_with_multiple_paths()
     {
         $endpoint = new Endpoint('https://laravel.com', ['docs', '5.4']);
 
@@ -56,7 +56,7 @@ class EndpointTest extends TestCase
     }
 
     /** @test */
-    function it_can_build_basic_endpoint_with_query_string()
+    public function it_can_build_basic_endpoint_with_query_string()
     {
         $endpoint = new Endpoint('https://laravel.com', 'docs', ['search' => 'controller']);
 
@@ -72,7 +72,7 @@ class EndpointTest extends TestCase
     }
 
     /** @test */
-    function it_can_build_basic_endpoint_appended_query_string()
+    public function it_can_build_basic_endpoint_appended_query_string()
     {
         $endpoint = (new Endpoint('https://laravel.com', 'docs'))
                         ->addQuery(['search' => 'controller', 'page' => 3]);
@@ -89,7 +89,7 @@ class EndpointTest extends TestCase
     }
 
     /** @test */
-    function it_can_set_endpoint_with_no_uri()
+    public function it_can_set_endpoint_with_no_uri()
     {
         $endpoint = new Endpoint(null, 'docs');
 
@@ -109,7 +109,7 @@ class EndpointTest extends TestCase
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage Method [getFullUrl] doesn't exists.
      */
-    function it_cant_call_unknown_method_should_throw_exception()
+    public function it_cant_call_unknown_method_should_throw_exception()
     {
         (new Endpoint(null, 'docs'))->getFullUrl();
     }

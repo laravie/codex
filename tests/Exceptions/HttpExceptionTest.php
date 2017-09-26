@@ -19,7 +19,7 @@ class HttpExceptionTest extends TestCase
     }
 
     /** @test */
-    function it_implements_the_contracts()
+    public function it_implements_the_contracts()
     {
         $response = m::mock(Response::class);
 
@@ -33,7 +33,7 @@ class HttpExceptionTest extends TestCase
     }
 
     /** @test */
-    function it_require_proper_response_object()
+    public function it_require_proper_response_object()
     {
         $response1 = m::mock(Response::class);
         $response2 = m::mock(ResponseInterface::class);
@@ -58,7 +58,7 @@ class HttpExceptionTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage $response is not an acceptable response object!
      */
-    function it_should_throw_exception_with_invalid_response_object()
+    public function it_should_throw_exception_with_invalid_response_object()
     {
         $stub = new HttpException(null);
     }
