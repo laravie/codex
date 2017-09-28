@@ -4,7 +4,7 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 ## 1.1.0
 
-**Unreleased**
+Released: 2017-09-07
 
 ### Changes
 
@@ -15,7 +15,7 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 ## 1.0.1
 
-Released: 2018-08-31
+Released: 2017-08-31
 
 ## Added
 

@@ -10,7 +10,7 @@ use Laravie\Codex\TestCase\Acme\Casts\Carbon;
 class SanitizerTest extends TestCase
 {
     /** @test */
-    function it_can_sanitize_from_inputs()
+    public function it_can_sanitize_from_inputs()
     {
         $stub = new Sanitizer();
         $stub->add('meta', new Arr());
@@ -30,7 +30,7 @@ class SanitizerTest extends TestCase
     }
 
     /** @test */
-    function it_can_sanitize_to_response()
+    public function it_can_sanitize_to_response()
     {
         $stub = new Sanitizer();
         $stub->add('meta', new Arr());
@@ -50,7 +50,7 @@ class SanitizerTest extends TestCase
     }
 
     /** @test */
-    function it_can_sanitize_from_inputs_on_nested_array()
+    public function it_can_sanitize_from_inputs_on_nested_array()
     {
         $stub = new Sanitizer();
         $stub->add(['meta', 'circles'], new Arr());
@@ -70,7 +70,7 @@ class SanitizerTest extends TestCase
     }
 
     /** @test */
-    function it_can_sanitize_to_response_on_nested_array()
+    public function it_can_sanitize_to_response_on_nested_array()
     {
         $stub = new Sanitizer();
         $stub->add(['meta', 'circles'], new Arr());

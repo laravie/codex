@@ -22,7 +22,7 @@ class HttpClientTest extends TestCase
     }
 
     /** @test */
-    function it_can_return_same_instance_when_given_contract()
+    public function it_can_return_same_instance_when_given_contract()
     {
         $endpoint = m::mock(Endpoint::class);
         $stub = $this->convertUriToEndpoint($endpoint);
@@ -31,7 +31,7 @@ class HttpClientTest extends TestCase
     }
 
     /** @test */
-    function it_can_return_endpoint_when_given_uri()
+    public function it_can_return_endpoint_when_given_uri()
     {
         $endpoint = m::mock(UriInterface::class);
 
@@ -44,7 +44,7 @@ class HttpClientTest extends TestCase
     }
 
     /** @test */
-    function it_can_return_endpoint_when_given_string()
+    public function it_can_return_endpoint_when_given_string()
     {
         $endpoint = m::mock(UriInterface::class);
 

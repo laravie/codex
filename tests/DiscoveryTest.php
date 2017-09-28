@@ -16,7 +16,7 @@ class DiscoveryTest extends TestCase
     }
 
     /** @test */
-    function it_can_set_client()
+    public function it_can_set_client()
     {
         $http = Discovery::client();
 
@@ -26,7 +26,7 @@ class DiscoveryTest extends TestCase
     }
 
     /** @test */
-    function it_can_refresh_client()
+    public function it_can_refresh_client()
     {
         $http = Discovery::client();
 
@@ -34,7 +34,7 @@ class DiscoveryTest extends TestCase
     }
 
     /** @test */
-    function it_can_override_client()
+    public function it_can_override_client()
     {
         $http1 = Discovery::client();
         $http2 = Discovery::override($override = Discovery::make());

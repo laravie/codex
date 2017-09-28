@@ -17,7 +17,7 @@ class ClientTest extends TestCase
     }
 
     /** @test */
-    function it_has_proper_signature()
+    public function it_has_proper_signature()
     {
         $stub = Client::make('abc');
 
@@ -27,7 +27,7 @@ class ClientTest extends TestCase
     }
 
     /** @test */
-    function it_can_set_custom_endpoint()
+    public function it_can_set_custom_endpoint()
     {
         $stub = Client::make('abc');
 
@@ -39,7 +39,7 @@ class ClientTest extends TestCase
     }
 
     /** @test */
-    function it_can_send_api_request_on_version_one()
+    public function it_can_send_api_request_on_version_one()
     {
         $http = m::mock('Http\Client\Common\HttpMethodsClient');
         $message = m::mock('Psr\Http\Message\ResponseInterface');
@@ -63,7 +63,7 @@ class ClientTest extends TestCase
     }
 
     /** @test */
-    function it_can_send_api_request_on_version_two()
+    public function it_can_send_api_request_on_version_two()
     {
         $http = m::mock('Http\Client\Common\HttpMethodsClient');
         $message = m::mock('Psr\Http\Message\ResponseInterface');
@@ -88,7 +88,7 @@ class ClientTest extends TestCase
     }
 
     /** @test */
-    function it_can_send_api_request_by_sending_stream_data()
+    public function it_can_send_api_request_by_sending_stream_data()
     {
         $http = m::mock('Http\Client\Common\HttpMethodsClient');
         $message = m::mock('Psr\Http\Message\ResponseInterface');
@@ -111,7 +111,7 @@ class ClientTest extends TestCase
     }
 
     /** @test */
-    function it_can_send_api_request_by_sending_json_data()
+    public function it_can_send_api_request_by_sending_json_data()
     {
         $http = m::mock('Http\Client\Common\HttpMethodsClient');
         $message = m::mock('Psr\Http\Message\ResponseInterface');
@@ -127,7 +127,7 @@ class ClientTest extends TestCase
 
         $response = (new Client($http, 'abc'))
                         ->resource('Welcome')
-                        ->ping(["meta" => ["foo", "bar"]], $headers);
+                        ->ping(['meta' => ['foo', 'bar']], $headers);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -137,7 +137,7 @@ class ClientTest extends TestCase
     }
 
     /** @test */
-    function it_can_send_api_request_by_providing_endpoint()
+    public function it_can_send_api_request_by_providing_endpoint()
     {
         $http = m::mock('Http\Client\Common\HttpMethodsClient');
         $message = m::mock('Psr\Http\Message\ResponseInterface');
@@ -165,7 +165,7 @@ class ClientTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage API version [v10] is not supported.
      */
-    function it_cant_use_unsupported_version_should_throw_exception()
+    public function it_cant_use_unsupported_version_should_throw_exception()
     {
         Client::make('abc')->useVersion('v10');
     }
@@ -175,7 +175,7 @@ class ClientTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Resource [Foobar] for version [v1] is not available.
      */
-    function it_cant_find_unknown_resource()
+    public function it_cant_find_unknown_resource()
     {
         $http = m::mock('Http\Client\Common\HttpMethodsClient');
 
