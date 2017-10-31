@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.2.0
+
+Released: 2017-10-31
+
+### Added
+
+* Add `Laravie\Codex\Response::validateWith()` helper to validate the response for SDK.
+
 ## 1.1.0
 
 Released: 2017-09-07
