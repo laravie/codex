@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.3.0
+
+Released: 2017-11-14
+
+### Added
+
+* Add `Laravie\Codex\Testing\FakeRequest`.
+
 ## 1.2.0
 
 Released: 2017-10-31
