@@ -128,11 +128,11 @@ abstract class Request implements Contracts\Request
     /**
      * Resolve URI.
      *
-     * @param  \Laravie\Codex\Endpoint  $endpoint
+     * @param  \Laravie\Codex\Contracts\Endpoint  $endpoint
      *
      * @return \Psr\Http\Message\UriInterface
      */
-    protected function resolveUri(Endpoint $endpoint): UriInterface
+    protected function resolveUri(Contracts\Endpoint $endpoint): UriInterface
     {
         return $endpoint->get();
     }
