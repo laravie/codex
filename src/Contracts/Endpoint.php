@@ -2,6 +2,8 @@
 
 namespace Laravie\Codex\Contracts;
 
+use Psr\Http\Message\UriInterface;
+
 interface Endpoint
 {
     /**
@@ -12,12 +14,12 @@ interface Endpoint
      *
      * @return $this
      */
-    public function addQuery($key, $value = null);
+    public function addQuery($key, string $value = null);
 
     /**
      * Get URI.
      *
-     * @return string
+     * @return string|null
      */
     public function getUri();
 
@@ -26,19 +28,19 @@ interface Endpoint
      *
      * @return array
      */
-    public function getPath();
+    public function getPath(): array;
 
     /**
      * Get query string(s).
      *
      * @return array
      */
-    public function getQuery();
+    public function getQuery(): array;
 
     /**
      * Get URI instance.
      *
      * @return \Psr\Http\Message\UriInterface
      */
-    public function get();
+    public function get(): UriInterface;
 }

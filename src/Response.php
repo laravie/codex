@@ -31,7 +31,7 @@ class Response implements Contracts\Response
      *
      * @return $this
      */
-    public function validate()
+    public function validate(): self
     {
         return $this;
     }
@@ -43,7 +43,7 @@ class Response implements Contracts\Response
      *
      * @return $this
      */
-    public function validateWith(callable $callback)
+    public function validateWith(callable $callback): self
     {
         call_user_func($callback, $this->getStatusCode(), $this);
 
@@ -55,7 +55,7 @@ class Response implements Contracts\Response
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->sanitizeTo($this->getContent());
     }
@@ -63,7 +63,7 @@ class Response implements Contracts\Response
     /**
      * Get body.
      *
-     * @return int
+     * @return mixed
      */
     public function getBody()
     {
@@ -85,7 +85,7 @@ class Response implements Contracts\Response
      *
      * @return int
      */
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->original->getStatusCode();
     }

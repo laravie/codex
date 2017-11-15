@@ -5,6 +5,8 @@ namespace Laravie\Codex\TestCase\Acme\One;
 use Laravie\Codex\Request;
 use Laravie\Codex\Endpoint;
 use Laravie\Codex\Sanitizer;
+use Laravie\Codex\Contracts\Endpoint as EndpointContract;
+use Laravie\Codex\Contracts\Sanitizer as SanitizerContract;
 
 class Welcome extends Request
 {
@@ -50,9 +52,9 @@ class Welcome extends Request
      *
      * @param  string|array  $path
      *
-     * @return \Laravie\Codex\Endpoint
+     * @return \Laravie\Codex\Contracts\Endpoint
      */
-    protected function getApiEndpoint($path = [])
+    protected function getApiEndpoint($path = []): EndpointContract
     {
         if (is_array($path)) {
             array_unshift($path, $this->getVersion());
@@ -68,7 +70,7 @@ class Welcome extends Request
      *
      * @return Laravie\Codex\Contracts\Sanitizer
      */
-    public function sanitizeWith()
+    public function sanitizeWith(): SanitizerContract
     {
         return new Sanitizer();
     }

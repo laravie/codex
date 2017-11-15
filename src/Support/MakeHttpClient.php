@@ -3,6 +3,7 @@
 namespace Laravie\Codex\Support;
 
 use Laravie\Codex\Discovery;
+use Http\Client\Common\HttpMethodsClient;
 
 trait MakeHttpClient
 {
@@ -11,7 +12,7 @@ trait MakeHttpClient
      *
      * @return \Http\Client\Common\HttpMethodsClient
      */
-    protected static function makeHttpClient()
+    protected static function makeHttpClient(): HttpMethodsClient
     {
         return Discovery::client();
     }
@@ -21,7 +22,7 @@ trait MakeHttpClient
      *
      * @return \Http\Client\Common\HttpMethodsClient
      */
-    protected static function makeFreshHttpClient()
+    protected static function makeFreshHttpClient(): HttpMethodsClient
     {
         return Discovery::refreshClient();
     }

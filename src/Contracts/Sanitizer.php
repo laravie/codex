@@ -22,7 +22,7 @@ interface Sanitizer
      *
      * @return array
      */
-    public function from(array $inputs, array $group = []);
+    public function from(array $inputs, array $group = []): array;
 
     /**
      * Sanitize response.
@@ -32,5 +32,5 @@ interface Sanitizer
      *
      * @return array
      */
-    public function to(array $inputs, $group = []);
+    public function to(array $inputs, array $group = []): array;
 }

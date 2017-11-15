@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Uri;
 use BadMethodCallException;
 use Psr\Http\Message\UriInterface;
 
-class Endpoint
+class Endpoint implements Contracts\Endpoint
 {
     /**
      * Base URL.
@@ -60,7 +60,7 @@ class Endpoint
      *
      * @return void
      */
-    protected function createQuery($query)
+    protected function createQuery(string $query)
     {
         if (empty($query)) {
             return;
@@ -83,7 +83,7 @@ class Endpoint
      *
      * @return $this
      */
-    public function addQuery($key, $value = null)
+    public function addQuery($key, string $value = null): self
     {
         if (is_array($key)) {
             foreach ($key as $name => $content) {
@@ -99,7 +99,7 @@ class Endpoint
     /**
      * Get URI.
      *
-     * @return string
+     * @return string|null
      */
     public function getUri()
     {
@@ -113,7 +113,7 @@ class Endpoint
      *
      * @return array
      */
-    public function getPath()
+    public function getPath(): array
     {
         $path = trim($this->uri->getPath(), '/');
 
@@ -125,7 +125,7 @@ class Endpoint
      *
      * @return array
      */
-    public function getQuery()
+    public function getQuery(): array
     {
         return $this->query;
     }
@@ -135,7 +135,7 @@ class Endpoint
      *
      * @return \Psr\Http\Message\UriInterface
      */
-    public function get()
+    public function get(): UriInterface
     {
         return $this->uri->withQuery(
             http_build_query($this->getQuery(), null, '&')

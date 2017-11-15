@@ -81,7 +81,7 @@ class EndpointTest extends TestCase
         $this->assertSame('laravel.com', $endpoint->getHost());
         $this->assertSame('https://laravel.com', $endpoint->getUri());
         $this->assertSame(['docs'], $endpoint->getPath());
-        $this->assertSame(['search' => 'controller', 'page' => 3], $endpoint->getQuery());
+        $this->assertSame(['search' => 'controller', 'page' => '3'], $endpoint->getQuery());
 
         $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
         $this->assertSame('https://laravel.com/docs?search=controller&page=3', (string) $endpoint->get());

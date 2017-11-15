@@ -3,7 +3,10 @@
 namespace Laravie\Codex\TestCase\Acme\Two;
 
 use Laravie\Codex\Request;
+use Laravie\Codex\Endpoint;
 use Laravie\Codex\Sanitizer;
+use Laravie\Codex\Contracts\Endpoint as EndpointContract;
+use Laravie\Codex\Contracts\Sanitizer as SanitizerContract;
 
 class Welcome extends Request
 {
@@ -39,7 +42,7 @@ class Welcome extends Request
      *
      * @return array
      */
-    protected function getApiHeaders()
+    protected function getApiHeaders(): array
     {
         return [
             'Authorization' => 'Bearer '.$this->client->getApiKey(),
@@ -51,9 +54,9 @@ class Welcome extends Request
      *
      * @param  string|array  $path
      *
-     * @return \Laravie\Codex\Endpoint
+     * @return \Laravie\Codex\Contracts\Endpoint
      */
-    protected function getApiEndpoint($path = [])
+    protected function getApiEndpoint($path = []): EndpointContract
     {
         return parent::getApiEndpoint([$this->getVersion(), $path]);
     }
@@ -63,7 +66,7 @@ class Welcome extends Request
      *
      * @return Laravie\Codex\Contracts\Sanitizer
      */
-    public function sanitizeWith()
+    public function sanitizeWith(): SanitizerContract
     {
         return new Sanitizer();
     }

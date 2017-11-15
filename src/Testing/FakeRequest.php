@@ -4,6 +4,7 @@ namespace Laravie\Codex\Testing;
 
 use Mockery as m;
 use GuzzleHttp\Psr7\Uri;
+use Mockery\MockeryInterface;
 use PHPUnit\Framework\Assert;
 use Psr\Http\Message\ResponseInterface;
 use Http\Client\Common\HttpMethodsClient;
@@ -71,7 +72,7 @@ class FakeRequest
      *
      * @return $this
      */
-    public function expectEndpointIs($endpoint)
+    public function expectEndpointIs(string $endpoint): self
     {
         $this->expectedEndpoint = $endpoint;
 
@@ -87,7 +88,7 @@ class FakeRequest
      *
      * @return $this
      */
-    public function call($method = 'GET', array $headers = [], $body = '')
+    public function call(string $method = 'GET', array $headers = [], $body = ''): self
     {
         $this->http->shouldReceive('send')
                 ->with($method, m::type(Uri::class), $headers, $body)
@@ -108,7 +109,7 @@ class FakeRequest
      *
      * @return $this
      */
-    public function shouldResponseWith($code = 200, $body = '')
+    public function shouldResponseWith(int $code = 200, string $body = ''): self
     {
         $this->expectedStatusCode = $code;
         $this->expectedBody = $body;
@@ -124,7 +125,7 @@ class FakeRequest
      *
      * @return \Mockery\MockeryInterface
      */
-    public function http()
+    public function http(): MockeryInterface
     {
         return $this->http;
     }
@@ -134,7 +135,7 @@ class FakeRequest
      *
      * @return \Mockery\MockeryInterface
      */
-    public function message()
+    public function message(): MockeryInterface
     {
         return $this->message;
     }

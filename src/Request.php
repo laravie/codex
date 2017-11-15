@@ -2,6 +2,8 @@
 
 namespace Laravie\Codex;
 
+use Psr\Http\Message\UriInterface;
+
 abstract class Request implements Contracts\Request
 {
     use Support\WithSanitizer;
@@ -39,7 +41,7 @@ abstract class Request implements Contracts\Request
      *
      * @return string
      */
-    public function getVersion()
+    public function getVersion(): string
     {
         return $this->version;
     }
@@ -52,9 +54,9 @@ abstract class Request implements Contracts\Request
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Contracts\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
-    protected function send($method, $path, array $headers = [], $body = [])
+    protected function send(string $method, $path, array $headers = [], $body = []): Contracts\Response
     {
         $body = $this->sanitizeFrom($body);
 
@@ -72,7 +74,7 @@ abstract class Request implements Contracts\Request
      *
      * @return array
      */
-    protected function getApiHeaders()
+    protected function getApiHeaders(): array
     {
         return [];
     }
@@ -82,7 +84,7 @@ abstract class Request implements Contracts\Request
      *
      * @return array
      */
-    protected function getApiBody()
+    protected function getApiBody(): array
     {
         return [];
     }
@@ -94,7 +96,7 @@ abstract class Request implements Contracts\Request
      *
      * @return array
      */
-    protected function mergeApiHeaders(array $headers = [])
+    protected function mergeApiHeaders(array $headers = []): array
     {
         return array_merge($this->getApiHeaders(), $headers);
     }
@@ -106,7 +108,7 @@ abstract class Request implements Contracts\Request
      *
      * @return array
      */
-    protected function mergeApiBody(array $body = [])
+    protected function mergeApiBody(array $body = []): array
     {
         return array_merge($this->getApiBody(), $body);
     }
@@ -116,9 +118,9 @@ abstract class Request implements Contracts\Request
      *
      * @param  string|array  $path
      *
-     * @return \Laravie\Codex\Endpoint
+     * @return \Laravie\Codex\Contracts\Endpoint
      */
-    protected function getApiEndpoint($path = [])
+    protected function getApiEndpoint($path = []): Contracts\Endpoint
     {
         return new Endpoint($this->client->getApiEndpoint(), $path);
     }
@@ -130,7 +132,7 @@ abstract class Request implements Contracts\Request
      *
      * @return \Psr\Http\Message\UriInterface
      */
-    protected function resolveUri(Endpoint $endpoint)
+    protected function resolveUri(Endpoint $endpoint): UriInterface
     {
         return $endpoint->get();
     }

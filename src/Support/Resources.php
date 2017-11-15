@@ -3,6 +3,7 @@
 namespace Laravie\Codex\Support;
 
 use Laravie\Codex\Contracts\Request;
+use Laravie\Codex\Contracts\Response as ResponseContract;
 
 trait Resources
 {
@@ -13,9 +14,9 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
-    protected function get($path, array $headers = [], $body = [])
+    protected function get($path, array $headers = [], $body = []): ResponseContract
     {
         return $this->send(Request::METHOD_GET, $path, $headers, $body);
     }
@@ -27,9 +28,9 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
-    protected function post($path, array $headers = [], $body = [])
+    protected function post($path, array $headers = [], $body = []): ResponseContract
     {
         return $this->send(Request::METHOD_POST, $path, $headers, $body);
     }
@@ -41,9 +42,9 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
-    protected function put($path, array $headers = [], $body = [])
+    protected function put($path, array $headers = [], $body = []): ResponseContract
     {
         return $this->send(Request::METHOD_PUT, $path, $headers, $body);
     }
@@ -55,9 +56,9 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
-    protected function patch($path, array $headers = [], $body = [])
+    protected function patch($path, array $headers = [], $body = []): ResponseContract
     {
         return $this->send(Request::METHOD_PATCH, $path, $headers, $body);
     }
@@ -69,9 +70,9 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
-    protected function delete($path, array $headers = [], $body = [])
+    protected function delete($path, array $headers = [], $body = []): ResponseContract
     {
         return $this->send(Request::METHOD_DELETE, $path, $headers, $body);
     }
@@ -84,7 +85,7 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
-    abstract protected function send($method, $path, array $headers = [], $body = []);
+    abstract protected function send($method, $path, array $headers = [], $body = []): ResponseContract;
 }

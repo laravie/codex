@@ -28,9 +28,9 @@ class HttpException extends RuntimeException implements HttpClientException
      */
     public function __construct(
         $response,
-        $message = null,
+        string $message = null,
         Exception $previous = null,
-        $code = 0
+        int $code = 0
     ) {
         $this->setResponse($response);
 
@@ -46,7 +46,7 @@ class HttpException extends RuntimeException implements HttpClientException
      *
      * @return int
      */
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->response->getStatusCode();
     }
@@ -70,7 +70,7 @@ class HttpException extends RuntimeException implements HttpClientException
      *
      * @return $this
      */
-    public function setResponse($response)
+    public function setResponse($response): self
     {
         if ($response instanceof Response || $response instanceof ResponseInterface) {
             $this->response = $response;

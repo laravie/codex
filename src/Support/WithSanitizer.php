@@ -18,7 +18,7 @@ trait WithSanitizer
      *
      * @return bool
      */
-    public function hasSanitizer()
+    public function hasSanitizer(): bool
     {
         return $this->sanitizer instanceof Sanitizer;
     }
@@ -30,7 +30,7 @@ trait WithSanitizer
      *
      * @return $this
      */
-    public function setSanitizer(Sanitizer $sanitizer = null)
+    public function setSanitizer(Sanitizer $sanitizer = null): self
     {
         $this->sanitizer = $sanitizer;
 
@@ -52,7 +52,7 @@ trait WithSanitizer
      *
      * @param  array|mixed  $content
      *
-     * @return array
+     * @return array|object
      */
     public function sanitizeFrom($content)
     {
@@ -68,7 +68,7 @@ trait WithSanitizer
      *
      * @return array
      */
-    public function sanitizeTo($content)
+    public function sanitizeTo($content): array
     {
         return ($this->hasSanitizer() && is_array($content))
                     ? $this->sanitizer->to($content)

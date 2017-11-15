@@ -11,7 +11,7 @@ interface Client
      *
      * @return $this
      */
-    public function useCustomApiEndpoint($endpoint);
+    public function useCustomApiEndpoint(string $endpoint);
 
     /**
      * Use different API version.
@@ -22,21 +22,21 @@ interface Client
      *
      * @return $this
      */
-    public function useVersion($version);
+    public function useVersion(string $version);
 
     /**
      * Get API endpoint URL.
      *
      * @return string
      */
-    public function getApiEndpoint();
+    public function getApiEndpoint(): string;
 
     /**
      * Get API default version.
      *
      * @return string
      */
-    public function getApiVersion();
+    public function getApiVersion(): string;
 
     /**
      * Send the HTTP request.
@@ -48,5 +48,5 @@ interface Client
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    public function send($method, $uri, array $headers = [], $body = []);
+    public function send(string $method, $uri, array $headers = [], $body = []): Response;
 }

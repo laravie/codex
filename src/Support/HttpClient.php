@@ -7,6 +7,7 @@ use Laravie\Codex\Endpoint;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
+use Laravie\Codex\Contracts\Response as ResponseContract;
 
 trait HttpClient
 {
@@ -27,7 +28,7 @@ trait HttpClient
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    public function send($method, $uri, array $headers = [], $body = [])
+    public function send(string $method, $uri, array $headers = [], $body = []): ResponseContract
     {
         $method = strtoupper($method);
         $endpoint = $this->convertUriToEndpoint($uri);
@@ -55,7 +56,7 @@ trait HttpClient
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    public function stream($method, $uri, array $headers = [], $body = [], array $files = [])
+    public function stream(string $method, $uri, array $headers = [], $body = [], array $files = []): ResponseContract
     {
         list($headers, $stream) = $this->prepareMultipartRequestPayloads(
             $this->prepareRequestHeaders($headers), $body, $files
@@ -76,7 +77,7 @@ trait HttpClient
      *
      * @return array
      */
-    protected function prepareRequestPayloads(array $headers = [], $body = [])
+    protected function prepareRequestPayloads(array $headers = [], $body = []): array
     {
         $headers = $this->prepareRequestHeaders($headers);
 
@@ -100,7 +101,7 @@ trait HttpClient
      *
      * @return \Laravie\Codex\Endpoint
      */
-    protected function convertUriToEndpoint($uri)
+    protected function convertUriToEndpoint($uri): Endpoint
     {
         if ($uri instanceof Endpoint) {
             return $uri;
@@ -118,7 +119,7 @@ trait HttpClient
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    abstract protected function responseWith(ResponseInterface $response);
+    abstract protected function responseWith(ResponseInterface $response): ResponseContract;
 
     /**
      * Prepare request headers.
@@ -127,5 +128,5 @@ trait HttpClient
      *
      * @return array
      */
-    abstract protected function prepareRequestHeaders(array $headers = []);
+    abstract protected function prepareRequestHeaders(array $headers = []): array;
 }

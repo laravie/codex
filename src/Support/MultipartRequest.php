@@ -16,7 +16,7 @@ trait MultipartRequest
      *
      * @return array
      */
-    public function prepareMultipartRequestPayloads(array $headers = [], array $body = [], array $files = [])
+    public function prepareMultipartRequestPayloads(array $headers = [], array $body = [], array $files = []): array
     {
         $multipart = (($headers['Content-Type'] ?? null) == 'multipart/form-data');
 
@@ -43,7 +43,7 @@ trait MultipartRequest
      *
      * @return void
      */
-    protected function addBodyToMultipartBuilder(MultipartStreamBuilder $builder, array $body, $prefix = null)
+    protected function addBodyToMultipartBuilder(MultipartStreamBuilder $builder, array $body, string $prefix = null)
     {
         foreach ($body as $key => $value) {
             $name = $key;
@@ -85,5 +85,5 @@ trait MultipartRequest
      *
      * @return array
      */
-    abstract public function sanitizeTo($content);
+    abstract public function sanitizeTo($content): array;
 }

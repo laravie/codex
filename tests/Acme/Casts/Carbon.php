@@ -13,7 +13,7 @@ class Carbon extends Cast
      *
      * @return bool
      */
-    protected function isValid($value)
+    protected function isValid($value): bool
     {
         return $value instanceof \DateTimeInterface;
     }

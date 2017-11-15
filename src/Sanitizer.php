@@ -19,7 +19,7 @@ class Sanitizer implements Contracts\Sanitizer
      *
      * @return $this
      */
-    public function add($group, Contracts\Cast $cast)
+    public function add($group, Contracts\Cast $cast): self
     {
         $this->casts = \igorw\assoc_in($this->casts, (array) $group, $cast);
 
@@ -34,7 +34,7 @@ class Sanitizer implements Contracts\Sanitizer
      *
      * @return array
      */
-    public function from(array $inputs, array $group = [])
+    public function from(array $inputs, array $group = []): array
     {
         $data = [];
 
@@ -53,7 +53,7 @@ class Sanitizer implements Contracts\Sanitizer
      *
      * @return array
      */
-    public function to(array $inputs, $group = [])
+    public function to(array $inputs, array $group = []): array
     {
         $data = [];
 
@@ -73,7 +73,7 @@ class Sanitizer implements Contracts\Sanitizer
      *
      * @return mixed
      */
-    protected function sanitizeFrom($value, $name, array $group = [])
+    protected function sanitizeFrom($value, string $name, array $group = [])
     {
         array_push($group, $name);
 
@@ -97,7 +97,7 @@ class Sanitizer implements Contracts\Sanitizer
      *
      * @return mixed
      */
-    protected function sanitizeTo($value, $name, array $group = [])
+    protected function sanitizeTo($value, string $name, array $group = [])
     {
         array_push($group, $name);
 

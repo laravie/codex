@@ -39,7 +39,7 @@ abstract class Cast implements Contracts\Cast
      *
      * @return bool
      */
-    abstract protected function isValid($value);
+    abstract protected function isValid($value): bool;
 
     /**
      * Cast value from object.

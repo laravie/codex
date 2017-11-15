@@ -37,7 +37,7 @@ abstract class Client implements Contracts\Client
      *
      * @return $this
      */
-    public function useCustomApiEndpoint($endpoint)
+    public function useCustomApiEndpoint(string $endpoint): self
     {
         $this->apiEndpoint = $endpoint;
 
@@ -53,7 +53,7 @@ abstract class Client implements Contracts\Client
      *
      * @return $this
      */
-    public function useVersion($version)
+    public function useVersion(string $version): self
     {
         if (! array_key_exists($version, $this->supportedVersions)) {
             throw new InvalidArgumentException("API version [{$version}] is not supported.");
@@ -69,7 +69,7 @@ abstract class Client implements Contracts\Client
      *
      * @return string
      */
-    public function getApiEndpoint()
+    public function getApiEndpoint(): string
     {
         return $this->apiEndpoint;
     }
@@ -79,7 +79,7 @@ abstract class Client implements Contracts\Client
      *
      * @return string
      */
-    public function getApiVersion()
+    public function getApiVersion(): string
     {
         return $this->defaultVersion;
     }
@@ -94,7 +94,7 @@ abstract class Client implements Contracts\Client
      *
      * @return object
      */
-    public function resource($service, $version = null)
+    public function resource(string $service, string $version = null)
     {
         if (is_null($version) || ! array_key_exists($version, $this->supportedVersions)) {
             $version = $this->defaultVersion;
@@ -117,7 +117,7 @@ abstract class Client implements Contracts\Client
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function responseWith(ResponseInterface $response)
+    protected function responseWith(ResponseInterface $response): Contracts\Response
     {
         return new Response($response);
     }
@@ -129,7 +129,7 @@ abstract class Client implements Contracts\Client
      *
      * @return array
      */
-    protected function prepareRequestHeaders(array $headers = [])
+    protected function prepareRequestHeaders(array $headers = []): array
     {
         return $headers;
     }
@@ -139,5 +139,5 @@ abstract class Client implements Contracts\Client
      *
      * @return string
      */
-    abstract protected function getResourceNamespace();
+    abstract protected function getResourceNamespace(): string;
 }

@@ -16,12 +16,12 @@ interface Response
      *
      * @return array
      */
-    public function toArray();
+    public function toArray(): array;
 
     /**
      * Get body.
      *
-     * @return int
+     * @return mixed
      */
     public function getBody();
 
@@ -37,5 +37,5 @@ interface Response
      *
      * @return int
      */
-    public function getStatusCode();
+    public function getStatusCode(): int;
 }

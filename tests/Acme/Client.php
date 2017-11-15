@@ -71,7 +71,7 @@ class Client extends BaseClient
      *
      * @return string
      */
-    protected function getResourceNamespace()
+    protected function getResourceNamespace(): string
     {
         return __NAMESPACE__;
     }

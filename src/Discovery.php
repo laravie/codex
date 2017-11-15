@@ -20,7 +20,7 @@ class Discovery
      *
      * @return \Http\Client\Common\HttpMethodsClient
      */
-    public static function client()
+    public static function client(): HttpClient
     {
         return static::$discoveredClient
                     ?? static::$discoveredClient = static::make();
@@ -31,7 +31,7 @@ class Discovery
      *
      * @return \Http\Client\Common\HttpMethodsClient
      */
-    public static function make()
+    public static function make(): HttpClient
     {
         return new HttpClient(
             HttpClientDiscovery::find(),
@@ -44,7 +44,7 @@ class Discovery
      *
      * @return \Http\Client\Common\HttpMethodsClient
      */
-    public static function refreshClient()
+    public static function refreshClient(): HttpClient
     {
         static::flush();
 
@@ -58,7 +58,7 @@ class Discovery
      *
      * @return \Http\Client\Common\HttpMethodsClient
      */
-    public static function override(HttpClient $client)
+    public static function override(HttpClient $client): HttpClient
     {
         static::$discoveredClient = $client;
 
