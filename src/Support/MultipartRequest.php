@@ -43,7 +43,7 @@ trait MultipartRequest
      *
      * @return void
      */
-    protected function addBodyToMultipartBuilder(MultipartStreamBuilder $builder, array $body, string $prefix = null)
+    protected function addBodyToMultipartBuilder(MultipartStreamBuilder $builder, array $body, ?string $prefix = null): void
     {
         foreach ($body as $key => $value) {
             $name = $key;
@@ -69,7 +69,7 @@ trait MultipartRequest
      *
      * @return void
      */
-    protected function addFilesToMultipartBuilder(MultipartStreamBuilder $builder, array $files = [])
+    protected function addFilesToMultipartBuilder(MultipartStreamBuilder $builder, array $files = []): void
     {
         foreach ($files as $key => $file) {
             if (! is_null($file)) {

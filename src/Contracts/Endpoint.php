@@ -21,7 +21,7 @@ interface Endpoint
      *
      * @return string|null
      */
-    public function getUri();
+    public function getUri(): ?string;
 
     /**
      * Get path(s).

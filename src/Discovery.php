@@ -70,7 +70,7 @@ class Discovery
      *
      * @return void
      */
-    public static function flush()
+    public static function flush(): void
     {
         static::$discoveredClient = null;
     }

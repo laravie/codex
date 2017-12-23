@@ -87,5 +87,5 @@ trait Resources
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    abstract protected function send($method, $path, array $headers = [], $body = []): ResponseContract;
+    abstract protected function send(string $method, $path, array $headers = [], $body = []): ResponseContract;
 }

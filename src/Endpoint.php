@@ -27,7 +27,7 @@ class Endpoint implements Contracts\Endpoint
      *
      * @param \Psr\Http\Message\UriInterface|string  $uri
      * @param array|string  $path
-     * @param array   $query
+     * @param array  $query
      */
     public function __construct($uri, $path = [], array $query = [])
     {
@@ -48,7 +48,7 @@ class Endpoint implements Contracts\Endpoint
      *
      * @return void
      */
-    protected function createFromUri(UriInterface $uri)
+    protected function createFromUri(UriInterface $uri): void
     {
         $this->createQuery($uri->getQuery());
     }
@@ -60,7 +60,7 @@ class Endpoint implements Contracts\Endpoint
      *
      * @return void
      */
-    protected function createQuery(string $query)
+    protected function createQuery(string $query): void
     {
         if (empty($query)) {
             return;
@@ -101,11 +101,11 @@ class Endpoint implements Contracts\Endpoint
      *
      * @return string|null
      */
-    public function getUri()
+    public function getUri(): ?string
     {
-        if (! empty($this->uri->getHost())) {
-            return $this->uri->getScheme().'://'.$this->uri->getHost();
-        }
+        return ! empty($this->uri->getHost())
+                    ? $this->uri->getScheme().'://'.$this->uri->getHost()
+                    : null;
     }
 
     /**

@@ -94,7 +94,7 @@ abstract class Client implements Contracts\Client
      *
      * @return object
      */
-    public function resource(string $service, string $version = null)
+    public function resource(string $service, ?string $version = null)
     {
         if (is_null($version) || ! array_key_exists($version, $this->supportedVersions)) {
             $version = $this->defaultVersion;

@@ -30,7 +30,7 @@ trait WithSanitizer
      *
      * @return $this
      */
-    public function setSanitizer(Sanitizer $sanitizer = null): self
+    public function setSanitizer(?Sanitizer $sanitizer = null): self
     {
         $this->sanitizer = $sanitizer;
 
@@ -42,7 +42,7 @@ trait WithSanitizer
      *
      * @return \Laravie\Codex\Contracts\Sanitizer|null
      */
-    public function getSanitizer()
+    public function getSanitizer(): ?Sanitizer
     {
         return $this->sanitizer;
     }
