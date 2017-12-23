@@ -20,7 +20,7 @@
         }
     },
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "guzzlehttp/psr7": "^1.0",
         "igorw/get-in": "^1.0",
         "php-http/client-common": "^1.1",
