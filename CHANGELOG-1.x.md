@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.3.1
+
+Released: 2017-12-28
+
+### Changes
+
+* Bump supported dependencies. 
+
 ## 1.3.0
 
 Released: 2017-11-14
