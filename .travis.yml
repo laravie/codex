@@ -7,9 +7,8 @@ php:
   - 7.2
 
 env:
-  global:
-    - setup=basic
   matrix:
+    - setup=basic
     - setup=lowest
     - setup=stable
 
