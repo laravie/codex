@@ -79,7 +79,7 @@ class Endpoint implements Contracts\Endpoint
      * Add query string.
      *
      * @param string|array  $key
-     * @param string  $value
+     * @param string|null  $value
      *
      * @return $this
      */
@@ -150,7 +150,7 @@ class Endpoint implements Contracts\Endpoint
      *
      * @return mixed
      */
-    public function __call($method, $parameters)
+    public function __call(string $method, array $parameters)
     {
         if (! method_exists($this->uri, $method)) {
             throw new BadMethodCallException("Method [{$method}] doesn't exists.");

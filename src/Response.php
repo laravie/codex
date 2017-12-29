@@ -98,7 +98,7 @@ class Response implements Contracts\Response
      *
      * @return mixed
      */
-    public function __call($method, $parameters)
+    public function __call(string $method, array $parameters)
     {
         if (! method_exists($this->original, $method)) {
             throw new BadMethodCallException("Method [{$method}] doesn't exists.");
