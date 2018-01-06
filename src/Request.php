@@ -96,7 +96,7 @@ abstract class Request implements Contracts\Request
      *
      * @return array
      */
-    protected function mergeApiHeaders(array $headers = []): array
+    final protected function mergeApiHeaders(array $headers = []): array
     {
         return array_merge($this->getApiHeaders(), $headers);
     }
@@ -108,7 +108,7 @@ abstract class Request implements Contracts\Request
      *
      * @return array
      */
-    protected function mergeApiBody(array $body = []): array
+    final protected function mergeApiBody(array $body = []): array
     {
         return array_merge($this->getApiBody(), $body);
     }
