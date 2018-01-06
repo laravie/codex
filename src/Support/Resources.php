@@ -16,7 +16,7 @@ trait Resources
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function get($path, array $headers = [], $body = []): ResponseContract
+    final protected function get($path, array $headers = [], $body = []): ResponseContract
     {
         return $this->send(Request::METHOD_GET, $path, $headers, $body);
     }
@@ -30,7 +30,7 @@ trait Resources
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function post($path, array $headers = [], $body = []): ResponseContract
+    final protected function post($path, array $headers = [], $body = []): ResponseContract
     {
         return $this->send(Request::METHOD_POST, $path, $headers, $body);
     }
@@ -44,7 +44,7 @@ trait Resources
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function put($path, array $headers = [], $body = []): ResponseContract
+    final protected function put($path, array $headers = [], $body = []): ResponseContract
     {
         return $this->send(Request::METHOD_PUT, $path, $headers, $body);
     }
@@ -58,7 +58,7 @@ trait Resources
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function patch($path, array $headers = [], $body = []): ResponseContract
+    final protected function patch($path, array $headers = [], $body = []): ResponseContract
     {
         return $this->send(Request::METHOD_PATCH, $path, $headers, $body);
     }
@@ -72,7 +72,7 @@ trait Resources
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function delete($path, array $headers = [], $body = []): ResponseContract
+    final protected function delete($path, array $headers = [], $body = []): ResponseContract
     {
         return $this->send(Request::METHOD_DELETE, $path, $headers, $body);
     }
