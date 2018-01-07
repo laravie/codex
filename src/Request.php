@@ -41,7 +41,7 @@ abstract class Request implements Contracts\Request
      *
      * @return string
      */
-    public function getVersion(): string
+    final public function getVersion(): string
     {
         return $this->version;
     }

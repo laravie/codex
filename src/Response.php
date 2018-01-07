@@ -43,7 +43,7 @@ class Response implements Contracts\Response
      *
      * @return $this
      */
-    public function validateWith(callable $callback): self
+    final public function validateWith(callable $callback): self
     {
         call_user_func($callback, $this->getStatusCode(), $this);
 

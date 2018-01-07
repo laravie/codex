@@ -48,7 +48,7 @@ class Endpoint implements Contracts\Endpoint
      *
      * @return void
      */
-    protected function createFromUri(UriInterface $uri): void
+    final protected function createFromUri(UriInterface $uri): void
     {
         $this->createQuery($uri->getQuery());
     }
