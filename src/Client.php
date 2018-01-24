@@ -139,6 +139,8 @@ abstract class Client implements Contracts\Client
      * @throws \InvalidArgumentException
      *
      * @return object
+     *
+     * @deprecated v1.4.0
      */
     public function resource($service, $version = null)
     {
