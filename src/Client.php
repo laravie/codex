@@ -92,9 +92,9 @@ abstract class Client implements Contracts\Client
      *
      * @throws \InvalidArgumentException
      *
-     * @return \Laravie\Codex\Request
+     * @return \Laravie\Codex\Contracts\Request
      */
-    public function uses(string $service, ?string $version = null): Request
+    public function uses(string $service, ?string $version = null): Contracts\Request
     {
         if (is_null($version) || ! array_key_exists($version, $this->supportedVersions)) {
             $version = $this->defaultVersion;
