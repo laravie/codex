@@ -92,9 +92,9 @@ abstract class Client implements Contracts\Client
      *
      * @throws \InvalidArgumentException
      *
-     * @return object
+     * @return \Laravie\Codex\Request
      */
-    public function resource(string $service, ?string $version = null)
+    public function uses(string $service, ?string $version = null): Request
     {
         if (is_null($version) || ! array_key_exists($version, $this->supportedVersions)) {
             $version = $this->defaultVersion;
@@ -107,7 +107,44 @@ abstract class Client implements Contracts\Client
             throw new InvalidArgumentException("Resource [{$service}] for version [{$version}] is not available.");
         }
 
-        return new $class($this);
+        return $this->via(function ($client) use ($class) {
+            return new $class($client);
+        });
+    }
+
+    /**
+     * Handle uses using via.
+     *
+     * @param  callable  $callable
+     *
+     * @return \Laravie\Codex\Request
+     */
+    public function via(callable $callable): Request
+    {
+        $request = call_user_func($callable, $this);
+
+        if (! $request instanceof Request) {
+            throw new InvalidArgumentException("Expected resource to be an instance of Laravie\Codex\Request.");
+        }
+
+        return $request;
+    }
+
+    /**
+     * Get versioned resource (service).
+     *
+     * @param  string  $service
+     * @param  string|null  $version
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return object
+     *
+     * @deprecated v1.4.0
+     */
+    public function resource(string $service, ?string $version = null)
+    {
+        return $this->uses($service, $version);
     }
 
     /**
