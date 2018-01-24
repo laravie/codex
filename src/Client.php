@@ -107,26 +107,18 @@ abstract class Client implements Contracts\Client
             throw new InvalidArgumentException("Resource [{$service}] for version [{$version}] is not available.");
         }
 
-        return $this->via(function ($client) use ($class) {
-            return new $class($client);
-        });
+        return new $class($this);
     }
 
     /**
      * Handle uses using via.
      *
-     * @param  callable  $callable
+     * @param  \Laravie\Codex\Contracts\Request  $request
      *
-     * @return \Laravie\Codex\Request
+     * @return \Laravie\Codex\Contracts\Request
      */
-    public function via($callable)
+    public function via(Contracts\Request $request)
     {
-        $request = call_user_func($callable, $this);
-
-        if (! $request instanceof Request) {
-            throw new InvalidArgumentException("Expected resource to be an instance of Laravie\Codex\Request.");
-        }
-
         return $request;
     }
 
