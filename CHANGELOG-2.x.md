@@ -2,6 +2,19 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 2.1.0
+
+Released: 2018-02-04
+
+### Added
+
+* Added `Laravie\Codex\Client::via()` method.
+* Added `Laravie\Codex\Client::uses()` method to replace deprecated `resource()`.
+
+### Deprecated
+
+* Deprecate `Laravie\Codex\Client::resource()` method, please use `Laravie\Codex\Client::uses()` instead.
+
 ## 2.0.0
 
 Released: 2018-01-22
