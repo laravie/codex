@@ -2,7 +2,9 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
-## (Unreleased)
+## 1.4.0
+
+Released: 2018-02-04
 
 ### Added
 
