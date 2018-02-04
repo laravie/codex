@@ -2,6 +2,21 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## (Unreleased)
+
+### Changes
+
+* Mark `Laravie\Codex\Discovery` class as `final`.
+* Updates `Laravie\Codex\Support\MultipartRequest` helper methods as `final`.
+* Updates `Laravie\Codex\Support\Resources` helper methods as `final`.
+* Updates `Laravie\Codex\Support\WithSanitizer` helper methods as `final`.
+* Set `final` to `createFromUri()` method in `Laravie\Codex\Endpoint`.
+* Set `final` to `validateWith()` method in `Laravie\Codex\Response`.
+* Set `final` to following methods in `Laravie\Codex\Request`:
+    - `getVersion()`
+    - `mergeApiHeaders()`
+    - `mergeApiBody()`
+
 ## 1.3.1
 
 Released: 2017-12-28
