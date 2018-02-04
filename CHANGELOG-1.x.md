@@ -11,14 +11,11 @@ This changelog references the relevant changes (bug and security fixes) done to 
 * Updates `Laravie\Codex\Support\Resources` helper methods as `final`.
 * Updates `Laravie\Codex\Support\WithSanitizer` helper methods as `final`.
 * Set `final` to `createFromUri()` method in `Laravie\Codex\Endpoint`.
+* Set `final` to `validateWith()` method in `Laravie\Codex\Response`.
 * Set `final` to following methods in `Laravie\Codex\Request`:
     - `getVersion()`
     - `mergeApiHeaders()`
     - `mergeApiBody()`
-* Set `final` to following methods in `Laravie\Codex\Response`:
-    - `validateWith()`
-    - `getBody()`
-    - `getStatusCode()`
 
 ## 1.3.1
 

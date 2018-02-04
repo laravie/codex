@@ -65,7 +65,7 @@ class Response implements Contracts\Response
      *
      * @return int
      */
-    final public function getBody()
+    public function getBody()
     {
         return $this->original->getBody();
     }
@@ -85,7 +85,7 @@ class Response implements Contracts\Response
      *
      * @return int
      */
-    final public function getStatusCode()
+    public function getStatusCode()
     {
         return $this->original->getStatusCode();
     }
