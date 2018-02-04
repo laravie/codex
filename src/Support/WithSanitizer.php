@@ -18,7 +18,7 @@ trait WithSanitizer
      *
      * @return bool
      */
-    public function hasSanitizer()
+    final public function hasSanitizer()
     {
         return $this->sanitizer instanceof Sanitizer;
     }
@@ -30,7 +30,7 @@ trait WithSanitizer
      *
      * @return $this
      */
-    public function setSanitizer(Sanitizer $sanitizer = null)
+    final public function setSanitizer(Sanitizer $sanitizer = null)
     {
         $this->sanitizer = $sanitizer;
 
@@ -42,7 +42,7 @@ trait WithSanitizer
      *
      * @return \Laravie\Codex\Contracts\Sanitizer|null
      */
-    public function getSanitizer()
+    final public function getSanitizer()
     {
         return $this->sanitizer;
     }
@@ -54,7 +54,7 @@ trait WithSanitizer
      *
      * @return array
      */
-    public function sanitizeFrom($content)
+    final public function sanitizeFrom($content)
     {
         return ($this->hasSanitizer() && is_array($content))
                     ? $this->sanitizer->from($content)
@@ -68,7 +68,7 @@ trait WithSanitizer
      *
      * @return array
      */
-    public function sanitizeTo($content)
+    final public function sanitizeTo($content)
     {
         return ($this->hasSanitizer() && is_array($content))
                     ? $this->sanitizer->to($content)

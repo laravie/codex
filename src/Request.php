@@ -39,7 +39,7 @@ abstract class Request implements Contracts\Request
      *
      * @return string
      */
-    public function getVersion()
+    final public function getVersion()
     {
         return $this->version;
     }
@@ -94,7 +94,7 @@ abstract class Request implements Contracts\Request
      *
      * @return array
      */
-    protected function mergeApiHeaders(array $headers = [])
+    final protected function mergeApiHeaders(array $headers = [])
     {
         return array_merge($this->getApiHeaders(), $headers);
     }
@@ -106,7 +106,7 @@ abstract class Request implements Contracts\Request
      *
      * @return array
      */
-    protected function mergeApiBody(array $body = [])
+    final protected function mergeApiBody(array $body = [])
     {
         return array_merge($this->getApiBody(), $body);
     }

@@ -48,7 +48,7 @@ class Endpoint
      *
      * @return void
      */
-    protected function createFromUri(UriInterface $uri)
+    final protected function createFromUri(UriInterface $uri)
     {
         $this->createQuery($uri->getQuery());
     }

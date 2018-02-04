@@ -15,7 +15,7 @@ trait Resources
      *
      * @return \Laravie\Codex\Reponse
      */
-    protected function get($path, array $headers = [], $body = [])
+    final protected function get($path, array $headers = [], $body = [])
     {
         return $this->send(Request::METHOD_GET, $path, $headers, $body);
     }
@@ -29,7 +29,7 @@ trait Resources
      *
      * @return \Laravie\Codex\Reponse
      */
-    protected function post($path, array $headers = [], $body = [])
+    final protected function post($path, array $headers = [], $body = [])
     {
         return $this->send(Request::METHOD_POST, $path, $headers, $body);
     }
@@ -43,7 +43,7 @@ trait Resources
      *
      * @return \Laravie\Codex\Reponse
      */
-    protected function put($path, array $headers = [], $body = [])
+    final protected function put($path, array $headers = [], $body = [])
     {
         return $this->send(Request::METHOD_PUT, $path, $headers, $body);
     }
@@ -57,7 +57,7 @@ trait Resources
      *
      * @return \Laravie\Codex\Reponse
      */
-    protected function patch($path, array $headers = [], $body = [])
+    final protected function patch($path, array $headers = [], $body = [])
     {
         return $this->send(Request::METHOD_PATCH, $path, $headers, $body);
     }
@@ -71,7 +71,7 @@ trait Resources
      *
      * @return \Laravie\Codex\Reponse
      */
-    protected function delete($path, array $headers = [], $body = [])
+    final protected function delete($path, array $headers = [], $body = [])
     {
         return $this->send(Request::METHOD_DELETE, $path, $headers, $body);
     }
