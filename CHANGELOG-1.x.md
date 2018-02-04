@@ -4,6 +4,11 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 ## (Unreleased)
 
+### Added
+
+* Added `Laravie\Codex\Client::via()` method.
+* Added `Laravie\Codex\Client::uses()` method to replace deprecated `resource()`.
+
 ### Changes
 
 * Mark `Laravie\Codex\Discovery` class as `final`.
@@ -16,6 +21,10 @@ This changelog references the relevant changes (bug and security fixes) done to 
     - `getVersion()`
     - `mergeApiHeaders()`
     - `mergeApiBody()`
+
+### Deprecated
+
+* Deprecate `Laravie\Codex\Client::resource()` method, please use `Laravie\Codex\Client::uses()` instead.
 
 ## 1.3.1
 
