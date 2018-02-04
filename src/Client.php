@@ -92,7 +92,7 @@ abstract class Client implements Contracts\Client
      *
      * @throws \InvalidArgumentException
      *
-     * @return object
+     * @return \Laravie\Codex\Contracts\Request
      */
     public function uses($service, $version = null)
     {
