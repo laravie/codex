@@ -52,7 +52,7 @@ class ClientTest extends TestCase
             ->shouldReceive('getBody')->andReturn('{"success":true}');
 
         $response = (new Client($http, 'abc'))
-                            ->resource('Welcome')
+                            ->uses('Welcome')
                             ->show();
 
         $this->assertSame(200, $response->getStatusCode());
@@ -77,7 +77,7 @@ class ClientTest extends TestCase
 
         $response = (new Client($http, 'abc'))
                             ->useVersion('v2')
-                            ->resource('Welcome')
+                            ->uses('Welcome')
                             ->show();
 
         $this->assertSame(200, $response->getStatusCode());
@@ -101,7 +101,7 @@ class ClientTest extends TestCase
         $message->shouldReceive('getStatusCode')->andReturn(200)
             ->shouldReceive('getBody')->andReturn('{"success":true}');
 
-        $response = (new Client($http, 'abc'))->resource('Welcome')->ping($stream);
+        $response = (new Client($http, 'abc'))->uses('Welcome')->ping($stream);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -126,7 +126,7 @@ class ClientTest extends TestCase
             ->shouldReceive('getBody')->andReturn('{"success":true}');
 
         $response = (new Client($http, 'abc'))
-                        ->resource('Welcome')
+                        ->uses('Welcome')
                         ->ping(['meta' => ['foo', 'bar']], $headers);
 
         $this->assertSame(200, $response->getStatusCode());
@@ -150,7 +150,7 @@ class ClientTest extends TestCase
             ->shouldReceive('getBody')->andReturn('{"success":true}');
 
         $response = (new Client($http, 'abc'))
-                        ->resource('Welcome')
+                        ->uses('Welcome')
                         ->pong();
 
         $this->assertSame(200, $response->getStatusCode());
@@ -179,6 +179,6 @@ class ClientTest extends TestCase
     {
         $http = m::mock('Http\Client\Common\HttpMethodsClient');
 
-        $response = (new Client($http, 'abc'))->resource('Foobar');
+        $response = (new Client($http, 'abc'))->uses('Foobar');
     }
 }
