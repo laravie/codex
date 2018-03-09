@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.4.1
+
+Released: 2018-03-09
+
+### Changes
+
+* Able to get response content from instance of `Psr\Http\Message\StreamInterface`.
+
 ## 1.4.0
 
 Released: 2018-02-04
