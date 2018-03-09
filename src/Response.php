@@ -71,8 +71,8 @@ class Response implements Contracts\Response
         $content = $this->original->getBody();
 
         return $content instanceof StreamInterface
-                    ? $content->getContents()
-                    : (string) $content;
+                    ? (string) $content
+                    : $content;
     }
 
     /**
