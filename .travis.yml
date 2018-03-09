@@ -11,8 +11,10 @@ php:
   - hhvm
 
 env:
-  global:
+  matrix:
     - setup=basic
+    - setup=lowest
+    - setup=stable
 
 before_script:
   - travis_retry composer self-update
@@ -25,11 +27,6 @@ script:
   - vendor/bin/phpunit -c phpunit.xml
 
 matrix:
-  include:
-    - php: 5.5
-      env: setup=lowest
-    - php: 5.5
-      env: setup=stable
   allow_failures:
     - env: setup=lowest
   fast_finish: true
