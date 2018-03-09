@@ -3,6 +3,7 @@
 namespace Laravie\Codex;
 
 use BadMethodCallException;
+use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class Response implements Contracts\Response
@@ -63,11 +64,15 @@ class Response implements Contracts\Response
     /**
      * Get body.
      *
-     * @return int
+     * @return string
      */
     public function getBody()
     {
-        return $this->original->getBody();
+        $content = $this->original->getBody();
+
+        return $content instanceof StreamInterface
+                    ? $content->getContents()
+                    : (string) $content;
     }
 
     /**
