@@ -19,6 +19,13 @@ trait HttpClient
     protected $http;
 
     /**
+     * List of HTTP requests.
+     *
+     * @var array
+     */
+    protected $httpRequests;
+
+    /**
      * Send the HTTP request.
      *
      * @param  string  $method
@@ -40,8 +47,8 @@ trait HttpClient
 
         list($headers, $body) = $this->prepareRequestPayloads($headers, $body);
 
-        return $this->responseWith(
-            $this->http->send($method, $endpoint->get(), $headers, $body)
+        return $this->requestWith(
+            $method, $endpoint->get(), $headers, $body
         );
     }
 
@@ -62,11 +69,30 @@ trait HttpClient
             $this->prepareRequestHeaders($headers), $body, $files
         );
 
-        return $this->responseWith(
-            $this->http->send(
-                strtoupper($method), $this->convertUriToEndpoint($uri)->get(), $headers, $stream
-            )
+        return $this->requestWith(
+            strtoupper($method), $this->convertUriToEndpoint($uri)->get(), $headers, $stream
         );
+    }
+
+    /**
+     * Stream (multipart) the HTTP request.
+     *
+     * @param  string  $method
+     * @param  \Psr\Http\Message\UriInterface  $uri
+     * @param  array  $headers
+     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    protected function requestWith($method, UriInterface $uri, array $headers, $body)
+    {
+        $response = $this->responseWith(
+            $this->http->send($method, $uri, $headers, $body)
+        );
+
+        $this->httpRequests[] = compact('method', 'uri', 'headers', 'body', 'response');
+
+        return $response;
     }
 
     /**

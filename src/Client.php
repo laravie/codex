@@ -31,6 +31,16 @@ abstract class Client implements Contracts\Client
     protected $supportedVersions = [];
 
     /**
+     * Dump HTTP requests for the client.
+     *
+     * @return array
+     */
+    public function dump()
+    {
+        return $this->httpRequests;
+    }
+
+    /**
      * Use custom API Endpoint.
      *
      * @param  string  $endpoint
