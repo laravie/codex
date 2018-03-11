@@ -84,7 +84,7 @@ trait HttpClient
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function requestWith($method, UriInterface $uri, array $headers, $body)
+    protected function requestWith(string $method, UriInterface $uri, array $headers, $body): ResponseContract
     {
         $response = $this->responseWith(
             $this->http->send($method, $uri, $headers, $body)

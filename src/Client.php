@@ -35,7 +35,7 @@ abstract class Client implements Contracts\Client
      *
      * @return array
      */
-    public function dump()
+    public function dump(): array
     {
         return $this->httpRequests;
     }
