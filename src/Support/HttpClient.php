@@ -22,7 +22,7 @@ trait HttpClient
      *
      * @var array
      */
-    protected $httpRequestQueries;
+    protected $httpRequestQueries = [];
 
     /**
      * Send the HTTP request.
