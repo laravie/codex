@@ -13,7 +13,7 @@ final class Discovery
      *
      * @var
      */
-    protected static $discoveredClient;
+    private static $discoveredClient;
 
     /**
      * Make HTTP client through Discovery.
