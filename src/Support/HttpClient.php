@@ -22,7 +22,7 @@ trait HttpClient
      *
      * @var array
      */
-    protected $httpRequests;
+    protected $httpRequestQueries;
 
     /**
      * Send the HTTP request.
@@ -89,7 +89,7 @@ trait HttpClient
             $this->http->send($method, $uri, $headers, $body)
         );
 
-        $this->httpRequests[] = compact('method', 'uri', 'headers', 'body', 'response');
+        $this->httpRequestQueries[] = compact('method', 'uri', 'headers', 'body', 'response');
 
         return $response;
     }
