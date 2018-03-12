@@ -82,17 +82,13 @@ class FakeRequest
      * Make expected HTTP request.
      *
      * @param  string $method
-     * @param  array  $headers
+     * @param  \Mockery\Matcher\Type|array  $headers
      * @param  \Mockery\Matcher\Type|mixed $body
      *
      * @return $this
      */
-    public function call($method = 'GET', array $headers = [], $body = '')
+    public function call($method = 'GET', $headers = [], $body = '')
     {
-        if (empty($headers)) {
-            $headers = m::type('Array');
-        }
-
         $this->http->shouldReceive('send')
                 ->with($method, m::type(Uri::class), $headers, $body)
                 ->andReturnUsing(function ($m, $u, $h, $b) {
