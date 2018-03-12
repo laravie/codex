@@ -2,6 +2,18 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.5.0
+
+Released: 2018-03-12
+
+### Added
+
+* Added `Laravie\Codex\Client::queries()` to get all executed requests and responses.
+
+### Changes
+
+* Bump minimum PHP to 5.6+.
+
 ## 1.4.1
 
 Released: 2018-03-09
