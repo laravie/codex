@@ -88,7 +88,7 @@ class FakeRequest
      *
      * @return $this
      */
-    public function call($method = 'GET', $headers = [], $body = ''): self
+    public function call(string $method = 'GET', $headers = [], $body = ''): self
     {
         $this->http->shouldReceive('send')
                 ->with($method, m::type(Uri::class), $headers, $body)
