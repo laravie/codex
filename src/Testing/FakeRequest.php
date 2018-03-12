@@ -125,7 +125,7 @@ class FakeRequest
      *
      * @return \Mockery\MockeryInterface
      */
-    public function http(): MockeryInterface
+    public function http()
     {
         return $this->http;
     }
@@ -135,7 +135,7 @@ class FakeRequest
      *
      * @return \Mockery\MockeryInterface
      */
-    public function message(): MockeryInterface
+    public function message()
     {
         return $this->message;
     }
