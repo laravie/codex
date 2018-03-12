@@ -4,7 +4,6 @@ namespace Laravie\Codex\Testing;
 
 use Mockery as m;
 use GuzzleHttp\Psr7\Uri;
-use Mockery\MockeryInterface;
 use PHPUnit\Framework\Assert;
 use Psr\Http\Message\ResponseInterface;
 use Http\Client\Common\HttpMethodsClient;
@@ -84,7 +83,7 @@ class FakeRequest
      *
      * @param  string $method
      * @param  \Mockery\Matcher\Type|array  $headers
-     * @param  \Mockery\Matcher\Type|mixed $body
+     * @param  \Mockery\Matcher\Type|mixed  $body
      *
      * @return $this
      */
