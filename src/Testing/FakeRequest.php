@@ -83,7 +83,7 @@ class FakeRequest
      *
      * @param  string $method
      * @param  array  $headers
-     * @param  mixed $body
+     * @param  \Mockery\Matcher\Type|mixed $body
      *
      * @return $this
      */
