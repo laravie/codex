@@ -117,7 +117,7 @@ abstract class Client implements Contracts\Client
             throw new InvalidArgumentException("Resource [{$service}] for version [{$version}] is not available.");
         }
 
-        return new $class($this);
+        return $this->via(new $class($this));
     }
 
     /**

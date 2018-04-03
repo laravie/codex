@@ -4,6 +4,7 @@ namespace Laravie\Codex\TestCase;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Laravie\Codex\Testing\FakeRequest;
 use Laravie\Codex\TestCase\Acme\Client;
 
 class ClientTest extends TestCase
@@ -24,6 +25,7 @@ class ClientTest extends TestCase
         $this->assertInstanceOf('Laravie\Codex\Client', $stub);
         $this->assertSame('v1', $stub->getApiVersion());
         $this->assertSame('https://acme.laravie/', $stub->getApiEndpoint());
+        $this->assertSame([], $stub->queries());
     }
 
     /** @test */
@@ -41,17 +43,12 @@ class ClientTest extends TestCase
     /** @test */
     public function it_can_send_api_request_on_version_one()
     {
-        $http = m::mock('Http\Client\Common\HttpMethodsClient');
-        $message = m::mock('Psr\Http\Message\ResponseInterface');
+        $faker = FakeRequest::create()
+                    ->call('GET', [], '')
+                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
+                    ->shouldResponseWith(200, '{"success":true}');
 
-        $http->shouldReceive('send')->once()
-            ->with('GET', m::type('GuzzleHttp\Psr7\Uri'), [], '')
-            ->andReturn($message);
-
-        $message->shouldReceive('getStatusCode')->andReturn(200)
-            ->shouldReceive('getBody')->andReturn('{"success":true}');
-
-        $response = (new Client($http, 'abc'))
+        $response = (new Client($faker->http(), 'abc'))
                             ->uses('Welcome')
                             ->show();
 
@@ -65,17 +62,12 @@ class ClientTest extends TestCase
     /** @test */
     public function it_can_send_api_request_on_version_two()
     {
-        $http = m::mock('Http\Client\Common\HttpMethodsClient');
-        $message = m::mock('Psr\Http\Message\ResponseInterface');
+        $faker = FakeRequest::create()
+                    ->call('GET', ['Authorization' => 'Bearer abc'], '')
+                    ->expectEndpointIs('https://acme.laravie/v2/welcome')
+                    ->shouldResponseWith(200, '{"success":true}');
 
-        $http->shouldReceive('send')->once()
-            ->with('GET', m::type('GuzzleHttp\Psr7\Uri'), ['Authorization' => 'Bearer abc'], '')
-            ->andReturn($message);
-
-        $message->shouldReceive('getStatusCode')->andReturn(200)
-            ->shouldReceive('getBody')->andReturn('{"success":true}');
-
-        $response = (new Client($http, 'abc'))
+        $response = (new Client($faker->http(), 'abc'))
                             ->useVersion('v2')
                             ->uses('Welcome')
                             ->show();
@@ -90,18 +82,14 @@ class ClientTest extends TestCase
     /** @test */
     public function it_can_send_api_request_by_sending_stream_data()
     {
-        $http = m::mock('Http\Client\Common\HttpMethodsClient');
-        $message = m::mock('Psr\Http\Message\ResponseInterface');
         $stream = m::mock('Psr\Http\Message\StreamInterface');
 
-        $http->shouldReceive('send')->once()
-            ->with('POST', m::type('GuzzleHttp\Psr7\Uri'), [], $stream)
-            ->andReturn($message);
+        $faker = FakeRequest::create()
+                    ->call('POST', [], $stream)
+                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
+                    ->shouldResponseWith(200, '{"success":true}');
 
-        $message->shouldReceive('getStatusCode')->andReturn(200)
-            ->shouldReceive('getBody')->andReturn('{"success":true}');
-
-        $response = (new Client($http, 'abc'))->uses('Welcome')->ping($stream);
+        $response = (new Client($faker->http(), 'abc'))->uses('Welcome')->ping($stream);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -113,21 +101,17 @@ class ClientTest extends TestCase
     /** @test */
     public function it_can_send_api_request_by_sending_json_data()
     {
-        $http = m::mock('Http\Client\Common\HttpMethodsClient');
-        $message = m::mock('Psr\Http\Message\ResponseInterface');
-
         $headers = ['Content-Type' => 'application/json'];
+        $payload = ['meta' => ['foo', 'bar']];
 
-        $http->shouldReceive('send')->once()
-            ->with('POST', m::type('GuzzleHttp\Psr7\Uri'), $headers, '{"meta":["foo","bar"]}')
-            ->andReturn($message);
+        $faker = FakeRequest::create()
+                    ->call('POST', $headers, json_encode($payload))
+                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
+                    ->shouldResponseWith(200, '{"success":true}');
 
-        $message->shouldReceive('getStatusCode')->andReturn(200)
-            ->shouldReceive('getBody')->andReturn('{"success":true}');
-
-        $response = (new Client($http, 'abc'))
+        $response = (new Client($faker->http(), 'abc'))
                         ->uses('Welcome')
-                        ->ping(['meta' => ['foo', 'bar']], $headers);
+                        ->ping($payload, $headers);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -139,17 +123,12 @@ class ClientTest extends TestCase
     /** @test */
     public function it_can_send_api_request_by_providing_endpoint()
     {
-        $http = m::mock('Http\Client\Common\HttpMethodsClient');
-        $message = m::mock('Psr\Http\Message\ResponseInterface');
+        $faker = FakeRequest::create()
+                    ->call('GET', [], '')
+                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
+                    ->shouldResponseWith(200, '{"success":true}');
 
-        $http->shouldReceive('send')->once()
-            ->with('GET', m::type('GuzzleHttp\Psr7\Uri'), [], '')
-            ->andReturn($message);
-
-        $message->shouldReceive('getStatusCode')->andReturn(200)
-            ->shouldReceive('getBody')->andReturn('{"success":true}');
-
-        $response = (new Client($http, 'abc'))
+        $response = (new Client($faker->http(), 'abc'))
                         ->uses('Welcome')
                         ->pong();
 
@@ -180,5 +159,17 @@ class ClientTest extends TestCase
         $http = m::mock('Http\Client\Common\HttpMethodsClient');
 
         $response = (new Client($http, 'abc'))->uses('Foobar');
+    }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Resource [Foobar] for version [v1] is not available.
+     */
+    public function it_cant_find_unknown_resource_using_old_method()
+    {
+        $http = m::mock('Http\Client\Common\HttpMethodsClient');
+
+        $response = (new Client($http, 'abc'))->resource('Foobar');
     }
 }
