@@ -5,6 +5,7 @@ namespace Laravie\Codex\TestCase;
 use Mockery as m;
 use Laravie\Codex\Response;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Exceptions\HttpException;
 
@@ -64,6 +65,20 @@ class ResponseTest extends TestCase
         $stub = new Response($api);
 
         $this->assertSame('1.1', $stub->getProtocolVersion());
+    }
+
+    /** @test */
+    public function it_can_get_body_from_stream()
+    {
+        $stream = m::mock(StreamInterface::class);
+        $api = m::mock(ResponseInterface::class);
+
+        $api->shouldReceive('getBody')->andReturn($stream);
+        $stream->shouldReceive('__toString')->andReturn('Text from stream');
+
+        $stub = new Response($api);
+
+        $this->assertSame('Text from stream', $stub->getBody());
     }
 
     /** @test */
