@@ -2,6 +2,16 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.6.0
+
+Released: 2018-04-03
+
+### Changes
+
+* Bump minimum PHP to 7.0+.
+* `Laravie\Codex\Endpoint` now implements `Laravie\Codex\Contracts\Endpoint`.
+* Improves tests.
+
 ## 1.5.0
 
 Released: 2018-03-12
