@@ -52,7 +52,7 @@ abstract class Request implements Contracts\Request
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Contracts\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
     protected function send($method, $path, array $headers = [], $body = [])
     {
@@ -116,7 +116,7 @@ abstract class Request implements Contracts\Request
      *
      * @param  string|array  $path
      *
-     * @return \Laravie\Codex\Endpoint
+     * @return \Laravie\Codex\Contracts\Endpoint
      */
     protected function getApiEndpoint($path = [])
     {
@@ -126,7 +126,7 @@ abstract class Request implements Contracts\Request
     /**
      * Resolve URI.
      *
-     * @param  \Laravie\Codex\Endpoint  $endpoint
+     * @param  \Laravie\Codex\Contracts\Endpoint  $endpoint
      *
      * @return \Psr\Http\Message\UriInterface
      */
