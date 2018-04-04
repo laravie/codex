@@ -52,7 +52,7 @@ abstract class Request implements Contracts\Request
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Contracts\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
     protected function send($method, $path, array $headers = [], $body = [])
     {

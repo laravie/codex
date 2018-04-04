@@ -94,7 +94,7 @@ class FakeRequest
                 ->andReturnUsing(function ($m, $u, $h, $b) {
                     Assert::assertSame((string) $u, $this->expectedEndpoint);
 
-                    return $this->message;
+                    return $this->message();
                 });
 
         return $this;

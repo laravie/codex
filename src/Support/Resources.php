@@ -13,7 +13,7 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
     final protected function get($path, array $headers = [], $body = [])
     {
@@ -27,7 +27,7 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
     final protected function post($path, array $headers = [], $body = [])
     {
@@ -41,7 +41,7 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
     final protected function put($path, array $headers = [], $body = [])
     {
@@ -55,7 +55,7 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
     final protected function patch($path, array $headers = [], $body = [])
     {
@@ -69,7 +69,7 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
     final protected function delete($path, array $headers = [], $body = [])
     {
@@ -84,7 +84,7 @@ trait Resources
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
-     * @return \Laravie\Codex\Reponse
+     * @return \Laravie\Codex\Contracts\Response
      */
     abstract protected function send($method, $path, array $headers = [], $body = []);
 }
