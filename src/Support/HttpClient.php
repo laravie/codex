@@ -128,7 +128,7 @@ trait HttpClient
      *
      * @return \Laravie\Codex\Contracts\Endpoint
      */
-    protected function convertUriToEndpoint($uri): Endpoint
+    final protected function convertUriToEndpoint($uri): EndpointContract
     {
         if ($uri instanceof EndpointContract) {
             return $uri;
