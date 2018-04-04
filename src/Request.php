@@ -58,7 +58,7 @@ abstract class Request implements Contracts\Request
     {
         $body = $this->sanitizeFrom($body);
 
-        $endpoint = ($path instanceof Endpoint)
+        $endpoint = ($path instanceof Contracts\Endpoint)
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
 

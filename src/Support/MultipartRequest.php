@@ -2,7 +2,7 @@
 
 namespace Laravie\Codex\Support;
 
-use Laravie\Codex\Endpoint;
+use Laravie\Codex\Contracts\Endpoint;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 
@@ -12,7 +12,7 @@ trait MultipartRequest
      * Stream (multipart) the HTTP request.
      *
      * @param  string  $method
-     * @param  \Laravie\Codex\Endpoint|string  $path
+     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      * @param  array  $files
