@@ -3,6 +3,7 @@
 namespace Laravie\Codex\Support;
 
 use Laravie\Codex\Contracts\Endpoint;
+use Laravie\Codex\Contracts\Response;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 
@@ -19,7 +20,7 @@ trait MultipartRequest
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    public function stream($method, $uri, array $headers = [], $body = [], array $files = [])
+    public function stream(string $method, $uri, array $headers = [], $body = [], array $files = []): Response
     {
         $body = $this->sanitizeFrom($body);
 
