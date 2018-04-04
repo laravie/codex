@@ -31,6 +31,8 @@ class Endpoint implements Contracts\Endpoint
      */
     public function __construct($uri, $path = [], array $query = [])
     {
+        $path = is_null($path) || $path === '/' ? [] : $path;
+
         if ($uri instanceof UriInterface) {
             $this->createFromUri($uri);
         } else {
