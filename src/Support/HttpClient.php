@@ -7,6 +7,7 @@ use Laravie\Codex\Endpoint;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
+use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 use Laravie\Codex\Contracts\Response as ResponseContract;
 
 trait HttpClient
@@ -29,7 +30,7 @@ trait HttpClient
      * Send the HTTP request.
      *
      * @param  string  $method
-     * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
+     * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
@@ -56,7 +57,7 @@ trait HttpClient
      * Stream (multipart) the HTTP request.
      *
      * @param  string  $method
-     * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
+     * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      * @param  array  $files
@@ -123,13 +124,13 @@ trait HttpClient
     /**
      * Convert URI to Endpoint object.
      *
-     * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
+     * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
      *
-     * @return \Laravie\Codex\Endpoint
+     * @return \Laravie\Codex\Contracts\Endpoint
      */
-    protected function convertUriToEndpoint($uri): Endpoint
+    final protected function convertUriToEndpoint($uri): EndpointContract
     {
-        if ($uri instanceof Endpoint) {
+        if ($uri instanceof EndpointContract) {
             return $uri;
         } elseif ($uri instanceof UriInterface) {
             return new Endpoint($uri);

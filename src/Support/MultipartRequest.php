@@ -2,11 +2,37 @@
 
 namespace Laravie\Codex\Support;
 
+use Laravie\Codex\Contracts\Endpoint;
+use Laravie\Codex\Contracts\Response;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 
 trait MultipartRequest
 {
+    /**
+     * Stream (multipart) the HTTP request.
+     *
+     * @param  string  $method
+     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
+     * @param  array  $headers
+     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
+     * @param  array  $files
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    public function stream(string $method, $uri, array $headers = [], $body = [], array $files = []): Response
+    {
+        $body = $this->sanitizeFrom($body);
+
+        $endpoint = ($path instanceof Endpoint)
+                        ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
+                        : $this->getApiEndpoint($path);
+
+        return $this->client->stream($method, $this->resolveUri($endpoint), $headers, $body, $files)
+                    ->setSanitizer($this->getSanitizer())
+                    ->validate();
+    }
+
     /**
      * Prepare multipart request payloads.
      *
