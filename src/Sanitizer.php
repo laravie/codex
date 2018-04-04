@@ -123,6 +123,10 @@ class Sanitizer implements Contracts\Sanitizer
     {
         $cast = \igorw\get_in($this->casts, (array) $group);
 
-        return ($cast instanceof Contracts\Cast) ? $cast : null;
+        if (is_subclass_of($cast, Contracts\Cast::class)) {
+            return is_string($cast) ? new $cast() : $cast;
+        }
+
+        return null;
     }
 }
