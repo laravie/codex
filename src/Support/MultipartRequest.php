@@ -19,15 +19,19 @@ trait MultipartRequest
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    public function stream($method, $uri, array $headers = [], $body = [], array $files = [])
+    public function stream($method, $path, array $headers = [], $body = [], array $files = [])
     {
         $body = $this->sanitizeFrom($body);
+
+        list($headers, $stream) = $this->prepareMultipartRequestPayloads(
+            $headers, $body, $files
+        );
 
         $endpoint = ($path instanceof Endpoint)
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
 
-        return $this->client->stream($method, $this->resolveUri($endpoint), $headers, $body, $files)
+        return $this->client->stream($method, $this->resolveUri($endpoint), $headers, $stream)
                     ->setSanitizer($this->getSanitizer())
                     ->validate();
     }

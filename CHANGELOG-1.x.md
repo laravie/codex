@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.6.2
+
+Released: 2018-04-04
+
+### Fixes
+
+* Fixes `Laravie\Codex\Support\HttpClient::stream()` and `Laravie\Codex\Support\MultipartRequest::stream()` implementation.
+
 ## 1.6.1
 
 Released: 2018-04-04
@@ -26,6 +34,14 @@ Released: 2018-04-03
 * Bump minimum PHP to 7.0+.
 * `Laravie\Codex\Endpoint` now implements `Laravie\Codex\Contracts\Endpoint`.
 * Improves tests.
+
+## 1.5.2
+
+Released: 2018-04-04
+
+### Fixes
+
+* Fixes `Laravie\Codex\Support\HttpClient::stream()` and `Laravie\Codex\Support\MultipartRequest::stream()` implementation.
 
 ## 1.5.1 
 
