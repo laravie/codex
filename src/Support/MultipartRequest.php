@@ -27,7 +27,11 @@ trait MultipartRequest
             $headers, $body, $files
         );
 
-        return $this->client->stream($method, $path, $headers, $stream)
+        $endpoint = ($path instanceof Endpoint)
+                        ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
+                        : $this->getApiEndpoint($path);
+
+        return $this->client->stream($method, $this->resolveUri($endpoint), $headers, $stream)
                     ->setSanitizer($this->getSanitizer())
                     ->validate();
     }
