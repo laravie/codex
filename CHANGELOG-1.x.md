@@ -2,6 +2,21 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.6.1
+
+Released: 2018-04-04
+
+### Added
+
+* Added `Laravie\Codex\Support\MultipartRequest::stream()` method.
+
+### Changes
+
+* Normalize given `$path` when constructing `Laravie\Codex\Endpoint`.
+* `Laravie\Codex\Sanitizer` should be able to lazy load casts object.
+* Improves tests and docblocks.
+* Use `Laravie\Codex\Contracts\Endpoint` as typehint instead of `Laravie\Codex\Endpoint` whenever possible.
+
 ## 1.6.0
 
 Released: 2018-04-03
@@ -11,6 +26,21 @@ Released: 2018-04-03
 * Bump minimum PHP to 7.0+.
 * `Laravie\Codex\Endpoint` now implements `Laravie\Codex\Contracts\Endpoint`.
 * Improves tests.
+
+## 1.5.1 
+
+Released: 2018-04-04
+
+### Added
+
+* Added `Laravie\Codex\Support\MultipartRequest::stream()` method.
+
+### Changes
+
+* Normalize given `$path` when constructing `Laravie\Codex\Endpoint`.
+* `Laravie\Codex\Sanitizer` should be able to lazy load casts object.
+* Improves tests and docblocks.
+
 
 ## 1.5.0
 
