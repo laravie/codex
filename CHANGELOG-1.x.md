@@ -2,6 +2,20 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 1.5.1 
+
+Released: 2018-04-04
+
+### Added
+
+* Added `Laravie\Codex\Support\MultipartRequest::stream()` method.
+
+### Changes
+
+* Normalize given `$path` when constructing `Laravie\Codex\Endpoint`.
+* `Laravie\Codex\Sanitizer` should be able to lazy load casts object.
+* Improves tests and docblocks.
+
 ## 1.5.0
 
 Released: 2018-03-12
