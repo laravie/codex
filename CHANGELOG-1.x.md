@@ -57,7 +57,6 @@ Released: 2018-04-04
 * `Laravie\Codex\Sanitizer` should be able to lazy load casts object.
 * Improves tests and docblocks.
 
-
 ## 1.5.0
 
 Released: 2018-03-12
