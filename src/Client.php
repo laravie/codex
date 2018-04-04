@@ -133,23 +133,6 @@ abstract class Client implements Contracts\Client
     }
 
     /**
-     * Get versioned resource (service).
-     *
-     * @param  string  $service
-     * @param  string|null  $version
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return object
-     *
-     * @deprecated v1.4.0
-     */
-    public function resource(string $service, ?string $version = null)
-    {
-        return $this->uses($service, $version);
-    }
-
-    /**
      * Resolve the responder class.
      *
      * @param  \Psr\Http\Message\ResponseInterface  $response

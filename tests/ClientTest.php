@@ -160,16 +160,4 @@ class ClientTest extends TestCase
 
         $response = (new Client($http, 'abc'))->uses('Foobar');
     }
-
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Resource [Foobar] for version [v1] is not available.
-     */
-    public function it_cant_find_unknown_resource_using_old_method()
-    {
-        $http = m::mock('Http\Client\Common\HttpMethodsClient');
-
-        $response = (new Client($http, 'abc'))->resource('Foobar');
-    }
 }
