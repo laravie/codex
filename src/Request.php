@@ -64,7 +64,7 @@ abstract class Request implements Contracts\Request
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
 
-        return $this->client->send($method, $this->resolveUri($endpoint), $headers, $body)
+        return $this->client->send($method, $endpoint, $headers, $body)
                     ->setSanitizer($this->getSanitizer())
                     ->validate();
     }
@@ -123,17 +123,5 @@ abstract class Request implements Contracts\Request
     protected function getApiEndpoint($path = []): Contracts\Endpoint
     {
         return new Endpoint($this->client->getApiEndpoint(), $path);
-    }
-
-    /**
-     * Resolve URI.
-     *
-     * @param  \Laravie\Codex\Contracts\Endpoint  $endpoint
-     *
-     * @return \Psr\Http\Message\UriInterface
-     */
-    protected function resolveUri(Contracts\Endpoint $endpoint): UriInterface
-    {
-        return $endpoint->get();
     }
 }

@@ -30,13 +30,13 @@ trait HttpClient
      * Send the HTTP request.
      *
      * @param  string  $method
-     * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
+     * @param  \Laravie\Codex\Contracts\Endpoint  $uri
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    public function send(string $method, $uri, array $headers = [], $body = []): ResponseContract
+    public function send(string $method, EndpointContract $uri, array $headers = [], $body = []): ResponseContract
     {
         $method = strtoupper($method);
         $endpoint = $this->convertUriToEndpoint($uri);
@@ -57,14 +57,14 @@ trait HttpClient
      * Stream (multipart) the HTTP request.
      *
      * @param  string  $method
-     * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
+     * @param  \Laravie\Codex\Contracts\Endpoint  $uri
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface  $stream
      * @param  array  $files
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    public function stream(string $method, $uri, array $headers = [], StreamInterface $stream): ResponseContract
+    public function stream(string $method, EndpointContract $uri, array $headers = [], StreamInterface $stream): ResponseContract
     {
         list($headers, $stream) = $this->prepareRequestPayloads($headers, $stream);
 

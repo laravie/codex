@@ -32,7 +32,7 @@ trait MultipartRequest
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
 
-        return $this->client->stream($method, $this->resolveUri($endpoint), $headers, $stream)
+        return $this->client->stream($method, $endpoint, $headers, $stream)
                     ->setSanitizer($this->getSanitizer())
                     ->validate();
     }
