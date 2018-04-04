@@ -8,7 +8,7 @@ Released: 2018-04-04
 
 ### Fixes
 
-* Fixes variable name.
+* Fixes `Laravie\Codex\Support\HttpClient::stream()` and `Laravie\Codex\Support\MultipartRequest::stream()` implementation.
 
 ## 1.5.1 
 
