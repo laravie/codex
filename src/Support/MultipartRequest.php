@@ -24,11 +24,15 @@ trait MultipartRequest
     {
         $body = $this->sanitizeFrom($body);
 
+        list($headers, $stream) = $this->prepareMultipartRequestPayloads(
+            $headers, $body, $files
+        );
+
         $endpoint = ($path instanceof Endpoint)
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
 
-        return $this->client->stream($method, $this->resolveUri($endpoint), $headers, $body, $files)
+        return $this->client->stream($method, $this->resolveUri($endpoint), $headers, $stream)
                     ->setSanitizer($this->getSanitizer())
                     ->validate();
     }

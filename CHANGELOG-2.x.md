@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 2.2.2
+
+Released: 2018-04-04
+
+### Fixes
+
+* Fixes `Laravie\Codex\Support\HttpClient::stream()` and `Laravie\Codex\Support\MultipartRequest::stream()` implementation.
+
 ## 2.2.1
 
 Released: 2018-04-04
