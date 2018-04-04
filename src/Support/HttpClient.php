@@ -57,16 +57,14 @@ trait HttpClient
      * @param  string  $method
      * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
      * @param  array  $headers
-     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
+     * @param  \Psr\Http\Message\StreamInterface  $stream
      * @param  array  $files
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    public function stream($method, $uri, array $headers = [], $body = [], array $files = [])
+    public function stream($method, $uri, array $headers = [], StreamInterface $stream)
     {
-        list($headers, $stream) = $this->prepareMultipartRequestPayloads(
-            $this->prepareRequestHeaders($headers), $body, $files
-        );
+        list($headers, $stream) = $this->prepareRequestPayloads($headers, $stream);
 
         return $this->requestWith(
             strtoupper($method), $this->convertUriToEndpoint($uri)->get(), $headers, $stream
