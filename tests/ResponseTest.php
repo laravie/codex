@@ -5,7 +5,9 @@ namespace Laravie\Codex\TestCase;
 use Mockery as m;
 use Laravie\Codex\Response;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
+use Laravie\Codex\Exceptions\HttpException;
 
 class ResponseTest extends TestCase
 {
@@ -63,6 +65,54 @@ class ResponseTest extends TestCase
         $stub = new Response($api);
 
         $this->assertSame('1.1', $stub->getProtocolVersion());
+    }
+
+    /** @test */
+    public function it_can_get_body_from_stream()
+    {
+        $stream = m::mock(StreamInterface::class);
+        $api = m::mock(ResponseInterface::class);
+
+        $api->shouldReceive('getBody')->andReturn($stream);
+        $stream->shouldReceive('__toString')->andReturn('Text from stream');
+
+        $stub = new Response($api);
+
+        $this->assertSame('Text from stream', $stub->getBody());
+    }
+
+    /** @test */
+    public function it_can_use_validate_with()
+    {
+        $api = m::mock(ResponseInterface::class);
+
+        $api->shouldReceive('getStatusCode')->andReturn(200);
+
+        $stub = (new Response($api))->validateWith(function ($code, $response) {
+            if ($code === 404) {
+                throw new HttpException($response, '404 File not found.');
+            }
+        });
+
+        $this->assertInstanceOf(Response::class, $stub);
+    }
+
+    /**
+     * @test
+     * @expectedException \Laravie\Codex\Exceptions\HttpException
+     * @expectedExceptionMessage 404 File not found.
+     */
+    public function it_can_use_validate_with_can_throws_exception()
+    {
+        $api = m::mock(ResponseInterface::class);
+
+        $api->shouldReceive('getStatusCode')->andReturn(404);
+
+        (new Response($api))->validateWith(function ($code, $response) {
+            if ($code === 404) {
+                throw new HttpException($response, '404 File not found.');
+            }
+        });
     }
 
     /**
