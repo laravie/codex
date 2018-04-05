@@ -35,9 +35,7 @@ class Response implements Contracts\Response
      */
     public function validate(): self
     {
-        $statusCode = $this->getStatusCode();
-
-        $this->validateUnauthorizedRequest($statusCode);
+        $this->validateUnauthorizedRequest();
 
         return $this;
     }
@@ -120,15 +118,13 @@ class Response implements Contracts\Response
     /**
      * Validate for unauthorized request.
      *
-     * @param  int  $statusCode
-     *
      * @throws \Laravie\Codex\Exceptions\UnauthorizedHttpException
      *
      * @return void
      */
-    protected function validateUnauthorizedRequest(int $statusCode): void
+    protected function validateUnauthorizedRequest(): void
     {
-        if ($statusCode === 401) {
+        if ($this->getStatusCode() === 401) {
             throw new UnauthorizedHttpException($this);
         }
     }

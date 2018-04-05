@@ -81,6 +81,21 @@ class ResponseTest extends TestCase
         $this->assertSame('Text from stream', $stub->getBody());
     }
 
+    /**
+     * @test
+     * @expectedException \Laravie\Codex\Exceptions\UnauthorizedHttpException
+     * @expectedExceptionMessage Not authorized
+     */
+    public function it_would_throw_exception_when_given_401_status_code()
+    {
+        $api = m::mock(ResponseInterface::class);
+
+        $api->shouldReceive('getStatusCode')->andReturn(401)
+            ->shouldReceive('getReasonPhrase')->andReturn('Not authorized');
+
+        (new Response($api))->validate();
+    }
+
     /** @test */
     public function it_can_use_validate_with()
     {
