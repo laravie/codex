@@ -2,6 +2,7 @@
 
 namespace Laravie\Codex\TestCase;
 
+use GuzzleHttp\Psr7\Uri;
 use Laravie\Codex\Endpoint;
 use PHPUnit\Framework\TestCase;
 
@@ -73,6 +74,23 @@ class EndpointTest extends TestCase
 
     /** @test */
     public function it_can_build_basic_endpoint_appended_query_string()
+    {
+        $uri = new Uri('https://laravel.com/docs?search=controller&page=3');
+        $endpoint = new Endpoint($uri);
+
+        $this->assertSame('https', $endpoint->getScheme());
+        $this->assertSame('laravel.com', $endpoint->getHost());
+        $this->assertSame('https://laravel.com', $endpoint->getUri());
+        $this->assertSame(['docs'], $endpoint->getPath());
+        $this->assertSame(['search' => 'controller', 'page' => '3'], $endpoint->getQuery());
+
+        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertSame('https://laravel.com/docs?search=controller&page=3', (string) $endpoint->get());
+        $this->assertSame('https://laravel.com/docs?search=controller&page=3', (string) $endpoint);
+    }
+
+    /** @test */
+    public function it_can_build_basic_endpoint_from_uri_instance()
     {
         $endpoint = (new Endpoint('https://laravel.com', 'docs'))
                         ->addQuery(['search' => 'controller', 'page' => 3]);
