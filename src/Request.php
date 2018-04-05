@@ -21,14 +21,10 @@ abstract class Request implements Contracts\Request
     protected $client;
 
     /**
-     * Construct a new Collection.
-     *
-     * @param \Laravie\Codex\Contracts\Client  $client
+     * Construct a new Request.
      */
-    public function __construct(Contracts\Client $client)
+    public function __construct()
     {
-        $this->client = $client;
-
         if (method_exists($this, 'sanitizeWith')) {
             $this->setSanitizer($this->sanitizeWith());
         }
@@ -46,6 +42,19 @@ abstract class Request implements Contracts\Request
     public static function to(string $uri, $path = [], array $query = []): Contracts\Endpoint
     {
         return new Endpoint($uri, $path, $query);
+    }
+
+    /**
+     * Set Codex Client.
+     *
+     * @param  \Laravie\Codex\Contracts\Client  $client
+     * @return $this
+     */
+    final public function setClient(Contracts\Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
     }
 
     /**

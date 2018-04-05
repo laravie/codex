@@ -129,6 +129,8 @@ abstract class Client implements Contracts\Client
      */
     public function via(Contracts\Request $request): Contracts\Request
     {
+        $request->setClient($this);
+
         return $request;
     }
 
