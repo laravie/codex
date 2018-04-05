@@ -6,9 +6,9 @@ use Mockery as m;
 use Laravie\Codex\Request;
 use Laravie\Codex\Response;
 use PHPUnit\Framework\TestCase;
+use Laravie\Codex\Testing\Faker;
 use Laravie\Codex\Support\HttpClient;
 use Psr\Http\Message\StreamInterface;
-use Laravie\Codex\Testing\FakeRequest;
 use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Contracts\Response as ResponseContract;
 
@@ -32,7 +32,7 @@ class HttpClientTest extends TestCase
         $headers = ['Accept' => 'application/json'];
         $payloads = ['search' => 'codex'];
 
-        $faker = FakeRequest::create()
+        $faker = Faker::create()
                         ->call('GET', $headers, '')
                         ->expectEndpointIs('https://laravel.com/docs/5.5?search=codex')
                         ->shouldResponseWith(200, '{"status":"success"}');
@@ -53,7 +53,7 @@ class HttpClientTest extends TestCase
 
         $stream = m::mock(StreamInterface::class);
 
-        $faker = FakeRequest::create()
+        $faker = Faker::create()
                         ->call('POST', $headers, $stream)
                         ->expectEndpointIs('https://laravel.com/codex')
                         ->shouldResponseWith(200, '{"status":"success"}');

@@ -4,7 +4,7 @@ namespace Laravie\Codex\TestCase;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Laravie\Codex\Testing\FakeRequest;
+use Laravie\Codex\Testing\Faker;
 use Laravie\Codex\TestCase\Acme\Client;
 
 class ClientTest extends TestCase
@@ -43,7 +43,7 @@ class ClientTest extends TestCase
     /** @test */
     public function it_can_send_api_request_on_version_one()
     {
-        $faker = FakeRequest::create()
+        $faker = Faker::create()
                     ->call('GET', [], '')
                     ->expectEndpointIs('https://acme.laravie/v1/welcome')
                     ->shouldResponseWith(200, '{"success":true}');
@@ -62,7 +62,7 @@ class ClientTest extends TestCase
     /** @test */
     public function it_can_send_api_request_on_version_two()
     {
-        $faker = FakeRequest::create()
+        $faker = Faker::create()
                     ->call('GET', ['Authorization' => 'Bearer abc'], '')
                     ->expectEndpointIs('https://acme.laravie/v2/welcome')
                     ->shouldResponseWith(200, '{"success":true}');
@@ -87,7 +87,7 @@ class ClientTest extends TestCase
             'password' => 'secret',
         ];
 
-        $faker = FakeRequest::create()
+        $faker = Faker::create()
                     ->call('POST', [], 'username=homestead&password=secret')
                     ->expectEndpointIs('https://acme.laravie/v1/welcome')
                     ->shouldResponseWith(200, '{"success":true}');
@@ -106,7 +106,7 @@ class ClientTest extends TestCase
     {
         $stream = m::mock('Psr\Http\Message\StreamInterface');
 
-        $faker = FakeRequest::create()
+        $faker = Faker::create()
                     ->call('POST', [], $stream)
                     ->expectEndpointIs('https://acme.laravie/v1/welcome')
                     ->shouldResponseWith(200, '{"success":true}');
@@ -126,7 +126,7 @@ class ClientTest extends TestCase
         $headers = ['Content-Type' => 'application/json'];
         $payload = ['meta' => ['foo', 'bar']];
 
-        $faker = FakeRequest::create()
+        $faker = Faker::create()
                     ->call('POST', $headers, json_encode($payload))
                     ->expectEndpointIs('https://acme.laravie/v1/welcome')
                     ->shouldResponseWith(200, '{"success":true}');
@@ -145,7 +145,7 @@ class ClientTest extends TestCase
     /** @test */
     public function it_can_send_api_request_by_providing_endpoint()
     {
-        $faker = FakeRequest::create()
+        $faker = Faker::create()
                     ->call('GET', [], '')
                     ->expectEndpointIs('https://acme.laravie/v1/welcome')
                     ->shouldResponseWith(200, '{"success":true}');
@@ -168,7 +168,7 @@ class ClientTest extends TestCase
      */
     public function it_throws_exception_when_401_is_returned()
     {
-        $faker = FakeRequest::create()
+        $faker = Faker::create()
                     ->call('GET', [], '')
                     ->expectEndpointIs('https://acme.laravie/v1/welcome')
                     ->shouldResponseWith(401)
