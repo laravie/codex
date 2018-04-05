@@ -61,7 +61,9 @@ class Response implements Contracts\Response
      */
     public function toArray(): array
     {
-        return $this->sanitizeTo($this->getContent());
+        $content = $this->getContent();
+
+        return is_array($content) ? $this->sanitizeTo($content) : [];
     }
 
     /**
