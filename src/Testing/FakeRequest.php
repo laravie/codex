@@ -89,6 +89,10 @@ class FakeRequest
      */
     public function call(string $method = 'GET', $headers = [], $body = ''): self
     {
+        if ($method === 'GET') {
+            $body = m::any();
+        }
+
         $this->http->shouldReceive('send')
                 ->with($method, m::type(Uri::class), $headers, $body)
                 ->andReturnUsing(function ($m, $u, $h, $b) {
