@@ -30,7 +30,7 @@ trait Passport
      *
      * @return string|null
      */
-    public function getClientId(): ?string
+    final public function getClientId(): ?string
     {
         return $this->clientId;
     }
@@ -42,7 +42,7 @@ trait Passport
      *
      * @return $this
      */
-    public function setClientId(?string $clientId)
+    final public function setClientId(?string $clientId): self
     {
         $this->clientId = $clientId;
 
@@ -54,7 +54,7 @@ trait Passport
      *
      * @return string|null
      */
-    public function getClientSecret(): ?string
+    final public function getClientSecret(): ?string
     {
         return $this->clientSecret;
     }
@@ -66,7 +66,7 @@ trait Passport
      *
      * @return $this
      */
-    public function setClientSecret(?string $clientSecret)
+    final public function setClientSecret(?string $clientSecret): self
     {
         $this->clientSecret = $clientSecret;
 
@@ -78,7 +78,7 @@ trait Passport
      *
      * @return string|null
      */
-    public function getAccessToken(): ?string
+    final public function getAccessToken(): ?string
     {
         return $this->accessToken;
     }
@@ -90,7 +90,7 @@ trait Passport
      *
      * @return $this
      */
-    public function setAccessToken(?string $accessToken)
+    final public function setAccessToken(?string $accessToken): self
     {
         $this->accessToken = $accessToken;
 
