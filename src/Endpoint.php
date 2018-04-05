@@ -181,9 +181,7 @@ class Endpoint implements Contracts\Endpoint
 
         if (strpos($method, 'with') !== 0) {
             return $result;
-        }
-
-        if ($result instanceof UriInterface) {
+        } elseif ($result instanceof UriInterface) {
             $this->uri = $result;
         }
 
