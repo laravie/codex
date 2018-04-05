@@ -80,6 +80,28 @@ class ClientTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_api_request_by_sending_array_data()
+    {
+        $payload = [
+            'username' => 'homestead',
+            'password' => 'secret',
+        ];
+
+        $faker = FakeRequest::create()
+                    ->call('POST', [], 'username=homestead&password=secret')
+                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
+                    ->shouldResponseWith(200, '{"success":true}');
+
+        $response = (new Client($faker->http(), 'abc'))->uses('Welcome')->ping($payload);
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"success":true}', $response->getBody());
+        $this->assertSame(['success' => true], $response->getContent());
+        $this->assertSame(['success' => true], $response->toArray());
+        $this->assertTrue($response->hasSanitizer());
+    }
+
+    /** @test */
     public function it_can_send_api_request_by_sending_stream_data()
     {
         $stream = m::mock('Psr\Http\Message\StreamInterface');
