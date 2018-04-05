@@ -119,7 +119,7 @@ class FakeRequest
      *
      * @return $this
      */
-    public function shouldResponseWith(int $code = 200, string $body = '', string $reason = ''): self
+    public function shouldResponseWith(int $code = 200, string $body = ''): self
     {
         $this->expectedStatusCode = $code;
         $this->expectedBody = $body;
