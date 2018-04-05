@@ -3,7 +3,6 @@
 namespace Laravie\Codex\Support;
 
 use GuzzleHttp\Psr7\Uri;
-use Laravie\Codex\Endpoint;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;

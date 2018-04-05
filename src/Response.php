@@ -5,6 +5,7 @@ namespace Laravie\Codex;
 use BadMethodCallException;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
+use Laravie\Codex\Exceptions\UnauthorizedHttpException;
 
 class Response implements Contracts\Response
 {
@@ -34,6 +35,10 @@ class Response implements Contracts\Response
      */
     public function validate(): self
     {
+        $statusCode = $this->getStatusCode();
+
+        $this->validateUnauthorizedRequest($statusCode);
+
         return $this;
     }
 
@@ -110,5 +115,21 @@ class Response implements Contracts\Response
         }
 
         return $this->original->{$method}(...$parameters);
+    }
+
+    /**
+     * Validate for unauthorized request.
+     *
+     * @param  int  $statusCode
+     *
+     * @throws \Laravie\Codex\Exceptions\UnauthorizedHttpException
+     *
+     * @return void
+     */
+    protected function validateUnauthorizedRequest(int $statusCode): void
+    {
+        if ($statusCode === 401) {
+            throw new UnauthorizedHttpException($this);
+        }
     }
 }

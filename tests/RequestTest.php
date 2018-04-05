@@ -42,8 +42,6 @@ class RequestTest extends TestCase
         $this->assertTrue($stub->hasSanitizer());
     }
 
-
-
     /** @test */
     public function it_can_create_instance_of_endpoint()
     {

@@ -4,10 +4,8 @@ namespace Laravie\Codex\TestCase\Support;
 
 use Mockery as m;
 use Laravie\Codex\Request;
-use Laravie\Codex\Endpoint;
 use Laravie\Codex\Response;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\UriInterface;
 use Laravie\Codex\Support\HttpClient;
 use Psr\Http\Message\StreamInterface;
 use Laravie\Codex\Testing\FakeRequest;

@@ -138,7 +138,6 @@ class EndpointTest extends TestCase
 
         $this->assertSame('laravie', $endpoint->getUserInfo());
         $this->assertSame('http://laravie@laravel.com/docs', (string) $endpoint);
-
     }
 
     /**

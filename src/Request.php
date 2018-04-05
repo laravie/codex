@@ -2,8 +2,6 @@
 
 namespace Laravie\Codex;
 
-use Psr\Http\Message\UriInterface;
-
 abstract class Request implements Contracts\Request
 {
     use Support\WithSanitizer;
