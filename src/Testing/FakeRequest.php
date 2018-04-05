@@ -109,16 +109,18 @@ class FakeRequest
      *
      * @param  int  $code
      * @param  string  $body
+     * @param  string|null  $reason
      *
      * @return $this
      */
-    public function shouldResponseWith(int $code = 200, string $body = ''): self
+    public function shouldResponseWith(int $code = 200, string $body = '', string $reason = ''): self
     {
         $this->expectedStatusCode = $code;
         $this->expectedBody = $body;
 
         $this->message->shouldReceive('getStatusCode')->andReturn($code)
-            ->shouldReceive('getBody')->andReturn($body);
+            ->shouldReceive('getBody')->andReturn($body)
+            ->shouldReceive('getReasonPhrase')->andReturn($reason);
 
         return $this;
     }
