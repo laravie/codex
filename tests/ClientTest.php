@@ -163,6 +163,24 @@ class ClientTest extends TestCase
 
     /**
      * @test
+     * @expectedException \Laravie\Codex\Exceptions\UnauthorizedHttpException
+     * @expectedExceptionMessage Not Authorized!
+     */
+    public function it_throws_exception_when_401_is_returned()
+    {
+        $faker = FakeRequest::create()
+                    ->call('GET', [], '')
+                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
+                    ->shouldResponseWith(401)
+                    ->expectReasonPhraseIs('Not Authorized!');
+
+        $response = (new Client($faker->http(), 'abc'))
+                        ->uses('Welcome')
+                        ->pong();
+    }
+
+    /**
+     * @test
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage API version [v10] is not supported.
      */

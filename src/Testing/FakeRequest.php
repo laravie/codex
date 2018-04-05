@@ -34,16 +34,23 @@ class FakeRequest
     /**
      * Expected HTTP status code.
      *
-     * @var int
+     * @var int|null
      */
-    protected $expectedStatusCode = 200;
+    protected $expectedStatusCode;
+
+    /**
+     * Expected Reason Phrase.
+     *
+     * @var string|null
+     */
+    protected $expectedReasonPhrase;
 
     /**
      * Expected HTTP body.
      *
-     * @var string
+     * @var string|null
      */
-    protected $expectedBody = '';
+    protected $expectedBody;
 
     /**
      * Construct a fake request.
@@ -109,7 +116,6 @@ class FakeRequest
      *
      * @param  int  $code
      * @param  string  $body
-     * @param  string|null  $reason
      *
      * @return $this
      */
@@ -119,8 +125,22 @@ class FakeRequest
         $this->expectedBody = $body;
 
         $this->message->shouldReceive('getStatusCode')->andReturn($code)
-            ->shouldReceive('getBody')->andReturn($body)
-            ->shouldReceive('getReasonPhrase')->andReturn($reason);
+            ->shouldReceive('getBody')->andReturn($body);
+
+        return $this;
+    }
+
+    /**
+     * Response should have reason phrase as.
+     *
+     * @param  string  $reason
+     * @return $this
+     */
+    public function expectReasonPhraseIs(string $reason): self
+    {
+        $this->expectedReasonPhrase = $reason;
+
+        $this->message->shouldReceive('getReasonPhrase')->andReturn($reason);
 
         return $this;
     }
