@@ -41,10 +41,10 @@ trait HttpClient
 
         if ($method === 'GET' && ! $body instanceof StreamInterface) {
             $uri->addQuery($body);
-            $body = [];
+            $body = null;
         }
 
-        list($headers, $body) = $this->prepareRequestPayloads($headers, $body);
+        list($headers, $body) = $this->prepareRequestPayloads($method, $headers, $body);
 
         return $this->requestWith(
             $method, $uri->get(), $headers, $body
@@ -64,7 +64,7 @@ trait HttpClient
      */
     public function stream(string $method, EndpointContract $uri, array $headers = [], StreamInterface $stream): ResponseContract
     {
-        list($headers, $stream) = $this->prepareRequestPayloads($headers, $stream);
+        list($headers, $stream) = $this->prepareRequestPayloads($method, $headers, $stream);
 
         return $this->requestWith(
             strtoupper($method), $uri->get(), $headers, $stream
@@ -95,16 +95,17 @@ trait HttpClient
     /**
      * Prepare request payloads.
      *
+     * @param  string  $method
      * @param  array  $headers
      * @param  mixed  $body
      *
      * @return array
      */
-    protected function prepareRequestPayloads(array $headers = [], $body = []): array
+    protected function prepareRequestPayloads(string $method, array $headers = [], $body = []): array
     {
         $headers = $this->prepareRequestHeaders($headers);
 
-        if ($body instanceof StreamInterface) {
+        if ($body instanceof StreamInterface || in_array($method, ['HEAD', 'GET', 'OPTIONS'])) {
             return [$headers, $body];
         }
 
