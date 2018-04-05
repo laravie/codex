@@ -156,9 +156,11 @@ class Endpoint implements Contracts\Endpoint
      */
     public function get(): UriInterface
     {
-        return $this->uri->withQuery(
+        $this->withQuery(
             http_build_query($this->getQuery(), null, '&')
         );
+
+        return $this->uri;
     }
 
     /**
