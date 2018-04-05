@@ -48,6 +48,7 @@ abstract class Request implements Contracts\Request
      * Set Codex Client.
      *
      * @param  \Laravie\Codex\Contracts\Client  $client
+     *
      * @return $this
      */
     final public function setClient(Contracts\Client $client): self

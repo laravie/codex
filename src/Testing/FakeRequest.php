@@ -134,6 +134,7 @@ class FakeRequest
      * Response should have reason phrase as.
      *
      * @param  string  $reason
+     *
      * @return $this
      */
     public function expectReasonPhraseIs(string $reason): self

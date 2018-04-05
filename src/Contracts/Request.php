@@ -13,10 +13,11 @@ interface Request
     const METHOD_PATCH = 'PATCH';
     const METHOD_DELETE = 'DELETE';
 
-     /**
+    /**
      * Set Codex Client.
      *
      * @param  \Laravie\Codex\Contracts\Client  $client
+     *
      * @return $this
      */
     public function setClient(Client $client);
