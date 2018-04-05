@@ -8,7 +8,7 @@ use PHPUnit\Framework\Assert;
 use Psr\Http\Message\ResponseInterface;
 use Http\Client\Common\HttpMethodsClient;
 
-class FakeRequest
+class Faker
 {
     /**
      * HTTP client mock.
