@@ -3,11 +3,16 @@
 namespace Laravie\Codex\TestCase\Support;
 
 use Mockery as m;
+use Laravie\Codex\Request;
 use Laravie\Codex\Endpoint;
 use Laravie\Codex\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UriInterface;
 use Laravie\Codex\Support\HttpClient;
+use Psr\Http\Message\StreamInterface;
+use Laravie\Codex\Testing\FakeRequest;
+use Psr\Http\Message\ResponseInterface;
+use Laravie\Codex\Contracts\Response as ResponseContract;
 
 class HttpClientTest extends TestCase
 {
@@ -16,44 +21,51 @@ class HttpClientTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         m::close();
+
+        unset($this->http);
     }
 
     /** @test */
-    public function it_can_return_same_instance_when_given_contract()
+    public function it_can_send_http_request()
     {
-        $endpoint = m::mock(Endpoint::class);
-        $stub = $this->convertUriToEndpoint($endpoint);
+        $headers = ['Accept' => 'application/json'];
+        $payloads = ['search' => 'codex'];
 
-        $this->assertSame($endpoint, $stub);
+        $faker = FakeRequest::create()
+                        ->call('GET', $headers, '')
+                        ->expectEndpointIs('https://laravel.com/docs/5.5?search=codex')
+                        ->shouldResponseWith(200, '{"status":"success"}');
+
+        $this->http = $faker->http();
+
+        $response = $this->send('GET', Request::to('https://laravel.com', ['docs', '5.5']), $headers, $payloads);
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('success', $response->toArray()['status']);
     }
 
     /** @test */
-    public function it_can_return_endpoint_when_given_uri()
+    public function it_can_stream_http_request()
     {
-        $endpoint = m::mock(UriInterface::class);
+        $headers = ['Content-Type' => 'application/json'];
+        $payloads = ['search' => 'codex'];
 
-        $endpoint->shouldReceive('getQuery')->andReturn('foo=bar');
+        $stream = m::mock(StreamInterface::class);
 
-        $stub = $this->convertUriToEndpoint($endpoint);
+        $faker = FakeRequest::create()
+                        ->call('POST', $headers, $stream)
+                        ->expectEndpointIs('https://laravel.com/codex')
+                        ->shouldResponseWith(200, '{"status":"success"}');
 
-        $this->assertInstanceOf(Endpoint::class, $stub);
-        $this->assertSame(['foo' => 'bar'], $stub->getQuery());
-    }
+        $this->http = $faker->http();
 
-    /** @test */
-    public function it_can_return_endpoint_when_given_string()
-    {
-        $endpoint = m::mock(UriInterface::class);
+        $response = $this->stream('POST', Request::to('https://laravel.com/codex'), $headers, $stream);
 
-        $stub = $this->convertUriToEndpoint('https://laravel.com/docs/5.4?search=controller');
-
-        $this->assertInstanceOf(Endpoint::class, $stub);
-        $this->assertSame('https://laravel.com', $stub->getUri());
-        $this->assertSame(['docs', '5.4'], $stub->getPath());
-        $this->assertSame(['search' => 'controller'], $stub->getQuery());
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('success', $response->toArray()['status']);
     }
 
     /**
@@ -63,7 +75,7 @@ class HttpClientTest extends TestCase
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function responseWith(ResponseInterface $response)
+    protected function responseWith(ResponseInterface $response): ResponseContract
     {
         return new Response($response);
     }
@@ -75,7 +87,7 @@ class HttpClientTest extends TestCase
      *
      * @return array
      */
-    protected function prepareRequestHeaders(array $headers = [])
+    protected function prepareRequestHeaders(array $headers = []): array
     {
         return $headers;
     }

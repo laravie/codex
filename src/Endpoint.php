@@ -26,23 +26,39 @@ class Endpoint implements Contracts\Endpoint
      * Construct API Endpoint.
      *
      * @param \Psr\Http\Message\UriInterface|string  $uri
-     * @param array|string  $path
+     * @param array|string  $paths
      * @param array  $query
      */
-    public function __construct($uri, $path = [], array $query = [])
+    public function __construct($uri, $paths = [], array $query = [])
     {
-        $path = is_null($path) || $path === '/' ? [] : $path;
+        $paths = is_null($paths) || $paths === '/' ? [] : $paths;
 
-        if ($uri instanceof UriInterface) {
-            $this->createFromUri($uri);
-        } else {
-            $uri = new Uri(sprintf('%s/%s', rtrim($uri, '/'), implode('/', (array) $path)));
-        }
+        $this->uri = $uri instanceof UriInterface
+                        ? $uri
+                        : $this->createUri($uri, (array) $paths);
 
+        $this->createQueryFromUri($this->uri);
         $this->addQuery($query);
-        $this->uri = $uri;
     }
 
+    /**
+     * Create instance of Uri.
+     *
+     * @param  string|null  $url
+     * @param  array  $paths
+     *
+     * @return \Psr\Http\Message\UriInterface
+     */
+    final protected function createUri(?string $url, array $paths): UriInterface
+    {
+        $path = implode('/', $paths);
+
+        if (! empty($path)) {
+            $url = rtrim($url, '/')."/{$path}";
+        }
+
+        return new Uri($url);
+    }
     /**
      * Create from UriInterface.
      *
@@ -50,9 +66,9 @@ class Endpoint implements Contracts\Endpoint
      *
      * @return void
      */
-    final protected function createFromUri(UriInterface $uri): void
+    final protected function createQueryFromUri(UriInterface $uri): void
     {
-        $this->createQuery($uri->getQuery());
+        $this->createQuery(trim($uri->getQuery(), '/'));
     }
 
     /**

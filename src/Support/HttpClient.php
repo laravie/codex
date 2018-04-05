@@ -39,17 +39,16 @@ trait HttpClient
     public function send(string $method, EndpointContract $uri, array $headers = [], $body = []): ResponseContract
     {
         $method = strtoupper($method);
-        $endpoint = $this->convertUriToEndpoint($uri);
 
         if ($method === 'GET' && ! $body instanceof StreamInterface) {
-            $endpoint->addQuery($body);
+            $uri->addQuery($body);
             $body = [];
         }
 
         list($headers, $body) = $this->prepareRequestPayloads($headers, $body);
 
         return $this->requestWith(
-            $method, $endpoint->get(), $headers, $body
+            $method, $uri->get(), $headers, $body
         );
     }
 
@@ -69,7 +68,7 @@ trait HttpClient
         list($headers, $stream) = $this->prepareRequestPayloads($headers, $stream);
 
         return $this->requestWith(
-            strtoupper($method), $this->convertUriToEndpoint($uri)->get(), $headers, $stream
+            strtoupper($method), $uri->get(), $headers, $stream
         );
     }
 
@@ -117,24 +116,6 @@ trait HttpClient
         }
 
         return [$headers, $body];
-    }
-
-    /**
-     * Convert URI to Endpoint object.
-     *
-     * @param  \Laravie\Codex\Contracts\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
-     *
-     * @return \Laravie\Codex\Contracts\Endpoint
-     */
-    final protected function convertUriToEndpoint($uri): EndpointContract
-    {
-        if ($uri instanceof EndpointContract) {
-            return $uri;
-        } elseif ($uri instanceof UriInterface) {
-            return new Endpoint($uri);
-        }
-
-        return new Endpoint(new Uri($uri));
     }
 
     /**

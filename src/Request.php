@@ -37,6 +37,20 @@ abstract class Request implements Contracts\Request
     }
 
     /**
+     * Create Endpoint instance.
+     *
+     * @param  string $uri
+     * @param  string|array  $path
+     * @param  array  $query
+     *
+     * @return \Laravie\Codex\Contracts\Endpoint
+     */
+    public static function to(string $uri, $path = [], array $query = []): Contracts\Endpoint
+    {
+        return new Endpoint($uri, $path, $query);
+    }
+
+    /**
      * Get API version.
      *
      * @return string

@@ -10,7 +10,7 @@ class DiscoveryTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Discovery::flush();
     }
