@@ -58,7 +58,6 @@ trait HttpClient
      * @param  \Laravie\Codex\Endpoint|\Psr\Http\Message\UriInterface|string  $uri
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface  $stream
-     * @param  array  $files
      *
      * @return \Laravie\Codex\Contracts\Response
      */
@@ -83,6 +82,10 @@ trait HttpClient
      */
     protected function requestWith($method, UriInterface $uri, array $headers, $body)
     {
+        if (in_array($method, ['HEAD', 'GET', 'TRACE'])) {
+            $body = null;
+        }
+
         $response = $this->responseWith(
             $this->http->send($method, $uri, $headers, $body)
         );
