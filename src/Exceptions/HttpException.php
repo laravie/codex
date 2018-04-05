@@ -70,7 +70,7 @@ class HttpException extends RuntimeException implements HttpClientException
      *
      * @return $this
      */
-    public function setResponse($response): self
+    final public function setResponse($response): self
     {
         if ($response instanceof Response || $response instanceof ResponseInterface) {
             $this->response = $response;

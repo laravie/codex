@@ -19,7 +19,7 @@ class Sanitizer implements Contracts\Sanitizer
      *
      * @return $this
      */
-    public function add($group, Contracts\Cast $cast): self
+    public function add($group, Contracts\Cast $cast)
     {
         $this->casts = \igorw\assoc_in($this->casts, (array) $group, $cast);
 

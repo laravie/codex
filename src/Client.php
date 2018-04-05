@@ -47,7 +47,7 @@ abstract class Client implements Contracts\Client
      *
      * @return $this
      */
-    public function useCustomApiEndpoint(string $endpoint): self
+    public function useCustomApiEndpoint(string $endpoint)
     {
         $this->apiEndpoint = $endpoint;
 
@@ -63,7 +63,7 @@ abstract class Client implements Contracts\Client
      *
      * @return $this
      */
-    public function useVersion(string $version): self
+    public function useVersion(string $version)
     {
         if (! array_key_exists($version, $this->supportedVersions)) {
             throw new InvalidArgumentException("API version [{$version}] is not supported.");

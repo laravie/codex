@@ -33,7 +33,7 @@ class Response implements Contracts\Response
      *
      * @return $this
      */
-    public function validate(): self
+    public function validate()
     {
         $this->validateUnauthorizedRequest();
 

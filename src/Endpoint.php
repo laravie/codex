@@ -102,7 +102,7 @@ class Endpoint implements Contracts\Endpoint
      *
      * @return $this
      */
-    public function addQuery($key, string $value = null): self
+    public function addQuery($key, string $value = null)
     {
         if (is_array($key)) {
             foreach ($key as $name => $content) {

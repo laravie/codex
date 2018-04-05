@@ -78,7 +78,7 @@ class Faker
      *
      * @return $this
      */
-    public function expectEndpointIs(string $endpoint): self
+    public function expectEndpointIs(string $endpoint)
     {
         $this->expectedEndpoint = $endpoint;
 
@@ -94,7 +94,7 @@ class Faker
      *
      * @return $this
      */
-    public function call(string $method = 'GET', $headers = [], $body = ''): self
+    public function call(string $method = 'GET', $headers = [], $body = '')
     {
         if ($method === 'GET') {
             $body = m::any();
@@ -119,7 +119,7 @@ class Faker
      *
      * @return $this
      */
-    public function shouldResponseWith(int $code = 200, string $body = ''): self
+    public function shouldResponseWith(int $code = 200, string $body = '')
     {
         $this->expectedStatusCode = $code;
         $this->expectedBody = $body;
@@ -137,7 +137,7 @@ class Faker
      *
      * @return $this
      */
-    public function expectReasonPhraseIs(string $reason): self
+    public function expectReasonPhraseIs(string $reason)
     {
         $this->expectedReasonPhrase = $reason;
 
