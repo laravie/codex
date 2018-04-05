@@ -20,7 +20,7 @@ trait MultipartRequest
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    public function stream(string $method, $uri, array $headers = [], $body = [], array $files = []): Response
+    public function stream(string $method, $path, array $headers = [], $body = [], array $files = []): Response
     {
         $body = $this->sanitizeFrom($body);
 
