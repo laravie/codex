@@ -59,6 +59,7 @@ class Endpoint implements Contracts\Endpoint
 
         return new Uri($url);
     }
+
     /**
      * Create from UriInterface.
      *
@@ -174,7 +175,17 @@ class Endpoint implements Contracts\Endpoint
             throw new BadMethodCallException("Method [{$method}] doesn't exists.");
         }
 
-        return $this->uri->{$method}(...$parameters);
+        $result = $this->uri->{$method}(...$parameters);
+
+        if (strpos($method, 'with') !== 0) {
+            return $result;
+        }
+
+        if ($result instanceof UriInterface) {
+            $this->uri = $result;
+        }
+
+        return $this;
     }
 
     /**

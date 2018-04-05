@@ -122,6 +122,25 @@ class EndpointTest extends TestCase
         $this->assertSame('/docs', (string) $endpoint);
     }
 
+    /** @test */
+    public function it_can_build_basic_endpoint_and_passthrough_with_input()
+    {
+        $endpoint = new Endpoint('https://laravel.com/docs');
+
+        $this->assertSame('https', $endpoint->getScheme());
+
+        $this->assertInstanceOf(Endpoint::class, $endpoint->withScheme('http'));
+
+        $this->assertSame('http', $endpoint->getScheme());
+
+
+        $this->assertInstanceOf(Endpoint::class, $endpoint->withUserInfo('laravie'));
+
+        $this->assertSame('laravie', $endpoint->getUserInfo());
+        $this->assertSame('http://laravie@laravel.com/docs', (string) $endpoint);
+
+    }
+
     /**
      * @test
      * @expectedException \BadMethodCallException
