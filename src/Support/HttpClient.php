@@ -56,7 +56,6 @@ trait HttpClient
      * @param  \Laravie\Codex\Contracts\Endpoint  $uri
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface  $stream
-     * @param  array  $files
      *
      * @return \Laravie\Codex\Contracts\Response
      */
