@@ -79,7 +79,7 @@ abstract class Client implements Contracts\Client
      *
      * @return string
      */
-    public function getApiEndpoint(): string
+    public function getApiEndpoint(): ?string
     {
         return $this->apiEndpoint;
     }

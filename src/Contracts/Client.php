@@ -31,7 +31,7 @@ interface Client
      *
      * @return string
      */
-    public function getApiEndpoint(): string;
+    public function getApiEndpoint(): ?string;
 
     /**
      * Get API default version.
