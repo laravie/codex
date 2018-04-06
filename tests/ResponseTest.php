@@ -7,7 +7,6 @@ use Laravie\Codex\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
-use Laravie\Codex\Exceptions\HttpException;
 
 class ResponseTest extends TestCase
 {

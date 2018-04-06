@@ -134,6 +134,7 @@ class Response implements Contracts\Response
      * Validate for unauthorized request.
      *
      * @param  string|null  $message
+     *
      * @throws \Laravie\Codex\Exceptions\HttpException
      *
      * @return void
