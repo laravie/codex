@@ -126,7 +126,7 @@ class Response implements Contracts\Response
      */
     protected function validateUnauthorizedRequest(): void
     {
-        if ($this->getStatusCode() === 401) {
+        if (in_array($this->getStatusCode(), [401, 403])) {
             throw new UnauthorizedHttpException($this);
         }
     }
