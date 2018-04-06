@@ -104,9 +104,7 @@ class ResponseTest extends TestCase
         $api->shouldReceive('getStatusCode')->andReturn(200);
 
         $stub = (new Response($api))->validateWith(function ($code, $response) {
-            if ($code === 404) {
-                throw new HttpException($response, '404 File not found.');
-            }
+            $response->validateRequestHasFailed();
         });
 
         $this->assertInstanceOf(Response::class, $stub);
@@ -121,12 +119,11 @@ class ResponseTest extends TestCase
     {
         $api = m::mock(ResponseInterface::class);
 
-        $api->shouldReceive('getStatusCode')->andReturn(404);
+        $api->shouldReceive('getStatusCode')->andReturn(404)
+            ->shouldReceive('getReasonPhrase')->andReturn('404 File not found.');
 
         (new Response($api))->validateWith(function ($code, $response) {
-            if ($code === 404) {
-                throw new HttpException($response, '404 File not found.');
-            }
+            $response->validateRequestHasFailed();
         });
     }
 
