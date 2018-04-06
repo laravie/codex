@@ -72,7 +72,7 @@ abstract class Request implements Contracts\Request
      * Send API request.
      *
      * @param  string  $method
-     * @param  \Laravie\Codex\Endpoint|string  $path
+     * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
