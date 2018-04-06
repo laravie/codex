@@ -1,9 +1,9 @@
 <?php
 
-namespace Laravie\Codex\TestCase\Support;
+namespace Laravie\Codex\TestCase\Concerns;
 
 use PHPUnit\Framework\TestCase;
-use Laravie\Codex\Support\Passport;
+use Laravie\Codex\Concerns\Passport;
 
 class PassportTest extends TestCase
 {

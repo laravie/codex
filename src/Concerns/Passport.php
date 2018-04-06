@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Codex\Support;
+namespace Laravie\Codex\Concerns;
 
 trait Passport
 {

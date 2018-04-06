@@ -1,13 +1,13 @@
 <?php
 
-namespace Laravie\Codex\Support;
+namespace Laravie\Codex\Concerns\Request;
 
 use Laravie\Codex\Contracts\Endpoint;
 use Laravie\Codex\Contracts\Response;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 
-trait MultipartRequest
+trait Multipart
 {
     /**
      * Stream (multipart) the HTTP request.

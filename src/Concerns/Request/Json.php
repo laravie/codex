@@ -1,10 +1,10 @@
 <?php
 
-namespace Laravie\Codex\Support;
+namespace Laravie\Codex\Concerns\Request;
 
 use Laravie\Codex\Contracts\Response;
 
-trait JsonRequest
+trait Json
 {
     /**
      * Send API request.
