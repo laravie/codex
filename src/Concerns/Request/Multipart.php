@@ -22,6 +22,7 @@ trait Multipart
      */
     public function stream(string $method, $path, array $headers = [], $body = [], array $files = []): Response
     {
+        $headers['Content-Type'] = 'multipart/form-data';
         $body = $this->sanitizeFrom($body);
 
         list($headers, $stream) = $this->prepareMultipartRequestPayloads(
