@@ -102,9 +102,9 @@ abstract class Client implements Contracts\Client
      *
      * @throws \InvalidArgumentException
      *
-     * @return \Laravie\Codex\Contracts\Request
+     * @return \Laravie\Codex\Contracts\Request|mixed
      */
-    public function uses(string $service, ?string $version = null): Contracts\Request
+    public function uses(string $service, ?string $version = null)
     {
         if (is_null($version) || ! array_key_exists($version, $this->supportedVersions)) {
             $version = $this->defaultVersion;
@@ -125,11 +125,15 @@ abstract class Client implements Contracts\Client
      *
      * @param  \Laravie\Codex\Contracts\Request  $request
      *
-     * @return \Laravie\Codex\Contracts\Request
+     * @return \Laravie\Codex\Contracts\Request|mixed
      */
-    public function via(Contracts\Request $request): Contracts\Request
+    public function via(Contracts\Request $request)
     {
         $request->setClient($this);
+
+        if ($request instanceof Contracts\Invokable) {
+            return $request->handle();
+        }
 
         return $request;
     }
