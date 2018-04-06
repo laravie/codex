@@ -34,7 +34,7 @@ class Response implements Contracts\Response
      */
     public function validate()
     {
-        $this->validateUnauthorizedRequest();
+        $this->abortIfRequestUnauthorized();
 
         return $this;
     }
@@ -123,7 +123,7 @@ class Response implements Contracts\Response
      *
      * @return void
      */
-    public function validateUnauthorizedRequest(): void
+    public function abortIfRequestUnauthorized(): void
     {
         if (in_array($this->getStatusCode(), [401, 403])) {
             throw new Exceptions\UnauthorizedHttpException($this);
@@ -133,16 +133,17 @@ class Response implements Contracts\Response
     /**
      * Validate for unauthorized request.
      *
+     * @param  string|null  $message
      * @throws \Laravie\Codex\Exceptions\HttpException
      *
      * @return void
      */
-    public function validateRequestHasFailed(): void
+    public function abortIfRequestHasFailed(?string $message = null): void
     {
         $statusCode = $this->getStatusCode();
 
         if ($statusCode >= 400 && $statusCode < 600) {
-            throw new Exceptions\HttpException($this);
+            throw new Exceptions\HttpException($this, $message);
         }
     }
 }

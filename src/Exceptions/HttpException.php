@@ -28,8 +28,8 @@ class HttpException extends RuntimeException implements HttpClientException
      */
     public function __construct(
         $response,
-        string $message = null,
-        Exception $previous = null,
+        ?string $message = null,
+        ?Exception $previous = null,
         int $code = 0
     ) {
         $this->setResponse($response);
