@@ -57,8 +57,8 @@ trait Multipart
 
         $builder = new MultipartStreamBuilder(StreamFactoryDiscovery::find());
 
-        $this->addBodyToMultipartBuilder($builder, $this->sanitizeFrom($body));
         $this->addFilesToMultipartBuilder($builder, $files);
+        $this->addBodyToMultipartBuilder($builder, $this->sanitizeFrom($body));
 
         $headers['Content-Type'] = 'multipart/form-data; boundary='.$builder->getBoundary();
 
