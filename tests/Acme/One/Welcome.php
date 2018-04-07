@@ -5,11 +5,15 @@ namespace Laravie\Codex\TestCase\Acme\One;
 use Laravie\Codex\Request;
 use Laravie\Codex\Endpoint;
 use Laravie\Codex\Sanitizer;
+use Laravie\Codex\Concerns\Request\Json;
+use Laravie\Codex\Concerns\Request\Multipart;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 use Laravie\Codex\Contracts\Sanitizer as SanitizerContract;
 
 class Welcome extends Request
 {
+    use Json, Multipart;
+
     /**
      * Version namespace.
      *
@@ -35,6 +39,26 @@ class Welcome extends Request
     public function ping($body, array $headers = [])
     {
         return $this->send('POST', 'welcome', $this->mergeApiHeaders($headers), $body);
+    }
+
+    /**
+     * Ping welcome.
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    public function jsonPing($body, array $headers = [])
+    {
+        return $this->sendJson('POST', 'welcome', $this->mergeApiHeaders($headers), $body);
+    }
+
+    /**
+     * Ping welcome.
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    public function streamPing($body, array $headers = [])
+    {
+        return $this->stream('POST', 'welcome', $this->mergeApiHeaders($headers), $body);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace Laravie\Codex\Testing;
 use Mockery as m;
 use GuzzleHttp\Psr7\Uri;
 use PHPUnit\Framework\Assert;
+use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
 use Http\Client\Common\HttpMethodsClient;
 
@@ -30,6 +31,13 @@ class Faker
      * @var string
      */
     protected $expectedEndpoint;
+
+    /**
+     * Expected HTTP status code.
+     *
+     * @var array
+     */
+    protected $expectedHeaders = [];
 
     /**
      * Expected HTTP status code.
@@ -94,7 +102,7 @@ class Faker
      *
      * @return $this
      */
-    public function call(string $method = 'GET', $headers = [], $body = '')
+    public function call(string $method, $headers = [], $body = '')
     {
         if ($method === 'GET') {
             $body = m::any();
@@ -105,10 +113,66 @@ class Faker
                 ->andReturnUsing(function ($m, $u, $h, $b) {
                     Assert::assertSame((string) $u, $this->expectedEndpoint);
 
+                    if (! empty($this->expectedHeaders)) {
+                        Assert::assertArraySubset($this->expectedHeaders, $h);
+                    }
+
                     return $this->message();
                 });
 
         return $this;
+    }
+
+    /**
+     * Make expected HTTP request.
+     *
+     * @param  string $method
+     * @param  \Mockery\Matcher\Type|array  $headers
+     * @param  \Mockery\Matcher\Type|mixed  $body
+     *
+     * @return $this
+     */
+    public function send(string $method, $headers = [], $body = '')
+    {
+        return $this->call($method, $headers, $body);
+    }
+
+    /**
+     * Make expected HTTP JSON request.
+     *
+     * @param  string $method
+     * @param  \Mockery\Matcher\Type|array  $headers
+     * @param  \Mockery\Matcher\Type|mixed  $body
+     *
+     * @return $this
+     */
+    public function sendJson(string $method, $headers = [], $body = '')
+    {
+        if (is_array($headers)) {
+            $headers['Content-Type'] = 'application/json';
+            $this->expectedHeaders = $headers;
+        }
+
+        return $this->call($method, $headers, $body);
+    }
+
+    /**
+     * Make expected HTTP JSON request.
+     *
+     * @param  string $method
+     * @param  \Mockery\Matcher\Type|array  $headers
+     *
+     * @return $this
+     */
+    public function stream(string $method, $headers = [])
+    {
+        if (is_array($headers)) {
+            $this->expectedHeaders = $headers;
+        }
+
+        $body = m::type(StreamInterface::class);
+
+        return $this->call($method, m::type('Array'), $body);
     }
 
     /**
