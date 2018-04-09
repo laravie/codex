@@ -15,7 +15,7 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 ### Changes
 
-* `Laravie\Codex\Client::via()` now assign self to request object, `Laravie\Codex\Request` no longer assign client from constructor.
+* `Laravie\Codex\Client::via()` now assign self to request object, `Laravie\Codex\Request` no longer assign `Client` from constructor.
 * `$path` for `Laravie\Codex\Support\HttpClient::send()` now expect to be an instance of `Laravie\Codex\Contracts\Endpoint`, this simplify the URL generation from `Request` to `Client`.
 * Optimize URL parsing when constructing `Laravie\Codex\Endpoint`.
 * `Laravie\Codex\Response` now automatically validate unauthorized requests (status code with either `401` or `403`) from `validate()` method.

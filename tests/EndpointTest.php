@@ -5,6 +5,7 @@ namespace Laravie\Codex\TestCase;
 use GuzzleHttp\Psr7\Uri;
 use Laravie\Codex\Endpoint;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\UriInterface;
 
 class EndpointTest extends TestCase
 {
@@ -19,7 +20,7 @@ class EndpointTest extends TestCase
         $this->assertSame(['docs'], $endpoint->getPath());
         $this->assertSame([], $endpoint->getQuery());
 
-        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertInstanceOf(UriInterface::class, $endpoint->get());
         $this->assertSame('https://laravel.com/docs', (string) $endpoint->get());
         $this->assertSame('https://laravel.com/docs', (string) $endpoint);
     }
@@ -35,7 +36,7 @@ class EndpointTest extends TestCase
         $this->assertSame(['docs'], $endpoint->getPath());
         $this->assertSame([], $endpoint->getQuery());
 
-        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertInstanceOf(UriInterface::class, $endpoint->get());
         $this->assertSame('https://laravel.com/docs', (string) $endpoint->get());
         $this->assertSame('https://laravel.com/docs', (string) $endpoint);
     }
@@ -51,7 +52,7 @@ class EndpointTest extends TestCase
         $this->assertSame(['docs', '5.4'], $endpoint->getPath());
         $this->assertSame([], $endpoint->getQuery());
 
-        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertInstanceOf(UriInterface::class, $endpoint->get());
         $this->assertSame('https://laravel.com/docs/5.4', (string) $endpoint->get());
         $this->assertSame('https://laravel.com/docs/5.4', (string) $endpoint);
     }
@@ -67,7 +68,7 @@ class EndpointTest extends TestCase
         $this->assertSame(['docs'], $endpoint->getPath());
         $this->assertSame(['search' => 'controller'], $endpoint->getQuery());
 
-        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertInstanceOf(UriInterface::class, $endpoint->get());
         $this->assertSame('https://laravel.com/docs?search=controller', (string) $endpoint->get());
         $this->assertSame('https://laravel.com/docs?search=controller', (string) $endpoint);
     }
@@ -84,7 +85,7 @@ class EndpointTest extends TestCase
         $this->assertSame(['docs'], $endpoint->getPath());
         $this->assertSame(['search' => 'controller', 'page' => '3'], $endpoint->getQuery());
 
-        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertInstanceOf(UriInterface::class, $endpoint->get());
         $this->assertSame('https://laravel.com/docs?search=controller&page=3', (string) $endpoint->get());
         $this->assertSame('https://laravel.com/docs?search=controller&page=3', (string) $endpoint);
     }
@@ -101,7 +102,7 @@ class EndpointTest extends TestCase
         $this->assertSame(['docs'], $endpoint->getPath());
         $this->assertSame(['search' => 'controller', 'page' => '3'], $endpoint->getQuery());
 
-        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertInstanceOf(UriInterface::class, $endpoint->get());
         $this->assertSame('https://laravel.com/docs?search=controller&page=3', (string) $endpoint->get());
         $this->assertSame('https://laravel.com/docs?search=controller&page=3', (string) $endpoint);
     }
@@ -117,7 +118,7 @@ class EndpointTest extends TestCase
         $this->assertSame(['docs'], $endpoint->getPath());
         $this->assertSame([], $endpoint->getQuery());
 
-        $this->assertInstanceOf('GuzzleHttp\Psr7\Uri', $endpoint->get());
+        $this->assertInstanceOf(UriInterface::class, $endpoint->get());
         $this->assertSame('/docs', (string) $endpoint->get());
         $this->assertSame('/docs', (string) $endpoint);
     }
