@@ -1,4 +1,4 @@
-# Changelog for v2.x
+# Release Notes for v2.x
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
