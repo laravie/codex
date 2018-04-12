@@ -142,7 +142,7 @@ class Faker
      *
      * @param  string $method
      * @param  \Mockery\Matcher\Type|array  $headers
-     * @param  \Mockery\Matcher\Type|mixed  $body
+     * @param  \Mockery\Matcher\Type|array|string  $body
      *
      * @return $this
      */
