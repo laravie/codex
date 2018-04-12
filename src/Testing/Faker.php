@@ -153,6 +153,10 @@ class Faker
             $this->expectedHeaders = $headers;
         }
 
+        if (is_array($body)) {
+            $body = json_encode($body);
+        }
+
         return $this->call($method, $headers, $body);
     }
 

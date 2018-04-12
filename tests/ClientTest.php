@@ -123,12 +123,33 @@ class ClientTest extends TestCase
     }
 
     /** @test */
-    public function it_can_send_api_request_by_sending_json_data()
+    public function it_can_send_api_request_by_sending_json_data_as_string()
     {
         $payload = ['meta' => ['foo', 'bar']];
 
         $faker = Faker::create()
                     ->sendJson('POST', [], json_encode($payload))
+                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
+                    ->shouldResponseWith(200, '{"success":true}');
+
+        $response = (new Client($faker->http(), 'abc'))
+                        ->uses('Welcome')
+                        ->jsonPing($payload, []);
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"success":true}', $response->getBody());
+        $this->assertSame(['success' => true], $response->getContent());
+        $this->assertSame(['success' => true], $response->toArray());
+        $this->assertTrue($response->hasSanitizer());
+    }
+
+    /** @test */
+    public function it_can_send_api_request_by_sending_json_data_as_array()
+    {
+        $payload = ['meta' => ['foo', 'bar']];
+
+        $faker = Faker::create()
+                    ->sendJson('POST', [], $payload)
                     ->expectEndpointIs('https://acme.laravie/v1/welcome')
                     ->shouldResponseWith(200, '{"success":true}');
 
