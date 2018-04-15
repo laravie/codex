@@ -1,7 +1,7 @@
 PHP library for building API Client SDK for PHP
 ==============
 
-Codex aims to make it easier to build API SDK for PHP using [PHP-HTTP](https://php-http.org)
+Codex aims to make it easier to build API SDK for PHP using [PHP-HTTP](https://php-http.org) which comply with [PSR-7](https://www.php-fig.org/psr/psr-7/)
 
 [![Build Status](https://travis-ci.org/laravie/codex.svg?branch=master)](https://travis-ci.org/laravie/codex)
 [![Latest Stable Version](https://poser.pugx.org/laravie/codex/v/stable)](https://packagist.org/packages/laravie/codex)
