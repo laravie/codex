@@ -47,11 +47,13 @@ class ResponseTest extends TestCase
     {
         $api = m::mock(ResponseInterface::class);
 
-        $api->shouldReceive('getStatusCode')->once()->andReturn(201);
+        $api->shouldReceive('getStatusCode')->times(3)->andReturn(201);
 
         $stub = new Response($api);
 
         $this->assertSame(201, $stub->getStatusCode());
+        $this->assertTrue($stub->isSuccessful());
+        $this->assertFalse($stub->isUnauthorized());
     }
 
     /** @test */

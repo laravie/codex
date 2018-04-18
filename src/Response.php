@@ -100,6 +100,40 @@ class Response implements Contracts\Response
     }
 
     /**
+     * Validate for unauthorized request.
+     *
+     * @throws \Laravie\Codex\Exceptions\UnauthorizedHttpException
+     *
+     * @return void
+     */
+    public function abortIfRequestUnauthorized(): void
+    {
+        if ($this->isUnauthorized()) {
+            throw new Exceptions\UnauthorizedHttpException($this);
+        }
+    }
+
+    /**
+     * Check if response is unauthorized.
+     *
+     * @return bool
+     */
+    public function isSuccessful(): bool
+    {
+        return in_array($this->getStatusCode(), [200, 201, 202, 204, 205]);
+    }
+
+    /**
+     * Check if response is unauthorized.
+     *
+     * @return bool
+     */
+    public function isUnauthorized(): bool
+    {
+        return in_array($this->getStatusCode(), [401, 403]);
+    }
+
+    /**
      * Call method under \Psr\Http\Message\ResponseInterface.
      *
      * @param  string  $method
@@ -114,20 +148,6 @@ class Response implements Contracts\Response
         }
 
         return $this->original->{$method}(...$parameters);
-    }
-
-    /**
-     * Validate for unauthorized request.
-     *
-     * @throws \Laravie\Codex\Exceptions\UnauthorizedHttpException
-     *
-     * @return void
-     */
-    public function abortIfRequestUnauthorized(): void
-    {
-        if (in_array($this->getStatusCode(), [401, 403])) {
-            throw new Exceptions\UnauthorizedHttpException($this);
-        }
     }
 
     /**
