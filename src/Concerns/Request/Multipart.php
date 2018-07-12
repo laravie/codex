@@ -68,9 +68,9 @@ trait Multipart
     /**
      * Add body to multipart stream builder.
      *
-     * @param \Http\Message\MultipartStream\MultipartStreamBuilder  $builder
-     * @param array  $body
-     * @param string|null  $prefix
+     * @param  \Http\Message\MultipartStream\MultipartStreamBuilder  $builder
+     * @param  array  $body
+     * @param  string|null  $prefix
      *
      * @return void
      */
