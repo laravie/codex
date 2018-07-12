@@ -5,7 +5,7 @@ namespace Laravie\Codex\Concerns\Request;
 use Laravie\Codex\Contracts\Endpoint;
 use Laravie\Codex\Contracts\Response;
 use Http\Discovery\StreamFactoryDiscovery;
-use Http\Message\MultipartStream\MultipartStreamBuilder;
+use Http\Message\MultipartStream\MultipartStreamBuilder as Builder;
 
 trait Multipart
 {
@@ -55,7 +55,7 @@ trait Multipart
             return [$headers, $body];
         }
 
-        $builder = new MultipartStreamBuilder(StreamFactoryDiscovery::find());
+        $builder = new Builder(StreamFactoryDiscovery::find());
 
         $this->addFilesToMultipartBuilder($builder, $files);
         $this->addBodyToMultipartBuilder($builder, $this->sanitizeFrom($body));
@@ -68,13 +68,13 @@ trait Multipart
     /**
      * Add body to multipart stream builder.
      *
-     * @param  \Http\Message\MultipartStream\MultipartStreamBuilder  $builder
+     * @param \Http\Message\MultipartStream\MultipartStreamBuilder  $builder
      * @param array  $body
      * @param string|null  $prefix
      *
      * @return void
      */
-    final protected function addBodyToMultipartBuilder(MultipartStreamBuilder $builder, array $body, ?string $prefix = null): void
+    final protected function addBodyToMultipartBuilder(Builder $builder, array $body, ?string $prefix = null): void
     {
         foreach ($body as $key => $value) {
             $name = $key;
@@ -100,7 +100,7 @@ trait Multipart
      *
      * @return void
      */
-    final protected function addFilesToMultipartBuilder(MultipartStreamBuilder $builder, array $files = []): void
+    final protected function addFilesToMultipartBuilder(Builder $builder, array $files = []): void
     {
         foreach ($files as $key => $file) {
             if (! is_null($file)) {
