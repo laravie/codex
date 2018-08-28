@@ -3,6 +3,7 @@
 namespace Laravie\Codex\Support;
 
 use GuzzleHttp\Psr7\Uri;
+use Laravie\Codex\Payload;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -103,15 +104,11 @@ trait HttpClient
     {
         $headers = $this->prepareRequestHeaders($headers);
 
-        if (! $body instanceof StreamInterface) {
-            if (isset($headers['Content-Type']) && $headers['Content-Type'] == 'application/json') {
-                return [$headers, json_encode($body)];
-            } elseif (is_array($body)) {
-                return [$headers, http_build_query($body, null, '&')];
-            }
+        if ($body instanceof StreamInterface) {
+            return [$headers, $body];
         }
 
-        return [$headers, $body];
+        return [$headers, Payload::make($body)->get($headers)];
     }
 
     /**
