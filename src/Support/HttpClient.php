@@ -95,7 +95,7 @@ trait HttpClient
      * Prepare request payloads.
      *
      * @param  array  $headers
-     * @param  mixed  $body
+     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
      *
      * @return array
      */
@@ -108,9 +108,9 @@ trait HttpClient
         }
 
         if (isset($headers['Content-Type']) && $headers['Content-Type'] == 'application/json') {
-            $body = json_encode($body);
+            return [$headers, json_encode($body)];
         } elseif (is_array($body)) {
-            $body = http_build_query($body, null, '&');
+            return [$headers, http_build_query($body, null, '&')];
         }
 
         return [$headers, $body];
