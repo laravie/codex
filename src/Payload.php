@@ -14,7 +14,7 @@ class Payload
     /**
      * Construct a new payload.
      *
-     * @param mixed $content
+     * @param  mixed  $content
      */
     public function __construct($content = null)
     {
@@ -24,7 +24,7 @@ class Payload
     /**
      * Construct a new payload using static.
      *
-     * @param mixed $content
+     * @param  mixed  $content
      *
      * @return static
      */
@@ -68,10 +68,12 @@ class Payload
     /**
      * Convert the content to http queries.
      *
+     * @param  string|null  $prefix
+     * @param  string  $separator
      * @return string
      */
-    public function toHttpQueries(): string
+    public function toHttpQueries(?string $prefix = null, string $separator = '&'): string
     {
-        return http_build_query($this->content, null, '&');
+        return http_build_query($this->content, $prefix, $separator);
     }
 }
