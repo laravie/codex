@@ -32,7 +32,7 @@ trait HttpClient
      * @param  string  $method
      * @param  \Laravie\Codex\Contracts\Endpoint  $uri
      * @param  array  $headers
-     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
+     * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Payload|array|null  $body
      *
      * @return \Laravie\Codex\Contracts\Response
      */
@@ -73,7 +73,7 @@ trait HttpClient
      * @param  string  $method
      * @param  \Psr\Http\Message\UriInterface  $uri
      * @param  array  $headers
-     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
+     * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Payload|array|null  $body
      *
      * @return \Laravie\Codex\Contracts\Response
      */
@@ -96,7 +96,7 @@ trait HttpClient
      * Prepare request payloads.
      *
      * @param  array  $headers
-     * @param  \Psr\Http\Message\StreamInterface|array|null  $body
+     * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Payload|array|null  $body
      *
      * @return array
      */
