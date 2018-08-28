@@ -21,6 +21,13 @@ abstract class Request implements Contracts\Request
     protected $client;
 
     /**
+     * Automatically validate response.
+     *
+     * @var bool
+     */
+    protected $validateResponseAutomatically = true;
+
+    /**
      * Construct a new Request.
      */
     public function __construct()
@@ -86,9 +93,27 @@ abstract class Request implements Contracts\Request
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
 
-        return $this->client->send($method, $endpoint, $headers, $body)
-                    ->setSanitizer($this->getSanitizer())
-                    ->validate();
+        return $this->interactsWithResponse(
+            $this->client->send($method, $endpoint, $headers, $body)
+        );
+    }
+
+    /**
+     * Interacts with Response.
+     *
+     * @param  \Laravie\Codex\Contracts\Response $response
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    protected function interactsWithResponse(Contracts\Response $response): Contracts\Response
+    {
+        $response->setSanitizer($this->getSanitizer());
+
+        if ($this->validateResponseAutomatically === true) {
+            $response->validate();
+        }
+
+        return $response;
     }
 
     /**
