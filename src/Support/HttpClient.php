@@ -104,10 +104,6 @@ trait HttpClient
     {
         $headers = $this->prepareRequestHeaders($headers);
 
-        if ($body instanceof StreamInterface) {
-            return [$headers, $body];
-        }
-
         return [$headers, Payload::make($body)->get($headers)];
     }
 

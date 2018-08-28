@@ -2,11 +2,21 @@
 
 namespace Laravie\Codex\TestCase;
 
+use Mockery as m;
 use Laravie\Codex\Payload;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\StreamInterface;
 
 class PayloadTest extends TestCase
 {
+    /**
+     * Teardown the test environment.
+     */
+    protected function tearDown(): void
+    {
+        m::close();
+    }
+
     /** @test */
     public function it_can_be_initiated()
     {
@@ -36,5 +46,15 @@ class PayloadTest extends TestCase
         $payload = Payload::make(['hello' => 'world', 'foo' => ['bar']]);
 
         $this->assertSame('hello=world&foo%5B0%5D=bar', $payload->get());
+    }
+
+     /** @test */
+    public function it_can_handle_instance_of_stream()
+    {
+        $message = m::mock(StreamInterface::class);
+
+        $payload = Payload::make($message);
+
+        $this->assertSame($message, $payload->get());
     }
 }

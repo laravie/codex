@@ -2,6 +2,8 @@
 
 namespace Laravie\Codex;
 
+use Psr\Http\Message\StreamInterface;
+
 class Payload
 {
     /**
@@ -46,11 +48,17 @@ class Payload
      */
     public function get(array $headers = [])
     {
-        if (isset($headers['Content-Type']) && $headers['Content-Type'] == 'application/json') {
-            return $this->toJson();
+        if ($this->content instanceof StreamInterface) {
+            return $this->content;
         }
 
-        return is_array($this->content) ? $this->toHttpQueries() : $this->content;
+        if (isset($headers['Content-Type']) && $headers['Content-Type'] == 'application/json') {
+            return $this->toJson();
+        } elseif (is_array($this->content)) {
+            return $this->toHttpQueries();
+        }
+
+        return $this->content;
     }
 
     /**
