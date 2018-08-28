@@ -103,14 +103,12 @@ trait HttpClient
     {
         $headers = $this->prepareRequestHeaders($headers);
 
-        if ($body instanceof StreamInterface) {
-            return [$headers, $body];
-        }
-
-        if (isset($headers['Content-Type']) && $headers['Content-Type'] == 'application/json') {
-            return [$headers, json_encode($body)];
-        } elseif (is_array($body)) {
-            return [$headers, http_build_query($body, null, '&')];
+        if (! $body instanceof StreamInterface) {
+            if (isset($headers['Content-Type']) && $headers['Content-Type'] == 'application/json') {
+                return [$headers, json_encode($body)];
+            } elseif (is_array($body)) {
+                return [$headers, http_build_query($body, null, '&')];
+            }
         }
 
         return [$headers, $body];
