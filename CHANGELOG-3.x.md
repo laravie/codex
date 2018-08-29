@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 3.1.0
+
+Released: 2018-08-29
+
+### Added
+
+* Add `Laravie\Codex\Payload` class to allow `body` content to be customized.
+* Add `Laravie\Codex\Request::$validateResponseAutomatically` property to allow disabling response validation (default to `true`).
+
 ## 3.0.1
 
 Released: 2018-04-18
