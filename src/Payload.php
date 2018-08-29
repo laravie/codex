@@ -78,6 +78,7 @@ class Payload
      *
      * @param  string|null  $prefix
      * @param  string  $separator
+     *
      * @return string
      */
     public function toHttpQueries(?string $prefix = null, string $separator = '&'): string

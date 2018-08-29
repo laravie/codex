@@ -48,7 +48,7 @@ class PayloadTest extends TestCase
         $this->assertSame('hello=world&foo%5B0%5D=bar', $payload->get());
     }
 
-     /** @test */
+    /** @test */
     public function it_can_handle_instance_of_stream()
     {
         $message = m::mock(StreamInterface::class);
