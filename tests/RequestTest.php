@@ -5,6 +5,7 @@ namespace Laravie\Codex\TestCase;
 use Mockery as m;
 use Laravie\Codex\Request;
 use PHPUnit\Framework\TestCase;
+use Laravie\Codex\Testing\Faker;
 use Laravie\Codex\Contracts\Client;
 use Laravie\Codex\Contracts\Endpoint;
 use Laravie\Codex\TestCase\Acme\One\Welcome;
@@ -40,6 +41,29 @@ class RequestTest extends TestCase
         $this->assertInstanceOf(RequestContract::class, $stub);
         $this->assertSame('v1', $stub->getVersion());
         $this->assertTrue($stub->hasSanitizer());
+    }
+
+    /** @test */
+    public function it_can_proxy_request_via_different_version()
+    {
+        $faker = Faker::create()
+                    ->send('GET', ['Authorization' => 'Bearer abc'])
+                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
+                    ->shouldResponseWith(200, '{"success":true}');
+
+        $welcome = (new Acme\Client($faker->http(), 'abc'))
+                            ->useVersion('v2')
+                            ->uses('Welcome');
+
+        $response = $welcome->legacyShow();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"success":true}', $response->getBody());
+        $this->assertSame(['success' => true], $response->getContent());
+        $this->assertSame(['success' => true], $response->toArray());
+        $this->assertTrue($response->hasSanitizer());
+
+        $this->assertSame('v2', $welcome->getVersion());
     }
 
     /** @test */

@@ -38,6 +38,18 @@ class Welcome extends Request
     }
 
     /**
+     * Show welcome.
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    public function legacyShow()
+    {
+        return $this->proxyRequestViaVersion('v1', function () {
+            return $this->show();
+        });
+    }
+
+    /**
      * Get API Header.
      *
      * @return array
