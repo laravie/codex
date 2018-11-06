@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 3.2.0
+
+Released: 2018-11-07
+
+### Added
+
+* Add `Laravie\Codex\Request::proxyRequestViaVersion()` method to allow proxy request between API version for the same resource.
+
 ## 3.1.0
 
 Released: 2018-08-29
