@@ -42,7 +42,7 @@ class HttpClientTest extends TestCase
         $response = $this->send('GET', Request::to('https://laravel.com', ['docs', '5.5']), $headers, $payloads);
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('success', $response->toArray()['status']);
+        $this->assertSame('success', json_decode($response->getBody(), true)['status']);
     }
 
     /** @test */
@@ -63,19 +63,7 @@ class HttpClientTest extends TestCase
         $response = $this->stream('POST', Request::to('https://laravel.com/codex'), $headers, $stream);
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('success', $response->toArray()['status']);
-    }
-
-    /**
-     * Resolve the responder class.
-     *
-     * @param  \Psr\Http\Message\ResponseInterface  $response
-     *
-     * @return \Laravie\Codex\Contracts\Response
-     */
-    protected function responseWith(ResponseInterface $response): ResponseContract
-    {
-        return new Response($response);
+        $this->assertSame('success', json_decode($response->getBody(), true)['status']);
     }
 
     /**

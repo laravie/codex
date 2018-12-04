@@ -9,6 +9,7 @@ use Laravie\Codex\Contracts\Client;
 use Laravie\Codex\Contracts\Endpoint;
 use Laravie\Codex\Contracts\Response;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Concerns\Request\Multipart;
 
 class MultipartTest extends TestCase
@@ -24,16 +25,15 @@ class MultipartTest extends TestCase
     /** @test */
     public function it_can_append_data_from_endpoint_when_sending_stream_request()
     {
-        $response = m::mock(Response::class);
-        $response->shouldReceive('setSanitizer')->once()->with(null)->andReturnSelf()
-            ->shouldReceive('validate')->once()->andReturnSelf();
+        $message = m::mock(ResponseInterface::class);
+        $message->shouldReceive('getStatusCode')->once()->andReturn(200);
 
         $client = m::mock(Client::class);
         $client->shouldReceive('getApiEndpoint')->once()->andReturn('https://laravel.com/')
             ->shouldReceive('stream')
                 ->once()
                 ->with('POST', m::type(Endpoint::class), m::type('Array'), m::type(StreamInterface::class))
-                ->andReturn($response);
+                ->andReturn($message);
 
         $endpoint = m::mock(Endpoint::class);
         $endpoint->shouldReceive('getPath')->andReturn(['docs', '5.5'])
@@ -49,23 +49,22 @@ class MultipartTest extends TestCase
         };
 
         $this->assertSame(
-            $response, $stub->setClient($client)->ping($endpoint)
+            $message, $stub->setClient($client)->ping($endpoint)->message
         );
     }
 
     /** @test */
     public function it_doesnt_attach_multipart_when_sending_without_proper_header_and_files()
     {
-        $response = m::mock(Response::class);
-        $response->shouldReceive('setSanitizer')->once()->with(null)->andReturnSelf()
-            ->shouldReceive('validate')->once()->andReturnSelf();
+        $message = m::mock(ResponseInterface::class);
+        $message->shouldReceive('getStatusCode')->once()->andReturn(200);
 
         $client = m::mock(Client::class);
         $client->shouldReceive('getApiEndpoint')->once()->andReturn('https://laravel.com/')
             ->shouldReceive('send')
                 ->once()
                 ->with('POST', m::type(Endpoint::class), ['Content-Type' => 'application/json'], ['search' => 'codex'])
-                ->andReturn($response);
+                ->andReturn($message);
 
         $stub = new class() extends Request {
             use Multipart;
@@ -81,24 +80,22 @@ class MultipartTest extends TestCase
         };
 
         $this->assertSame(
-            $response,
-            $stub->setClient($client)->ping()
+            $message, $stub->setClient($client)->ping()->message
         );
     }
 
     /** @test */
     public function it_can_convert_body_contents_to_multipart()
     {
-        $response = m::mock(Response::class);
-        $response->shouldReceive('setSanitizer')->once()->with(null)->andReturnSelf()
-            ->shouldReceive('validate')->once()->andReturnSelf();
+        $message = m::mock(ResponseInterface::class);
+        $message->shouldReceive('getStatusCode')->once()->andReturn(200);
 
         $client = m::mock(Client::class);
         $client->shouldReceive('getApiEndpoint')->once()->andReturn('https://laravel.com/')
             ->shouldReceive('stream')
                 ->once()
                 ->with('POST', m::type(Endpoint::class), m::type('Array'), m::type(StreamInterface::class))
-                ->andReturnUsing(function ($m, $u, $h, $b) use ($response) {
+                ->andReturnUsing(function ($m, $u, $h, $b) use ($message) {
                     $content = $b->getContents();
 
                     $this->assertContains('Content-Disposition: form-data; name="search"', $content);
@@ -106,7 +103,7 @@ class MultipartTest extends TestCase
                     $this->assertContains('Content-Disposition: form-data; name="developer[name]"', $content);
                     $this->assertContains('Content-Disposition: form-data; name="developer[email]"', $content);
 
-                    return $response;
+                    return $message;
                 });
 
         $stub = new class() extends Request {
@@ -128,24 +125,22 @@ class MultipartTest extends TestCase
         };
 
         $this->assertSame(
-            $response,
-            $stub->setClient($client)->ping()
+            $message, $stub->setClient($client)->ping()->message
         );
     }
 
     /** @test */
     public function it_can_attach_files_for_multipart_uploads()
     {
-        $response = m::mock(Response::class);
-        $response->shouldReceive('setSanitizer')->once()->with(null)->andReturnSelf()
-            ->shouldReceive('validate')->once()->andReturnSelf();
+        $message = m::mock(ResponseInterface::class);
+        $message->shouldReceive('getStatusCode')->once()->andReturn(200);
 
         $client = m::mock(Client::class);
         $client->shouldReceive('getApiEndpoint')->once()->andReturn('https://laravel.com/')
             ->shouldReceive('stream')
                 ->once()
                 ->with('POST', m::type(Endpoint::class), m::type('Array'), m::type(StreamInterface::class))
-                ->andReturnUsing(function ($m, $u, $h, $b) use ($response) {
+                ->andReturnUsing(function ($m, $u, $h, $b) use ($message) {
                     $content = $b->getContents();
 
                     $this->assertContains('Content-Disposition: form-data; name="hello"; filename="hello.txt"', $content);
@@ -156,7 +151,7 @@ class MultipartTest extends TestCase
                     $this->assertContains('Content-Disposition: form-data; name="developer[name]"', $content);
                     $this->assertContains('Content-Disposition: form-data; name="developer[email]"', $content);
 
-                    return $response;
+                    return $message;
                 });
 
         $stub = new class() extends Request {
@@ -183,8 +178,7 @@ class MultipartTest extends TestCase
         };
 
         $this->assertSame(
-            $response,
-            $stub->setClient($client)->ping()
+            $message, $stub->setClient($client)->ping()->message
         );
     }
 }

@@ -15,16 +15,16 @@ class Response implements Contracts\Response
      *
      * @var \Psr\Http\Message\ResponseInterface
      */
-    protected $original;
+    protected $message;
 
     /**
      * Construct a new response.
      *
-     * @param \Psr\Http\Message\ResponseInterface  $original
+     * @param \Psr\Http\Message\ResponseInterface  $message
      */
-    public function __construct(ResponseInterface $original)
+    public function __construct(ResponseInterface $message)
     {
-        $this->original = $original;
+        $this->message = $message;
     }
 
     /**
@@ -72,7 +72,7 @@ class Response implements Contracts\Response
      */
     public function getBody()
     {
-        $content = $this->original->getBody();
+        $content = $this->message->getBody();
 
         return $content instanceof StreamInterface
                     ? (string) $content
@@ -96,7 +96,7 @@ class Response implements Contracts\Response
      */
     public function getStatusCode(): int
     {
-        return $this->original->getStatusCode();
+        return $this->message->getStatusCode();
     }
 
     /**
@@ -185,10 +185,25 @@ class Response implements Contracts\Response
      */
     public function __call(string $method, array $parameters)
     {
-        if (! method_exists($this->original, $method)) {
+        if (! method_exists($this->message, $method)) {
             throw new BadMethodCallException("Method [{$method}] doesn't exists.");
         }
 
-        return $this->original->{$method}(...$parameters);
+        return $this->message->{$method}(...$parameters);
+    }
+
+    /**
+     * Get hidden property.
+     *
+     * @param  string $key
+     * @return mixed
+     */
+    public function __get(string $key)
+    {
+        if (! property_exists($this, $key)) {
+            return null;
+        }
+
+        return $this->{$key};
     }
 }

@@ -135,18 +135,6 @@ abstract class Client implements Contracts\Client
     }
 
     /**
-     * Resolve the responder class.
-     *
-     * @param  \Psr\Http\Message\ResponseInterface  $response
-     *
-     * @return \Laravie\Codex\Contracts\Response
-     */
-    protected function responseWith(ResponseInterface $response): Contracts\Response
-    {
-        return new Response($response);
-    }
-
-    /**
      * Prepare request headers.
      *
      * @param  array  $headers

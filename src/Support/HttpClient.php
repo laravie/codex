@@ -34,9 +34,9 @@ trait HttpClient
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Payload|array|null  $body
      *
-     * @return \Laravie\Codex\Contracts\Response
+     * @return Psr\Http\Message\ResponseInterface
      */
-    public function send(string $method, EndpointContract $uri, array $headers = [], $body = []): ResponseContract
+    public function send(string $method, EndpointContract $uri, array $headers = [], $body = []): ResponseInterface
     {
         $method = strtoupper($method);
 
@@ -58,9 +58,9 @@ trait HttpClient
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface  $stream
      *
-     * @return \Laravie\Codex\Contracts\Response
+     * @return Psr\Http\Message\ResponseInterface
      */
-    public function stream(string $method, EndpointContract $uri, array $headers = [], StreamInterface $stream): ResponseContract
+    public function stream(string $method, EndpointContract $uri, array $headers = [], StreamInterface $stream): ResponseInterface
     {
         list($headers, $stream) = $this->prepareRequestPayloads($headers, $stream);
 
@@ -75,17 +75,15 @@ trait HttpClient
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Payload|array|null  $body
      *
-     * @return \Laravie\Codex\Contracts\Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    protected function requestWith(string $method, UriInterface $uri, array $headers, $body): ResponseContract
+    protected function requestWith(string $method, UriInterface $uri, array $headers, $body): ResponseInterface
     {
         if (in_array($method, ['HEAD', 'GET', 'TRACE'])) {
             $body = null;
         }
 
-        $response = $this->responseWith(
-            $this->http->send($method, $uri, $headers, $body)
-        );
+        $response = $this->http->send($method, $uri, $headers, $body);
 
         $this->httpRequestQueries[] = compact('method', 'uri', 'headers', 'body', 'response');
 
@@ -106,15 +104,6 @@ trait HttpClient
 
         return [$headers, Payload::make($body)->get($headers)];
     }
-
-    /**
-     * Resolve the responder class.
-     *
-     * @param  \Psr\Http\Message\ResponseInterface  $response
-     *
-     * @return \Laravie\Codex\Contracts\Response
-     */
-    abstract protected function responseWith(ResponseInterface $response): ResponseContract;
 
     /**
      * Prepare request headers.

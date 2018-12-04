@@ -2,6 +2,8 @@
 
 namespace Laravie\Codex;
 
+use Psr\Http\Message\ResponseInterface;
+
 abstract class Request implements Contracts\Request
 {
     use Support\WithSanitizer;
@@ -101,17 +103,32 @@ abstract class Request implements Contracts\Request
     /**
      * Interacts with Response.
      *
-     * @param  \Laravie\Codex\Contracts\Response $response
+     * @param  \Psr\Http\Message\ResponseInterface $message
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function interactsWithResponse(Contracts\Response $response): Contracts\Response
+    protected function interactsWithResponse(ResponseInterface $message): Contracts\Response
     {
-        $response->setSanitizer($this->getSanitizer());
+        $response = $this->responseWith($message);
 
         if ($this->validateResponseAutomatically === true) {
             $response->validate();
         }
+
+        return $response;
+    }
+
+    /**
+     * Resolve the responder class.
+     *
+     * @param  \Psr\Http\Message\ResponseInterface  $message
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    protected function responseWith(ResponseInterface $message): Contracts\Response
+    {
+        $response = new Response($message);
+        $response->setSanitizer($this->getSanitizer());
 
         return $response;
     }

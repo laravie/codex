@@ -3,6 +3,7 @@
 namespace Laravie\Codex\Contracts;
 
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\ResponseInterface;
 
 interface Client
 {
@@ -48,9 +49,9 @@ interface Client
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Payload|array|null  $body
      *
-     * @return \Laravie\Codex\Contracts\Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    public function send(string $method, Endpoint $uri, array $headers = [], $body = []): Response;
+    public function send(string $method, Endpoint $uri, array $headers = [], $body = []): ResponseInterface;
 
     /**
      * Stream (multipart) the HTTP request.
@@ -61,7 +62,7 @@ interface Client
      * @param  \Psr\Http\Message\StreamInterface  $stream
      * @param  array  $files
      *
-     * @return \Laravie\Codex\Contracts\Response
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    public function stream(string $method, Endpoint $uri, array $headers = [], StreamInterface $stream): Response;
+    public function stream(string $method, Endpoint $uri, array $headers = [], StreamInterface $stream): ResponseInterface;
 }
