@@ -115,7 +115,7 @@ class ResponseTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Laravie\Codex\Exceptions\UnauthorizedHttpException
+     * @expectedException \Laravie\Codex\Exceptions\UnauthorizedException
      * @expectedExceptionMessage Not authorized
      */
     public function it_would_throw_exception_when_given_401_status_code()

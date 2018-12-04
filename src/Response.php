@@ -102,14 +102,14 @@ class Response implements Contracts\Response
     /**
      * Validate for unauthorized request.
      *
-     * @throws \Laravie\Codex\Exceptions\UnauthorizedHttpException
+     * @throws \Laravie\Codex\Exceptions\UnauthorizedException
      *
      * @return void
      */
     public function abortIfRequestUnauthorized(): void
     {
         if ($this->isUnauthorized()) {
-            throw new Exceptions\UnauthorizedHttpException($this);
+            throw new Exceptions\UnauthorizedException($this);
         }
     }
 
