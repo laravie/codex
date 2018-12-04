@@ -185,7 +185,7 @@ class ClientTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Laravie\Codex\Exceptions\UnauthorizedHttpException
+     * @expectedException \Laravie\Codex\Exceptions\UnauthorizedException
      * @expectedExceptionMessage Not Authorized!
      */
     public function it_throws_exception_when_401_is_returned()
