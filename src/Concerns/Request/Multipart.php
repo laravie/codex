@@ -33,9 +33,11 @@ trait Multipart
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
 
-        return $this->interactsWithResponse(
+        $message = $this->responseWith(
             $this->client->stream($method, $endpoint, $headers, $stream)
         );
+
+        return $this->interactsWithResponse($message);
     }
 
     /**

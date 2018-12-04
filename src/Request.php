@@ -95,22 +95,22 @@ abstract class Request implements Contracts\Request
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
 
-        return $this->interactsWithResponse(
+        $message = $this->responseWith(
             $this->client->send($method, $endpoint, $headers, $body)
         );
+
+        return $this->interactsWithResponse($message);
     }
 
     /**
      * Interacts with Response.
      *
-     * @param  \Psr\Http\Message\ResponseInterface $message
+     * @param  \Laravie\Codex\Contracts\Response $response
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function interactsWithResponse(ResponseInterface $message): Contracts\Response
+    protected function interactsWithResponse(Contracts\Response $response): Contracts\Response
     {
-        $response = $this->responseWith($message);
-
         $response->setSanitizer($this->getSanitizer());
 
         if ($this->validateResponseAutomatically === true) {
