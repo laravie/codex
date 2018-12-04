@@ -4,13 +4,10 @@ namespace Laravie\Codex\TestCase\Support;
 
 use Mockery as m;
 use Laravie\Codex\Request;
-use Laravie\Codex\Response;
 use PHPUnit\Framework\TestCase;
 use Laravie\Codex\Testing\Faker;
 use Laravie\Codex\Support\HttpClient;
 use Psr\Http\Message\StreamInterface;
-use Psr\Http\Message\ResponseInterface;
-use Laravie\Codex\Contracts\Response as ResponseContract;
 
 class HttpClientTest extends TestCase
 {

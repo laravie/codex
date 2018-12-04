@@ -7,7 +7,6 @@ use Laravie\Codex\Request;
 use PHPUnit\Framework\TestCase;
 use Laravie\Codex\Contracts\Client;
 use Laravie\Codex\Contracts\Endpoint;
-use Laravie\Codex\Contracts\Response;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Concerns\Request\Multipart;

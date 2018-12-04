@@ -3,7 +3,6 @@
 namespace Laravie\Codex;
 
 use InvalidArgumentException;
-use Psr\Http\Message\ResponseInterface;
 
 abstract class Client implements Contracts\Client
 {

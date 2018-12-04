@@ -8,7 +8,6 @@ use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
-use Laravie\Codex\Contracts\Response as ResponseContract;
 
 trait HttpClient
 {

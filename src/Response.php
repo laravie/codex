@@ -196,6 +196,7 @@ class Response implements Contracts\Response
      * Get hidden property.
      *
      * @param  string $key
+     *
      * @return mixed
      */
     public function __get(string $key)
