@@ -34,7 +34,6 @@ trait Multipart
                         : $this->getApiEndpoint($path);
 
         return $this->client->stream($method, $endpoint, $headers, $stream)
-                    ->setSanitizer($this->getSanitizer())
                     ->validate();
     }
 
