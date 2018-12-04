@@ -128,7 +128,7 @@ class Response implements Contracts\Response
      *
      * @return bool
      */
-    public function isMissing(): bool
+    public function isNotFound(): bool
     {
         return in_array($this->getStatusCode(), [404]);
     }
@@ -187,7 +187,7 @@ class Response implements Contracts\Response
      */
     public function abortIfRequestNotFound(?string $message = null): void
     {
-        if ($this->isMissing()) {
+        if ($this->isNotFound()) {
             throw new Exceptions\NotFoundException($this, $message);
         }
     }
