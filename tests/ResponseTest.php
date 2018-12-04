@@ -47,13 +47,44 @@ class ResponseTest extends TestCase
     {
         $api = m::mock(ResponseInterface::class);
 
-        $api->shouldReceive('getStatusCode')->times(3)->andReturn(201);
+        $api->shouldReceive('getStatusCode')->times(4)->andReturn(201);
 
         $stub = new Response($api);
 
         $this->assertSame(201, $stub->getStatusCode());
         $this->assertTrue($stub->isSuccessful());
         $this->assertFalse($stub->isUnauthorized());
+        $this->assertFalse($stub->isMissing());
+    }
+
+    /** @test */
+    public function it_can_return_status_code_when_unauthorized()
+    {
+        $api = m::mock(ResponseInterface::class);
+
+        $api->shouldReceive('getStatusCode')->times(4)->andReturn(401);
+
+        $stub = new Response($api);
+
+        $this->assertSame(401, $stub->getStatusCode());
+        $this->assertFalse($stub->isSuccessful());
+        $this->assertTrue($stub->isUnauthorized());
+        $this->assertFalse($stub->isMissing());
+    }
+
+    /** @test */
+    public function it_can_return_status_code_when_missing()
+    {
+        $api = m::mock(ResponseInterface::class);
+
+        $api->shouldReceive('getStatusCode')->times(4)->andReturn(404);
+
+        $stub = new Response($api);
+
+        $this->assertSame(404, $stub->getStatusCode());
+        $this->assertFalse($stub->isSuccessful());
+        $this->assertFalse($stub->isUnauthorized());
+        $this->assertTrue($stub->isMissing());
     }
 
     /** @test */
@@ -116,7 +147,7 @@ class ResponseTest extends TestCase
      * @expectedException \Laravie\Codex\Exceptions\HttpException
      * @expectedExceptionMessage 404 File not found.
      */
-    public function it_can_use_validate_with_can_throws_exception()
+    public function it_can_use_validate_with_can_throws_exception_request_has_failed()
     {
         $api = m::mock(ResponseInterface::class);
 
@@ -124,6 +155,22 @@ class ResponseTest extends TestCase
 
         (new Response($api))->validateWith(function ($code, $response) {
             $response->abortIfRequestHasFailed('404 File not found.');
+        });
+    }
+
+    /**
+     * @test
+     * @expectedException \Laravie\Codex\Exceptions\NotFoundException
+     * @expectedExceptionMessage 404 File not found.
+     */
+    public function it_can_use_validate_with_can_throws_exception_request_not_found()
+    {
+        $api = m::mock(ResponseInterface::class);
+
+        $api->shouldReceive('getStatusCode')->andReturn(404);
+
+        (new Response($api))->validateWith(function ($code, $response) {
+            $response->abortIfRequestNotFound('404 File not found.');
         });
     }
 

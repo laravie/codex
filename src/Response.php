@@ -124,6 +124,16 @@ class Response implements Contracts\Response
     }
 
     /**
+     * Check if response is missing.
+     *
+     * @return bool
+     */
+    public function isMissing(): bool
+    {
+        return in_array($this->getStatusCode(), [404]);
+    }
+
+    /**
      * Check if response is unauthorized.
      *
      * @return bool
@@ -165,6 +175,20 @@ class Response implements Contracts\Response
 
         if ($statusCode >= 400 && $statusCode < 600) {
             throw new Exceptions\HttpException($this, $message);
+        }
+    }
+
+    /**
+     * Abort if request data is not found.
+     *
+     * @param  string|null $message
+     *
+     * @return void
+     */
+    public function abortIfRequestNotFound(?string $message = null): void
+    {
+        if ($this->isMissing()) {
+            throw new Exceptions\NotFoundException($this, $message);
         }
     }
 }
