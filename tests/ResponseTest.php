@@ -54,7 +54,7 @@ class ResponseTest extends TestCase
         $this->assertSame(201, $stub->getStatusCode());
         $this->assertTrue($stub->isSuccessful());
         $this->assertFalse($stub->isUnauthorized());
-        $this->assertFalse($stub->isMissing());
+        $this->assertFalse($stub->isNotFound());
     }
 
     /** @test */
@@ -69,7 +69,7 @@ class ResponseTest extends TestCase
         $this->assertSame(401, $stub->getStatusCode());
         $this->assertFalse($stub->isSuccessful());
         $this->assertTrue($stub->isUnauthorized());
-        $this->assertFalse($stub->isMissing());
+        $this->assertFalse($stub->isNotFound());
     }
 
     /** @test */
@@ -84,7 +84,7 @@ class ResponseTest extends TestCase
         $this->assertSame(404, $stub->getStatusCode());
         $this->assertFalse($stub->isSuccessful());
         $this->assertFalse($stub->isUnauthorized());
-        $this->assertTrue($stub->isMissing());
+        $this->assertTrue($stub->isNotFound());
     }
 
     /** @test */
