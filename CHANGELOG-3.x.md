@@ -2,6 +2,20 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 3.3.0
+
+Released: 2018-12-04
+
+### Added
+
+* Add `Laravie\Codex\Response::isNotFound()` and `Laravie\Codex\Response::abortIfRequestNotFound()` methods.
+* Add `Laravie\Codex\Exceptions\NotFoundException` exception.
+* Add `Laravie\Codex\Exceptions\UnauthorizedException` exception.
+
+### Deprecates
+
+* Deprecate `Laravie\Codex\Exceptions\UnauthorizedHttpException`. Use `Laravie\Codex\Exceptions\UnauthorizedException` instead.
+
 ## 3.2.0
 
 Released: 2018-11-07
