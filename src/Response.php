@@ -100,20 +100,6 @@ class Response implements Contracts\Response
     }
 
     /**
-     * Validate for unauthorized request.
-     *
-     * @throws \Laravie\Codex\Exceptions\UnauthorizedException
-     *
-     * @return void
-     */
-    public function abortIfRequestUnauthorized(): void
-    {
-        if ($this->isUnauthorized()) {
-            throw new Exceptions\UnauthorizedException($this);
-        }
-    }
-
-    /**
      * Check if response is unauthorized.
      *
      * @return bool
@@ -144,20 +130,17 @@ class Response implements Contracts\Response
     }
 
     /**
-     * Call method under \Psr\Http\Message\ResponseInterface.
+     * Validate for unauthorized request.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @throws \Laravie\Codex\Exceptions\UnauthorizedException
      *
-     * @return mixed
+     * @return void
      */
-    public function __call(string $method, array $parameters)
+    public function abortIfRequestUnauthorized(): void
     {
-        if (! method_exists($this->original, $method)) {
-            throw new BadMethodCallException("Method [{$method}] doesn't exists.");
+        if ($this->isUnauthorized()) {
+            throw new Exceptions\UnauthorizedException($this);
         }
-
-        return $this->original->{$method}(...$parameters);
     }
 
     /**
@@ -190,5 +173,22 @@ class Response implements Contracts\Response
         if ($this->isNotFound()) {
             throw new Exceptions\NotFoundException($this, $message);
         }
+    }
+
+    /**
+     * Call method under \Psr\Http\Message\ResponseInterface.
+     *
+     * @param  string  $method
+     * @param  array  $parameters
+     *
+     * @return mixed
+     */
+    public function __call(string $method, array $parameters)
+    {
+        if (! method_exists($this->original, $method)) {
+            throw new BadMethodCallException("Method [{$method}] doesn't exists.");
+        }
+
+        return $this->original->{$method}(...$parameters);
     }
 }
