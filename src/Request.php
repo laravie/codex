@@ -111,6 +111,8 @@ abstract class Request implements Contracts\Request
     {
         $response = $this->responseWith($message);
 
+        $response->setSanitizer($this->getSanitizer());
+
         if ($this->validateResponseAutomatically === true) {
             $response->validate();
         }
@@ -127,10 +129,7 @@ abstract class Request implements Contracts\Request
      */
     protected function responseWith(ResponseInterface $message): Contracts\Response
     {
-        $response = new Response($message);
-        $response->setSanitizer($this->getSanitizer());
-
-        return $response;
+        return new Response($message);
     }
 
     /**
