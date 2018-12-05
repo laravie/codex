@@ -2,7 +2,7 @@
 
 namespace Laravie\Codex\Exceptions;
 
-class UnauthorizedException extends HttpException
+class UnauthorizedException extends UnauthorizedHttpException
 {
     //
 }
