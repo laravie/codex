@@ -33,7 +33,7 @@ trait HttpClient
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Payload|array|null  $body
      *
-     * @return Psr\Http\Message\ResponseInterface
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function send(string $method, EndpointContract $uri, array $headers = [], $body = []): ResponseInterface
     {
@@ -57,7 +57,7 @@ trait HttpClient
      * @param  array  $headers
      * @param  \Psr\Http\Message\StreamInterface  $stream
      *
-     * @return Psr\Http\Message\ResponseInterface
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function stream(string $method, EndpointContract $uri, array $headers = [], StreamInterface $stream): ResponseInterface
     {
