@@ -2,7 +2,9 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
-## Unreleased
+## v4.0.0
+
+Status: Unreleased
 
 ### Changes
 
