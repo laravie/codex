@@ -8,6 +8,7 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 * Moved `Laravie\Codex\Client::responseWith()` to `Laravie\Codex\Request::responseWith()`. If you are overriding the `Response` implementation please update your code.
 * `Laravie\Codex\Support\HttpClient::send()` and `Laravie\Codex\Support\HttpClient::stream()` now return instance of `Psr\Http\Message\ResponseInterface`.
+* Rename `Laravie\Codex\Response::$original` to `Laravie\Codex\Response::$message`.
 
 ### Removed
 
