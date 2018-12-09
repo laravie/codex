@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 3.3.1
+
+Released: 2018-12-09
+
+### Changes
+
+* `Laravie\Codex\Concerns\Request\Multipart::stream()` updated to utilized `Laravie\Codex\Request::interactsWithResponse()` helper.
+
 ## 3.3.0
 
 Released: 2018-12-04
