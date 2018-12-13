@@ -4,7 +4,7 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 ## v4.0.0
 
-Status: Unreleased
+Status: 2018-12-13
 
 ### Changes
 
