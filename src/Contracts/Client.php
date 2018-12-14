@@ -8,13 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 interface Client
 {
     /**
-     * Get API endpoint URL.
-     *
-     * @return string
-     */
-    public function getApiEndpoint(): ?string;
-
-    /**
      * Send the HTTP request.
      *
      * @param  string  $method

@@ -4,7 +4,7 @@ namespace Laravie\Codex;
 
 use InvalidArgumentException;
 
-abstract class Client implements Contracts\Client, Contracts\Client\Versioning
+abstract class Client implements Contracts\Client
 {
     use Support\HttpClient;
 

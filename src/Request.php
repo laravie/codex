@@ -6,7 +6,9 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class Request implements Contracts\Request
 {
-    use Support\WithSanitizer;
+    use Support\Responsable,
+        Support\Versioning,
+        Support\WithSanitizer;
 
     /**
      * Version namespace.
@@ -18,7 +20,7 @@ abstract class Request implements Contracts\Request
     /**
      * The Codex client.
      *
-     * @var \Laravie\Codex\Client
+     * @var \Laravie\Codex\Contracts\Client
      */
     protected $client;
 
@@ -68,16 +70,6 @@ abstract class Request implements Contracts\Request
     }
 
     /**
-     * Get API version.
-     *
-     * @return string
-     */
-    final public function getVersion(): string
-    {
-        return $this->version;
-    }
-
-    /**
      * Send API request.
      *
      * @param  string  $method
@@ -100,24 +92,6 @@ abstract class Request implements Contracts\Request
         );
 
         return $this->interactsWithResponse($message);
-    }
-
-    /**
-     * Interacts with Response.
-     *
-     * @param  \Laravie\Codex\Contracts\Response $response
-     *
-     * @return \Laravie\Codex\Contracts\Response
-     */
-    protected function interactsWithResponse(Contracts\Response $response): Contracts\Response
-    {
-        $response->setSanitizer($this->getSanitizer());
-
-        if ($this->validateResponseAutomatically === true) {
-            $response->validate();
-        }
-
-        return $response;
     }
 
     /**
@@ -186,26 +160,5 @@ abstract class Request implements Contracts\Request
     protected function getApiEndpoint($path = []): Contracts\Endpoint
     {
         return new Endpoint($this->client->getApiEndpoint(), $path);
-    }
-
-    /**
-     * Proxy route to response via other version.
-     *
-     * @param  string   $swapVersion
-     * @param  callable $callback
-     *
-     * @return \Laravie\Codex\Contracts\Response
-     */
-    protected function proxyRequestViaVersion(string $swapVersion, callable $callback): Contracts\Response
-    {
-        $version = $this->version;
-
-        try {
-            $this->version = $swapVersion;
-
-            return call_user_func($callback);
-        } finally {
-            $this->version = $version;
-        }
     }
 }
