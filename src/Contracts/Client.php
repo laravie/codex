@@ -8,15 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 interface Client
 {
     /**
-     * Use custom API Endpoint.
-     *
-     * @param  string  $endpoint
-     *
-     * @return $this
-     */
-    public function useCustomApiEndpoint(string $endpoint);
-
-    /**
      * Get API endpoint URL.
      *
      * @return string
