@@ -21,11 +21,4 @@ interface Request
      * @return $this
      */
     public function setClient(Client $client);
-
-    /**
-     * Get API version.
-     *
-     * @return string
-     */
-    public function getVersion(): string;
 }
