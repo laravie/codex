@@ -16,7 +16,7 @@ abstract class Request implements Contracts\Request
     /**
      * The Codex client.
      *
-     * @var \Laravie\Codex\Client
+     * @var \Laravie\Codex\Contracts\Client
      */
     protected $client;
 
