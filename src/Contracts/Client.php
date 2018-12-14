@@ -17,29 +17,11 @@ interface Client
     public function useCustomApiEndpoint(string $endpoint);
 
     /**
-     * Use different API version.
-     *
-     * @param  string  $version
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return $this
-     */
-    public function useVersion(string $version);
-
-    /**
      * Get API endpoint URL.
      *
      * @return string
      */
     public function getApiEndpoint(): ?string;
-
-    /**
-     * Get API default version.
-     *
-     * @return string
-     */
-    public function getApiVersion(): string;
 
     /**
      * Send the HTTP request.
