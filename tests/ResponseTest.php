@@ -21,7 +21,9 @@ class ResponseTest extends TestCase
     /** @test */
     public function it_implements_proper_contract()
     {
-        $stub = new Response(m::mock(ResponseInterface::class));
+        $message = m::mock(ResponseInterface::class);
+
+        $stub = new Response($message);
 
         $this->assertInstanceOf('Laravie\Codex\Contracts\Response', $stub);
     }
@@ -137,6 +139,7 @@ class ResponseTest extends TestCase
 
         $stub = (new Response($api))->validateWith(function ($code, $response) {
             $response->abortIfRequestHasFailed();
+            $response->abortIfRequestNotFound();
         });
 
         $this->assertInstanceOf(Response::class, $stub);

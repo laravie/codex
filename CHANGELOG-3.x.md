@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 3.3.2
+
+Released: 2018-12-15
+
+### Removed
+
+* Remove interface methods that doesn't need to belongs to Codex.
+
 ## 3.3.1
 
 Released: 2018-12-09
