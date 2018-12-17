@@ -2,9 +2,21 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
-## v4.0.0
+## 4.0.1
 
-Status: 2018-12-13
+Released: 2018-12-15
+
+### Changes
+
+* Move reusable `Laravie\Codex\Request` methods to `Laravie\Codex\Support\Responsable` and `Laravie\Codex\Support\Versioning` trait.
+
+### Removed
+
+* Remove interface methods that doesn't need to belongs to Codex.
+
+## 4.0.0
+
+Released: 2018-12-13
 
 ### Changes
 

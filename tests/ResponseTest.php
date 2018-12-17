@@ -26,6 +26,8 @@ class ResponseTest extends TestCase
         $stub = new Response($message);
 
         $this->assertInstanceOf('Laravie\Codex\Contracts\Response', $stub);
+        $this->assertSame($message, $stub->message);
+        $this->assertNull($stub->original);
     }
 
     /** @test */
