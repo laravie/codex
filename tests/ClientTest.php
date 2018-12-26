@@ -3,6 +3,7 @@
 namespace Laravie\Codex\TestCase;
 
 use Mockery as m;
+use Laravie\Codex\Discovery;
 use PHPUnit\Framework\TestCase;
 use Laravie\Codex\Testing\Faker;
 use Laravie\Codex\TestCase\Acme\Client;
@@ -218,7 +219,7 @@ class ClientTest extends TestCase
      */
     public function it_cant_find_unknown_resource()
     {
-        $http = m::mock('Http\Client\Common\HttpMethodsClient');
+        $http = Discovery::client();
 
         $response = (new Client($http, 'abc'))->uses('Foobar');
     }

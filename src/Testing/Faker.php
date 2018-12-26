@@ -4,22 +4,39 @@ namespace Laravie\Codex\Testing;
 
 use Mockery as m;
 use GuzzleHttp\Psr7\Uri;
+use Http\Client\HttpClient;
 use PHPUnit\Framework\Assert;
+use Http\Message\RequestFactory;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Http\Client\Common\HttpMethodsClient;
 
 class Faker
 {
     /**
-     * HTTP client mock.
+     * HTTP methods client.
      *
-     * @var \Mockery\MockeryInterface
+     * @var \Http\Client\Common\HttpMethodsClient
      */
     protected $http;
 
     /**
-     * Message mock.
+     * HTTP client mock for "Http\Client\HttpClient".
+     *
+     * @var \Mockery\MockeryInterface
+     */
+    protected $client;
+
+    /**
+     * Request mock for "Http\Message\RequestFactory".
+     *
+     * @var \Mockery\MockeryInterface
+     */
+    protected $request;
+
+    /**
+     * Message mock for "Psr\Http\Message\ResponseInterface".
      *
      * @var \Mockery\MockeryInterface
      */
@@ -65,8 +82,13 @@ class Faker
      */
     public function __construct()
     {
-        $this->http = m::mock(HttpMethodsClient::class);
+        $this->client = m::mock(HttpClient::class);
+        $this->request = m::mock(RequestFactory::class);
         $this->message = m::mock(ResponseInterface::class);
+
+        $this->http = new HttpMethodsClient(
+            $this->client, $this->request
+        );
     }
 
     /**
@@ -108,17 +130,21 @@ class Faker
             $body = m::any();
         }
 
-        $this->http->shouldReceive('send')
-                ->with($method, m::type(Uri::class), $headers, $body)
-                ->andReturnUsing(function ($m, $u, $h, $b) {
-                    Assert::assertSame((string) $u, $this->expectedEndpoint);
+        $request = m::mock(RequestInterface::class);
 
-                    if (! empty($this->expectedHeaders)) {
-                        Assert::assertArraySubset($this->expectedHeaders, $h);
-                    }
+        $this->request->shouldReceive('createRequest')
+            ->with($method, m::type(Uri::class), $headers, $body)
+            ->andReturnUsing(function ($m, $u, $h, $b) use ($request) {
+                Assert::assertSame((string) $u, $this->expectedEndpoint);
 
-                    return $this->message();
-                });
+                if (! empty($this->expectedHeaders)) {
+                    Assert::assertArraySubset($this->expectedHeaders, $h);
+                }
+
+                return $request;
+            });
+
+        $this->client->shouldReceive('sendRequest')->with($request)->andReturn($this->message());
 
         return $this;
     }
