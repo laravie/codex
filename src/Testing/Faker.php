@@ -243,7 +243,7 @@ class Faker
     /**
      * Get HTTP mock.
      *
-     * @return \Mockery\MockeryInterface
+     * @return \Http\Client\Common\HttpMethodsClient
      */
     public function http()
     {
