@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 3.3.3
+
+Released: 2018-12-30
+
+### Changes
+
+* Update `Laravie\Codex\Testing\Faker` to support handling upcoming version of `Http\Client\Common\HttpMethodsClient` which would be marked as `final`.
+* Move reusable `Laravie\Codex\Request` methods to `Laravie\Codex\Support\Responsable` and `Laravie\Codex\Support\Versioning` trait.
+
 ## 3.3.2
 
 Released: 2018-12-15

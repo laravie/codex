@@ -22,21 +22,21 @@ class Faker
     protected $http;
 
     /**
-     * HTTP client mock for "Http\Client\HttpClient".
+     * Mock for "Http\Client\HttpClient".
      *
      * @var \Mockery\MockeryInterface
      */
     protected $client;
 
     /**
-     * Request mock for "Http\Message\RequestFactory".
+     * Mock for "Http\Message\RequestFactory".
      *
      * @var \Mockery\MockeryInterface
      */
     protected $request;
 
     /**
-     * Message mock for "Psr\Http\Message\ResponseInterface".
+     * Mock for "Psr\Http\Message\ResponseInterface".
      *
      * @var \Mockery\MockeryInterface
      */
@@ -243,7 +243,7 @@ class Faker
     /**
      * Get HTTP mock.
      *
-     * @return \Mockery\MockeryInterface
+     * @return \Http\Client\Common\HttpMethodsClient
      */
     public function http()
     {
