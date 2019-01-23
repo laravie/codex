@@ -12,14 +12,17 @@ env:
   global:
     - coverage=no
   matrix:
-    - setup=basic
-    - setup=lowest
-    - setup=stable
+    - httplug=1.1
+    - httplug=2.0
+    - setup=lowest httplug=1.1
+    - setup=lowest httplug=2.0
+    - setup=stable httplug=1.1
+    - setup=stable httplug=2.0
 
 before_script:
   - travis_retry composer self-update
   - composer config discard-changes true
-  - if [[ $setup = 'basic' ]]; then travis_retry composer install --prefer-source --no-interaction; fi
+  - travis_retry composer require "php-http/httplug=^${httplug}" --prefer-dist --no-interaction --dev
   - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-stable; fi
   - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-lowest --prefer-stable; fi
   - if [[ $setup = 'coveralls' ]]; then travis_retry composer require "php-coveralls/php-coveralls=^2.1" --prefer-dist --no-interaction --dev; fi
