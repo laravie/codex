@@ -37,7 +37,7 @@ after_script:
 matrix:
   include:
     - php: 7.1
-      env: setup=coveralls coverage=yes
+      env: setup=coveralls coverage=yes httplug=2.0
   allow_failures:
     - env: setup=coveralls coverage=yes
   fast_finish: true
