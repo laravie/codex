@@ -40,5 +40,5 @@ matrix:
       env: setup=coveralls coverage=yes httplug=2.0
   allow_failures:
     - php: nightly
-    - env: setup=coveralls coverage=yes
+    - env: setup=coveralls coverage=yes httplug=2.0
   fast_finish: true
