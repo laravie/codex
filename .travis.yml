@@ -12,20 +12,17 @@ env:
   global:
     - coverage=no
   matrix:
-    - httplug=1.1
     - httplug=2.0
-    - setup=lowest httplug=1.1
     - setup=lowest httplug=2.0
-    - setup=stable httplug=1.1
     - setup=stable httplug=2.0
 
 before_script:
   - travis_retry composer self-update
   - composer config discard-changes true
-  - travis_retry composer require "php-http/httplug=^${httplug}" --prefer-dist --no-interaction --dev
-  - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-stable; fi
-  - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-lowest --prefer-stable; fi
-  - if [[ $setup = 'coveralls' ]]; then travis_retry composer require "php-coveralls/php-coveralls=^2.1" --prefer-dist --no-interaction --dev; fi
+  - travis_retry composer require "php-http/httplug=^${httplug}" --prefer-dist --no-interaction --dev --no-suggest
+  - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-stable --no-suggest; fi
+  - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
+  - if [[ $setup = 'coveralls' ]]; then travis_retry composer require "php-coveralls/php-coveralls=^2.1" --prefer-dist --no-interaction --dev --no-suggest; fi
 
 script:
   - if [[ $coverage = 'yes' ]]; then vendor/bin/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml; fi
