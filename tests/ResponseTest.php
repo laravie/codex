@@ -133,6 +133,23 @@ class ResponseTest extends TestCase
     }
 
     /** @test */
+    public function it_can_use_then()
+    {
+        $api = m::mock(ResponseInterface::class);
+
+        $api->shouldReceive('getStatusCode')->andReturn(200);
+
+        $stub = new Response($api);
+
+        $stub->then(function ($response, $code) use ($stub) {
+            $this->assertSame($stub, $response);
+            $this->assertSame(200, $code);
+        });
+
+        $this->assertInstanceOf(Response::class, $stub);
+    }
+
+    /** @test */
     public function it_can_use_validate_with()
     {
         $api = m::mock(ResponseInterface::class);
