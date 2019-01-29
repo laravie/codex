@@ -54,6 +54,20 @@ class Response implements Contracts\Response
     }
 
     /**
+     * Validate response with custom callable.
+     *
+     * @param  callable  $callback
+     *
+     * @return $this
+     */
+    final public function then(callable $callback): self
+    {
+        call_user_func($callback, $this, $this->getStatusCode());
+
+        return $this;
+    }
+
+    /**
      * Convert response body to array.
      *
      * @return array
