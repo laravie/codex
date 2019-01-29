@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 4.0.3
+
+Released: 2019-01-29
+
+### Added
+
+* Added `Laravie\Codex\Response::then()` helper.
+
 ## 4.0.2
 
 Released: 2018-12-30
