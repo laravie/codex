@@ -12,9 +12,9 @@ env:
   global:
     - coverage=no
   matrix:
-    - httplug=2.0
-    - setup=lowest httplug=2.0
-    - setup=stable httplug=2.0
+    - setup=basic
+    - setup=lowest
+    - setup=stable
 
 before_script:
   - travis_retry composer self-update
