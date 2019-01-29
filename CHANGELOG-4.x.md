@@ -2,6 +2,22 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 4.0.3
+
+Released: 2019-01-29
+
+### Added
+
+* Added `Laravie\Codex\Response::then()` helper.
+
+## 4.0.2
+
+Released: 2018-12-30
+
+### Changes
+
+* Update `Laravie\Codex\Testing\Faker` to support handling upcoming version of `Http\Client\Common\HttpMethodsClient` which would be marked as `final`.
+
 ## 4.0.1
 
 Released: 2018-12-15
