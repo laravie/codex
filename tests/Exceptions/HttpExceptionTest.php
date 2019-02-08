@@ -53,13 +53,12 @@ class HttpExceptionTest extends TestCase
         $this->assertSame(500, $stub2->getStatusCode());
     }
 
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage $response is not an acceptable response object!
-     */
+    /** @test */
     public function it_should_throw_exception_with_invalid_response_object()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('$response is not an acceptable response object!');
+
         $stub = new HttpException(null);
     }
 }
