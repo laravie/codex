@@ -141,13 +141,12 @@ class EndpointTest extends TestCase
         $this->assertSame('http://laravie@laravel.com/docs', (string) $endpoint);
     }
 
-    /**
-     * @test
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Method [getFullUrl] doesn't exists.
-     */
+    /** @test */
     public function it_cant_call_unknown_method_should_throw_exception()
     {
+        $this->expectException('BadMethodCallException');
+        $this->expectExceptionMessage("Method [getFullUrl] doesn't exists.");
+
         (new Endpoint(null, 'docs'))->getFullUrl();
     }
 }
