@@ -184,13 +184,12 @@ class ClientTest extends TestCase
         $this->assertTrue($response->hasSanitizer());
     }
 
-    /**
-     * @test
-     * @expectedException \Laravie\Codex\Exceptions\UnauthorizedException
-     * @expectedExceptionMessage Not Authorized!
-     */
+    /** @test */
     public function it_throws_exception_when_401_is_returned()
     {
+        $this->expectException('Laravie\Codex\Exceptions\UnauthorizedException');
+        $this->expectExceptionMessage('Not Authorized!');
+
         $faker = Faker::create()
                     ->call('GET', [], '')
                     ->expectEndpointIs('https://acme.laravie/v1/welcome')
@@ -202,23 +201,21 @@ class ClientTest extends TestCase
                         ->pong();
     }
 
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage API version [v10] is not supported.
-     */
+    /** @test */
     public function it_cant_use_unsupported_version_should_throw_exception()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('API version [v10] is not supported.');
+
         Client::make('abc')->useVersion('v10');
     }
 
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Resource [Foobar] for version [v1] is not available.
-     */
+    /** @test */
     public function it_cant_find_unknown_resource()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('Resource [Foobar] for version [v1] is not available.');
+
         $http = Discovery::client();
 
         $response = (new Client($http, 'abc'))->uses('Foobar');
