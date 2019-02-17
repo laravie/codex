@@ -54,7 +54,7 @@ class Payload
 
         if (isset($headers['Content-Type']) && $headers['Content-Type'] == 'application/json') {
             return $this->toJson();
-        } elseif (is_array($this->content)) {
+        } elseif (\is_array($this->content)) {
             return $this->toHttpQueries();
         }
 
@@ -70,7 +70,7 @@ class Payload
      */
     public function toJson($options = 0): string
     {
-        return json_encode($this->content, $options);
+        return \json_encode($this->content, $options);
     }
 
     /**
@@ -83,6 +83,6 @@ class Payload
      */
     public function toHttpQueries(?string $prefix = null, string $separator = '&'): string
     {
-        return http_build_query($this->content, $prefix, $separator);
+        return \http_build_query($this->content, $prefix, $separator);
     }
 }

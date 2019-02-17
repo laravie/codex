@@ -27,7 +27,7 @@ abstract class Cast implements Contracts\Cast
      */
     public function to($value)
     {
-        return ! is_null($value)
+        return ! \is_null($value)
                     ? $this->toCast($value)
                     : null;
     }

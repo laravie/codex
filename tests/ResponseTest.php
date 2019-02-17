@@ -117,13 +117,12 @@ class ResponseTest extends TestCase
         $this->assertSame('Text from stream', $stub->getBody());
     }
 
-    /**
-     * @test
-     * @expectedException \Laravie\Codex\Exceptions\UnauthorizedException
-     * @expectedExceptionMessage Not authorized
-     */
+    /** @test */
     public function it_would_throw_exception_when_given_401_status_code()
     {
+        $this->expectException('Laravie\Codex\Exceptions\UnauthorizedException');
+        $this->expectExceptionMessage('Not authorized');
+
         $api = m::mock(ResponseInterface::class);
 
         $api->shouldReceive('getStatusCode')->andReturn(401)
@@ -164,13 +163,12 @@ class ResponseTest extends TestCase
         $this->assertInstanceOf(Response::class, $stub);
     }
 
-    /**
-     * @test
-     * @expectedException \Laravie\Codex\Exceptions\HttpException
-     * @expectedExceptionMessage 404 File not found.
-     */
+    /** @test */
     public function it_can_use_validate_with_can_throws_exception_request_has_failed()
     {
+        $this->expectException('Laravie\Codex\Exceptions\HttpException');
+        $this->expectExceptionMessage('404 File not found.');
+
         $api = m::mock(ResponseInterface::class);
 
         $api->shouldReceive('getStatusCode')->andReturn(404);
@@ -180,13 +178,12 @@ class ResponseTest extends TestCase
         });
     }
 
-    /**
-     * @test
-     * @expectedException \Laravie\Codex\Exceptions\NotFoundException
-     * @expectedExceptionMessage 404 File not found.
-     */
+    /** @test */
     public function it_can_use_validate_with_can_throws_exception_request_not_found()
     {
+        $this->expectException('Laravie\Codex\Exceptions\NotFoundException');
+        $this->expectExceptionMessage('404 File not found.');
+
         $api = m::mock(ResponseInterface::class);
 
         $api->shouldReceive('getStatusCode')->andReturn(404);
@@ -196,13 +193,12 @@ class ResponseTest extends TestCase
         });
     }
 
-    /**
-     * @test
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Method [getRequest] doesn't exists.
-     */
+    /** @test */
     public function it_cant_return_unknown_parent_methods_should_throw_exception()
     {
+        $this->expectException('BadMethodCallException');
+        $this->expectExceptionMessage("Method [getRequest] doesn't exists.");
+
         (new Response(m::mock(ResponseInterface::class)))->getRequest();
     }
 }

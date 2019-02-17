@@ -37,7 +37,7 @@ trait HttpClient
      */
     public function send(string $method, EndpointContract $uri, array $headers = [], $body = []): ResponseInterface
     {
-        $method = strtoupper($method);
+        $method = \strtoupper($method);
 
         if ($method === 'GET' && ! $body instanceof StreamInterface) {
             $uri->addQuery($body);
@@ -63,7 +63,7 @@ trait HttpClient
     {
         list($headers, $stream) = $this->prepareRequestPayloads($headers, $stream);
 
-        return $this->requestWith(strtoupper($method), $uri->get(), $headers, $stream);
+        return $this->requestWith(\strtoupper($method), $uri->get(), $headers, $stream);
     }
 
     /**
@@ -78,13 +78,13 @@ trait HttpClient
      */
     protected function requestWith(string $method, UriInterface $uri, array $headers, $body): ResponseInterface
     {
-        if (in_array($method, ['HEAD', 'GET', 'TRACE'])) {
+        if (\in_array($method, ['HEAD', 'GET', 'TRACE'])) {
             $body = null;
         }
 
         $response = $this->http->send($method, $uri, $headers, $body);
 
-        $this->httpRequestQueries[] = compact('method', 'uri', 'headers', 'body', 'response');
+        $this->httpRequestQueries[] = \compact('method', 'uri', 'headers', 'body', 'response');
 
         return $response;
     }
