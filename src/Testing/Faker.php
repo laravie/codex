@@ -174,13 +174,13 @@ class Faker
      */
     public function sendJson(string $method, $headers = [], $body = '')
     {
-        if (is_array($headers)) {
+        if (\is_array($headers)) {
             $headers['Content-Type'] = 'application/json';
             $this->expectedHeaders = $headers;
         }
 
-        if (is_array($body)) {
-            $body = json_encode($body);
+        if (\is_array($body)) {
+            $body = \json_encode($body);
         }
 
         return $this->call($method, $headers, $body);
@@ -196,7 +196,7 @@ class Faker
      */
     public function stream(string $method, $headers = [])
     {
-        if (is_array($headers)) {
+        if (\is_array($headers)) {
             $this->expectedHeaders = $headers;
         }
 

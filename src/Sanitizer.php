@@ -75,15 +75,15 @@ class Sanitizer implements Contracts\Sanitizer
      */
     protected function sanitizeFrom($value, string $name, array $group = [])
     {
-        array_push($group, $name);
+        \array_push($group, $name);
 
         $caster = $this->getCaster($group);
 
-        if (is_array($value) && is_null($caster)) {
+        if (\is_array($value) && \is_null($caster)) {
             return $this->from($value, $group);
         }
 
-        return ! is_null($caster)
+        return ! \is_null($caster)
                     ? $caster->from($value)
                     : $value;
     }
@@ -99,15 +99,15 @@ class Sanitizer implements Contracts\Sanitizer
      */
     protected function sanitizeTo($value, string $name, array $group = [])
     {
-        array_push($group, $name);
+        \array_push($group, $name);
 
         $caster = $this->getCaster($group);
 
-        if (is_array($value) && is_null($caster)) {
+        if (\is_array($value) && \is_null($caster)) {
             return $this->to($value, $group);
         }
 
-        return ! is_null($caster)
+        return ! \is_null($caster)
                     ? $caster->to($value)
                     : $value;
     }
@@ -123,8 +123,8 @@ class Sanitizer implements Contracts\Sanitizer
     {
         $cast = \igorw\get_in($this->casts, (array) $group);
 
-        if (is_subclass_of($cast, Contracts\Cast::class)) {
-            return is_string($cast) ? new $cast() : $cast;
+        if (\is_subclass_of($cast, Contracts\Cast::class)) {
+            return \is_string($cast) ? new $cast() : $cast;
         }
 
         return null;

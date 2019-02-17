@@ -48,7 +48,7 @@ class Response implements Contracts\Response
      */
     final public function validateWith(callable $callback): self
     {
-        call_user_func($callback, $this->getStatusCode(), $this);
+        \call_user_func($callback, $this->getStatusCode(), $this);
 
         return $this;
     }
@@ -62,7 +62,7 @@ class Response implements Contracts\Response
      */
     final public function then(callable $callback): self
     {
-        call_user_func($callback, $this, $this->getStatusCode());
+        \call_user_func($callback, $this, $this->getStatusCode());
 
         return $this;
     }
@@ -76,7 +76,7 @@ class Response implements Contracts\Response
     {
         $content = $this->getContent();
 
-        return is_array($content) ? $this->sanitizeTo($content) : [];
+        return \is_array($content) ? $this->sanitizeTo($content) : [];
     }
 
     /**
@@ -100,7 +100,7 @@ class Response implements Contracts\Response
      */
     public function getContent()
     {
-        return json_decode($this->getBody(), true);
+        return \json_decode($this->getBody(), true);
     }
 
     /**
@@ -120,7 +120,7 @@ class Response implements Contracts\Response
      */
     public function isSuccessful(): bool
     {
-        return in_array($this->getStatusCode(), [200, 201, 202, 204, 205]);
+        return \in_array($this->getStatusCode(), [200, 201, 202, 204, 205]);
     }
 
     /**
@@ -130,7 +130,7 @@ class Response implements Contracts\Response
      */
     public function isNotFound(): bool
     {
-        return in_array($this->getStatusCode(), [404]);
+        return \in_array($this->getStatusCode(), [404]);
     }
 
     /**
@@ -140,7 +140,7 @@ class Response implements Contracts\Response
      */
     public function isUnauthorized(): bool
     {
-        return in_array($this->getStatusCode(), [401, 403]);
+        return \in_array($this->getStatusCode(), [401, 403]);
     }
 
     /**
@@ -199,7 +199,7 @@ class Response implements Contracts\Response
      */
     public function __call(string $method, array $parameters)
     {
-        if (! method_exists($this->message, $method)) {
+        if (! \method_exists($this->message, $method)) {
             throw new BadMethodCallException("Method [{$method}] doesn't exists.");
         }
 
@@ -215,7 +215,7 @@ class Response implements Contracts\Response
      */
     public function __get(string $key)
     {
-        if (! property_exists($this, $key)) {
+        if (! \property_exists($this, $key)) {
             return null;
         }
 

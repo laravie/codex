@@ -36,7 +36,7 @@ abstract class Request implements Contracts\Request
      */
     public function __construct()
     {
-        if (method_exists($this, 'sanitizeWith')) {
+        if (\method_exists($this, 'sanitizeWith')) {
             $this->setSanitizer($this->sanitizeWith());
         }
     }
@@ -135,7 +135,7 @@ abstract class Request implements Contracts\Request
      */
     final protected function mergeApiHeaders(array $headers = []): array
     {
-        return array_merge($this->getApiHeaders(), $headers);
+        return \array_merge($this->getApiHeaders(), $headers);
     }
 
     /**
@@ -147,7 +147,7 @@ abstract class Request implements Contracts\Request
      */
     final protected function mergeApiBody(array $body = []): array
     {
-        return array_merge($this->getApiBody(), $body);
+        return \array_merge($this->getApiBody(), $body);
     }
 
     /**

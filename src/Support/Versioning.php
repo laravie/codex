@@ -31,7 +31,7 @@ trait Versioning
         try {
             $this->version = $swapVersion;
 
-            return call_user_func($callback);
+            return \call_user_func($callback);
         } finally {
             $this->version = $version;
         }

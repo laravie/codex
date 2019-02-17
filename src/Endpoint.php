@@ -31,7 +31,7 @@ class Endpoint implements Contracts\Endpoint
      */
     public function __construct($uri, $paths = [], array $query = [])
     {
-        $paths = is_null($paths) || $paths === '/' ? [] : $paths;
+        $paths = \is_null($paths) || $paths === '/' ? [] : $paths;
 
         $this->uri = $uri instanceof UriInterface
                         ? $uri
@@ -51,10 +51,10 @@ class Endpoint implements Contracts\Endpoint
      */
     final protected function createUri(?string $url, array $paths): UriInterface
     {
-        $path = implode('/', $paths);
+        $path = \implode('/', $paths);
 
         if (! empty($path)) {
-            $url = rtrim($url, '/')."/{$path}";
+            $url = \rtrim($url, '/')."/{$path}";
         }
 
         return new Uri($url);
@@ -85,11 +85,11 @@ class Endpoint implements Contracts\Endpoint
             return;
         }
 
-        foreach (explode('&', $query) as $pair) {
-            if (strpos($pair, '=') >= 0) {
-                list($key, $value) = explode('=', $pair, 2);
+        foreach (\explode('&', $query) as $pair) {
+            if (\strpos($pair, '=') >= 0) {
+                list($key, $value) = \explode('=', $pair, 2);
 
-                $this->addQuery($key, urldecode($value));
+                $this->addQuery($key, \urldecode($value));
             }
         }
     }
@@ -104,7 +104,7 @@ class Endpoint implements Contracts\Endpoint
      */
     public function addQuery($key, string $value = null)
     {
-        if (is_array($key)) {
+        if (\is_array($key)) {
             foreach ($key as $name => $content) {
                 $this->addQuery($name, $content);
             }
@@ -134,9 +134,7 @@ class Endpoint implements Contracts\Endpoint
      */
     public function getPath(): array
     {
-        $path = trim($this->uri->getPath(), '/');
-
-        return explode('/', $path);
+        return \explode('/', \trim($this->uri->getPath(), '/'));
     }
 
     /**
@@ -157,7 +155,7 @@ class Endpoint implements Contracts\Endpoint
     public function get(): UriInterface
     {
         $this->withQuery(
-            http_build_query($this->getQuery(), null, '&')
+            \http_build_query($this->getQuery(), null, '&')
         );
 
         return $this->uri;
@@ -173,13 +171,13 @@ class Endpoint implements Contracts\Endpoint
      */
     public function __call(string $method, array $parameters)
     {
-        if (! method_exists($this->uri, $method)) {
+        if (! \method_exists($this->uri, $method)) {
             throw new BadMethodCallException("Method [{$method}] doesn't exists.");
         }
 
         $result = $this->uri->{$method}(...$parameters);
 
-        if (strpos($method, 'with') !== 0) {
+        if (\strpos($method, 'with') !== 0) {
             return $result;
         } elseif ($result instanceof UriInterface) {
             $this->uri = $result;

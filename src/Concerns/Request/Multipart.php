@@ -81,11 +81,11 @@ trait Multipart
         foreach ($body as $key => $value) {
             $name = $key;
 
-            if (! is_null($prefix)) {
+            if (! \is_null($prefix)) {
                 $name = "{$prefix}[{$key}]";
             }
 
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $this->addBodyToMultipartBuilder($builder, $value, $name);
                 continue;
             }
@@ -105,7 +105,7 @@ trait Multipart
     final protected function addFilesToMultipartBuilder(Builder $builder, array $files = []): void
     {
         foreach ($files as $key => $file) {
-            if (! is_null($file)) {
+            if (! \is_null($file)) {
                 $builder->addResource($key, fopen($file, 'r'));
             }
         }
