@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 4.0.4
+
+Released: 2019-02-26
+
+### Changes
+
+* Improve performance by prefixing all global functions calls with `\` to skip the look up and resolve process and go straight to the global function.
+
 ## 4.0.3
 
 Released: 2019-01-29
