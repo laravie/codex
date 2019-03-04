@@ -5,7 +5,6 @@ namespace Laravie\Codex\Testing;
 use Mockery as m;
 use GuzzleHttp\Psr7\Uri;
 use Http\Client\HttpClient;
-use PHPUnit\Framework\Assert;
 use Http\Message\RequestFactory;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\RequestInterface;
