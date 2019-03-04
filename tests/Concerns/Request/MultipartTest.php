@@ -97,10 +97,10 @@ class MultipartTest extends TestCase
                 ->andReturnUsing(function ($m, $u, $h, $b) use ($message) {
                     $content = $b->getContents();
 
-                    $this->assertContains('Content-Disposition: form-data; name="search"', $content);
-                    $this->assertContains('Content-Disposition: form-data; name="project"', $content);
-                    $this->assertContains('Content-Disposition: form-data; name="developer[name]"', $content);
-                    $this->assertContains('Content-Disposition: form-data; name="developer[email]"', $content);
+                    $this->assertStringContainsString('Content-Disposition: form-data; name="search"', $content);
+                    $this->assertStringContainsString('Content-Disposition: form-data; name="project"', $content);
+                    $this->assertStringContainsString('Content-Disposition: form-data; name="developer[name]"', $content);
+                    $this->assertStringContainsString('Content-Disposition: form-data; name="developer[email]"', $content);
 
                     return $message;
                 });
@@ -142,13 +142,13 @@ class MultipartTest extends TestCase
                 ->andReturnUsing(function ($m, $u, $h, $b) use ($message) {
                     $content = $b->getContents();
 
-                    $this->assertContains('Content-Disposition: form-data; name="hello"; filename="hello.txt"', $content);
-                    $this->assertContains('Content-Disposition: form-data; name="logo"; filename="logo.png"', $content);
+                    $this->assertStringContainsString('Content-Disposition: form-data; name="hello"; filename="hello.txt"', $content);
+                    $this->assertStringContainsString('Content-Disposition: form-data; name="logo"; filename="logo.png"', $content);
 
-                    $this->assertContains('Content-Disposition: form-data; name="search"', $content);
-                    $this->assertContains('Content-Disposition: form-data; name="project"', $content);
-                    $this->assertContains('Content-Disposition: form-data; name="developer[name]"', $content);
-                    $this->assertContains('Content-Disposition: form-data; name="developer[email]"', $content);
+                    $this->assertStringContainsString('Content-Disposition: form-data; name="search"', $content);
+                    $this->assertStringContainsString('Content-Disposition: form-data; name="project"', $content);
+                    $this->assertStringContainsString('Content-Disposition: form-data; name="developer[name]"', $content);
+                    $this->assertStringContainsString('Content-Disposition: form-data; name="developer[email]"', $content);
 
                     return $message;
                 });
