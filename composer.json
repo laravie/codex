@@ -32,11 +32,11 @@
         "mockery/mockery": "^1.0",
         "php-http/curl-client": "^1.7",
         "php-http/multipart-stream-builder": "^1.0",
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^7.5"
     },
     "suggest": {
         "php-http/multipart-stream-builder": "Allow to send multipart form request (^1.0)",
-        "phpunit/phpunit": "Allow to use Codex Faker request during testing (^7.0)"
+        "phpunit/phpunit": "Allow to use Codex Faker request during testing (^7.5)"
     },
     "extra": {
         "branch-alias": {
