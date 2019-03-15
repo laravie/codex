@@ -22,11 +22,11 @@
     "require": {
         "php": ">=7.1",
         "guzzlehttp/psr7": "^1.4",
+        "http-interop/http-factory-guzzle": "^1.0",
         "igorw/get-in": "^1.0",
         "php-http/client-common": "^2.0",
         "php-http/client-implementation": "^1.0",
-        "php-http/discovery": "^1.6",
-        "zendframework/zend-diactoros": "^2.1"
+        "php-http/discovery": "^1.6"
     },
     "require-dev": {
         "mockery/mockery": "^1.0",
@@ -40,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.0-dev"
+            "dev-master": "4.1-dev"
         }
     },
     "config": {
