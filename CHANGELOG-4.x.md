@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 4.0.5
+
+Released: 2019-03-15
+
+### Changes
+
+* Suggest `phpunit/phpunit=^7.5`.
+
 ## 4.0.4
 
 Released: 2019-02-26
