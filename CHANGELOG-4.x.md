@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 4.1.0
+
+Released: 2019-03-16
+
+### Changes
+
+* Add support for PSR-18 via `php-http/httplug` v2.0+.
+* Update recommended PHPUnit to `^7.5 || ^8.0`.
+
 ## 4.0.5
 
 Released: 2019-03-15
