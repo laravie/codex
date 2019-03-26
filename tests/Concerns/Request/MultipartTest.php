@@ -70,7 +70,7 @@ class MultipartTest extends TestCase
 
             public function ping()
             {
-                list($headers, $stream) = $this->prepareMultipartRequestPayloads(
+                [$headers, $stream] = $this->prepareMultipartRequestPayloads(
                     ['Content-Type' => 'application/json'], ['search' => 'codex'], []
                 );
 

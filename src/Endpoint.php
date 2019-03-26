@@ -87,7 +87,7 @@ class Endpoint implements Contracts\Endpoint
 
         foreach (\explode('&', $query) as $pair) {
             if (\strpos($pair, '=') >= 0) {
-                list($key, $value) = \explode('=', $pair, 2);
+                [$key, $value] = \explode('=', $pair, 2);
 
                 $this->addQuery($key, \urldecode($value));
             }

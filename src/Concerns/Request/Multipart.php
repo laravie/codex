@@ -25,7 +25,7 @@ trait Multipart
         $headers['Content-Type'] = 'multipart/form-data';
         $body = $this->sanitizeFrom($body);
 
-        list($headers, $stream) = $this->prepareMultipartRequestPayloads(
+        [$headers, $stream] = $this->prepareMultipartRequestPayloads(
             $headers, $body, $files
         );
 

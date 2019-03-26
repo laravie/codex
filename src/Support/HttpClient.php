@@ -44,7 +44,7 @@ trait HttpClient
             $body = null;
         }
 
-        list($headers, $body) = $this->prepareRequestPayloads($headers, $body);
+        [$headers, $body] = $this->prepareRequestPayloads($headers, $body);
 
         return $this->requestWith($method, $uri->get(), $headers, $body);
     }
@@ -61,7 +61,7 @@ trait HttpClient
      */
     public function stream(string $method, EndpointContract $uri, array $headers = [], StreamInterface $stream): ResponseInterface
     {
-        list($headers, $stream) = $this->prepareRequestPayloads($headers, $stream);
+        [$headers, $stream] = $this->prepareRequestPayloads($headers, $stream);
 
         return $this->requestWith(\strtoupper($method), $uri->get(), $headers, $stream);
     }
