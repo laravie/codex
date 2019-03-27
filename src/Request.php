@@ -4,7 +4,6 @@ namespace Laravie\Codex;
 
 use Laravie\Codex\Common\Endpoint;
 use Psr\Http\Message\ResponseInterface;
-use Laravie\Codex\Filter\Support\WithFilterable;
 use Laravie\Codex\Contracts\Client as ClientContract;
 use Laravie\Codex\Contracts\Request as RequestContract;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
