@@ -1,9 +1,9 @@
 <?php
 
-namespace Laravie\Codex\TestCase;
+namespace Laravie\Codex\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Laravie\Codex\TestCase\Acme\Casts\Arr;
+use Laravie\Codex\Tests\Acme\Casts\Arr;
 
 class CastTest extends TestCase
 {

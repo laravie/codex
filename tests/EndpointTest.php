@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Codex\TestCase;
+namespace Laravie\Codex\Tests;
 
 use GuzzleHttp\Psr7\Uri;
 use Laravie\Codex\Endpoint;

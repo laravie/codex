@@ -16,7 +16,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Laravie\\Codex\\TestCase\\": "tests/"
+            "Laravie\\Codex\\Tests\\": "tests/"
         }
     },
     "require": {

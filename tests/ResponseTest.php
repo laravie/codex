@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Codex\TestCase;
+namespace Laravie\Codex\Tests;
 
 use Mockery as m;
 use Laravie\Codex\Response;

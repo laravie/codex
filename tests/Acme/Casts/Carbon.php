@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Codex\TestCase\Acme\Casts;
+namespace Laravie\Codex\Tests\Acme\Casts;
 
 use Laravie\Codex\Cast;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Laravie\Codex\TestCase;
+namespace Laravie\Codex\Tests;
 
 use Mockery as m;
 use Laravie\Codex\Discovery;
 use PHPUnit\Framework\TestCase;
 use Laravie\Codex\Testing\Faker;
-use Laravie\Codex\TestCase\Acme\Client;
+use Laravie\Codex\Tests\Acme\Client;
 
 class ClientTest extends TestCase
 {
