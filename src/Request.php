@@ -80,7 +80,7 @@ abstract class Request implements RequestContract
      * @param  string  $method
      * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
      * @param  array  $headers
-     * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Payload|array|null  $body
+     * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Common\Payload|array|null  $body
      *
      * @return \Laravie\Codex\Contracts\Response
      */
