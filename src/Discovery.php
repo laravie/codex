@@ -2,7 +2,7 @@
 
 namespace Laravie\Codex;
 
-class Response extends Common\Response
+class Discovery extends Common\Discovery
 {
     //
 }

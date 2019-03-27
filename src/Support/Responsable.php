@@ -2,9 +2,9 @@
 
 namespace Laravie\Codex\Support;
 
+use Laravie\Codex\Contracts\Response;
+use Laravie\Codex\Contracts\Filterable;
 use Psr\Http\Message\ResponseInterface;
-use Laravie\Codex\Contracts\Response as ResponseContract;
-use Laravie\Codex\Contracts\Filterable as FilterableContract;
 
 trait Responsable
 {
@@ -15,9 +15,9 @@ trait Responsable
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function interactsWithResponse(ResponseContract $response): ResponseContract
+    protected function interactsWithResponse(Response $response): Response
     {
-        if ($response instanceof FilterableContract && $this instanceof FilterableContract) {
+        if ($response instanceof Filterable && $this instanceof Filterable) {
             $response->setFilterable($this->getFilterable());
         }
 
@@ -35,5 +35,5 @@ trait Responsable
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    abstract protected function responseWith(ResponseInterface $message): ResponseContract;
+    abstract protected function responseWith(ResponseInterface $message): Response;
 }

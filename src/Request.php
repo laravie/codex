@@ -2,15 +2,9 @@
 
 namespace Laravie\Codex;
 
-use Laravie\Codex\Common\Endpoint;
 use Psr\Http\Message\ResponseInterface;
-use Laravie\Codex\Contracts\Client as ClientContract;
-use Laravie\Codex\Contracts\Request as RequestContract;
-use Laravie\Codex\Contracts\Endpoint as EndpointContract;
-use Laravie\Codex\Contracts\Response as ResponseContract;
-use Laravie\Codex\Contracts\Filterable as FilterableContract;
 
-abstract class Request implements RequestContract
+abstract class Request implements Contracts\Request
 {
     use Support\Responsable,
         Support\Versioning;
@@ -41,7 +35,7 @@ abstract class Request implements RequestContract
      */
     public function __construct()
     {
-        if (\method_exists($this, 'sanitizeWith') && $this instanceof FilterableContract) {
+        if (\method_exists($this, 'sanitizeWith') && $this instanceof Contracts\Filterable) {
             $this->setFilterable($this->sanitizeWith());
         }
     }
@@ -55,9 +49,9 @@ abstract class Request implements RequestContract
      *
      * @return \Laravie\Codex\Contracts\Endpoint
      */
-    public static function to(string $uri, $path = [], array $query = []): EndpointContract
+    public static function to(string $uri, $path = [], array $query = []): Contracts\Endpoint
     {
-        return new Endpoint($uri, $path, $query);
+        return new Common\Endpoint($uri, $path, $query);
     }
 
     /**
@@ -67,7 +61,7 @@ abstract class Request implements RequestContract
      *
      * @return $this
      */
-    final public function setClient(ClientContract $client): self
+    final public function setClient(Contracts\Client $client): self
     {
         $this->client = $client;
 
@@ -84,13 +78,13 @@ abstract class Request implements RequestContract
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function send(string $method, $path, array $headers = [], $body = []): ResponseContract
+    protected function send(string $method, $path, array $headers = [], $body = []): Contracts\Response
     {
-        if ($this instanceof FilterableContract) {
+        if ($this instanceof Contracts\Filterable) {
             $body = $this->filterRequest($body);
         }
 
-        $endpoint = ($path instanceof EndpointContract)
+        $endpoint = ($path instanceof Contracts\Endpoint)
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
 
@@ -108,7 +102,7 @@ abstract class Request implements RequestContract
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function responseWith(ResponseInterface $message): ResponseContract
+    protected function responseWith(ResponseInterface $message): Contracts\Response
     {
         return new Response($message);
     }
@@ -164,8 +158,8 @@ abstract class Request implements RequestContract
      *
      * @return \Laravie\Codex\Contracts\Endpoint
      */
-    protected function getApiEndpoint($path = []): EndpointContract
+    protected function getApiEndpoint($path = []): Contracts\Endpoint
     {
-        return new Endpoint($this->client->getApiEndpoint(), $path);
+        return new Common\Endpoint($this->client->getApiEndpoint(), $path);
     }
 }

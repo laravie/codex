@@ -2,7 +2,7 @@
 
 namespace Laravie\Codex\Support;
 
-use Laravie\Codex\Contracts\Response as ResponseContract;
+use Laravie\Codex\Contracts\Response;
 
 trait Versioning
 {
@@ -24,7 +24,7 @@ trait Versioning
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function proxyRequestViaVersion(string $swapVersion, callable $callback): ResponseContract
+    protected function proxyRequestViaVersion(string $swapVersion, callable $callback): Response
     {
         $version = $this->version;
 
