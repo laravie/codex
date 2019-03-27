@@ -4,15 +4,17 @@ namespace Laravie\Codex\Tests\Acme\One;
 
 use Laravie\Codex\Request;
 use Laravie\Codex\Endpoint;
-use Laravie\Codex\Sanitizer;
+use Laravie\Codex\Filter\Sanitizer;
+use Laravie\Codex\Contracts\Filterable;
+use Laravie\Codex\Filter\WithSanitizer;
 use Laravie\Codex\Concerns\Request\Json;
 use Laravie\Codex\Concerns\Request\Multipart;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 use Laravie\Codex\Contracts\Sanitizer as SanitizerContract;
 
-class Welcome extends Request
+class Welcome extends Request implements Filterable
 {
-    use Json, Multipart;
+    use Json, Multipart, WithSanitizer;
 
     /**
      * Version namespace.

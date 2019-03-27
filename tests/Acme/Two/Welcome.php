@@ -4,9 +4,7 @@ namespace Laravie\Codex\Tests\Acme\Two;
 
 use Laravie\Codex\Request;
 use Laravie\Codex\Endpoint;
-use Laravie\Codex\Sanitizer;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
-use Laravie\Codex\Contracts\Sanitizer as SanitizerContract;
 
 class Welcome extends Request
 {
@@ -71,15 +69,5 @@ class Welcome extends Request
     protected function getApiEndpoint($path = []): EndpointContract
     {
         return parent::getApiEndpoint([$this->getVersion(), $path]);
-    }
-
-    /**
-     * Sanitize with.
-     *
-     * @return Laravie\Codex\Contracts\Sanitizer
-     */
-    public function sanitizeWith(): SanitizerContract
-    {
-        return new Sanitizer();
     }
 }
