@@ -40,7 +40,6 @@ class RequestTest extends TestCase
 
         $this->assertInstanceOf(RequestContract::class, $stub);
         $this->assertSame('v1', $stub->getVersion());
-        $this->assertTrue($stub->hasSanitizer());
     }
 
     /** @test */
@@ -61,7 +60,6 @@ class RequestTest extends TestCase
         $this->assertSame('{"success":true}', $response->getBody());
         $this->assertSame(['success' => true], $response->getContent());
         $this->assertSame(['success' => true], $response->toArray());
-        $this->assertTrue($response->hasSanitizer());
 
         $this->assertSame('v2', $welcome->getVersion());
     }

@@ -4,16 +4,17 @@ namespace Laravie\Codex;
 
 use Laravie\Codex\Common\Endpoint;
 use Psr\Http\Message\ResponseInterface;
+use Laravie\Codex\Filter\Support\WithFilterable;
 use Laravie\Codex\Contracts\Client as ClientContract;
 use Laravie\Codex\Contracts\Request as RequestContract;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
 use Laravie\Codex\Contracts\Response as ResponseContract;
+use Laravie\Codex\Contracts\Filterable as FilterableContract;
 
 abstract class Request implements RequestContract
 {
     use Support\Responsable,
-        Support\Versioning,
-        Support\WithSanitizer;
+        Support\Versioning;
 
     /**
      * Version namespace.
@@ -41,8 +42,8 @@ abstract class Request implements RequestContract
      */
     public function __construct()
     {
-        if (\method_exists($this, 'sanitizeWith')) {
-            $this->setSanitizer($this->sanitizeWith());
+        if (\method_exists($this, 'sanitizeWith') && $this instanceof FilterableContract) {
+            $this->setFilterable($this->sanitizeWith());
         }
     }
 
@@ -86,7 +87,9 @@ abstract class Request implements RequestContract
      */
     protected function send(string $method, $path, array $headers = [], $body = []): ResponseContract
     {
-        $body = $this->sanitizeFrom($body);
+        if ($this instanceof FilterableContract) {
+            $body = $this->filterRequest($body);
+        }
 
         $endpoint = ($path instanceof EndpointContract)
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())

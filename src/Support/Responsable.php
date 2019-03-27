@@ -4,6 +4,7 @@ namespace Laravie\Codex\Support;
 
 use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Contracts\Response as ResponseContract;
+use Laravie\Codex\Contracts\Filterable as FilterableContract;
 
 trait Responsable
 {
@@ -16,7 +17,9 @@ trait Responsable
      */
     protected function interactsWithResponse(ResponseContract $response): ResponseContract
     {
-        $response->setSanitizer($this->getSanitizer());
+        if ($response instanceof FilterableContract && $this instanceof FilterableContract) {
+            $response->setFilterable($this->getFilterable());
+        }
 
         if ($this->validateResponseAutomatically === true) {
             $response->validate();

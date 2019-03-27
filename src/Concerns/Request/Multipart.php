@@ -4,6 +4,7 @@ namespace Laravie\Codex\Concerns\Request;
 
 use Laravie\Codex\Contracts\Endpoint;
 use Laravie\Codex\Contracts\Response;
+use Laravie\Codex\Contracts\Filterable;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder as Builder;
 
@@ -23,7 +24,10 @@ trait Multipart
     public function stream(string $method, $path, array $headers = [], $body = [], array $files = []): Response
     {
         $headers['Content-Type'] = 'multipart/form-data';
-        $body = $this->sanitizeFrom($body);
+
+        if ($this instanceof Filterable) {
+            $body = $this->filterRequest($body);
+        }
 
         [$headers, $stream] = $this->prepareMultipartRequestPayloads(
             $headers, $body, $files
@@ -60,7 +64,9 @@ trait Multipart
         $builder = new Builder(StreamFactoryDiscovery::find());
 
         $this->addFilesToMultipartBuilder($builder, $files);
-        $this->addBodyToMultipartBuilder($builder, $this->sanitizeFrom($body));
+        $this->addBodyToMultipartBuilder(
+            $builder, $this instanceof Filterable ? $this->filterRequest($body) : $body
+        );
 
         $headers['Content-Type'] = 'multipart/form-data; boundary='.$builder->getBoundary();
 
@@ -110,13 +116,4 @@ trait Multipart
             }
         }
     }
-
-    /**
-     * Sanitize "to" for content.
-     *
-     * @param  array|mixed  $content
-     *
-     * @return array
-     */
-    abstract public function sanitizeTo($content): array;
 }
