@@ -31,7 +31,7 @@
         "phpunit/phpunit": "^7.5 || ^8.0"
     },
     "suggest": {
-        "laravie/codex-filter": "Content filtering for Laravie Codex",
+        "laravie/codex-filter": "Content filtering for Laravie Codex (^1.0)",
         "php-http/multipart-stream-builder": "Allow to send multipart form request (^1.0)",
         "phpunit/phpunit": "Allow to use Codex Faker request during testing (^8.0)"
     },
