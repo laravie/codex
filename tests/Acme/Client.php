@@ -2,7 +2,7 @@
 
 namespace Laravie\Codex\TestCase\Acme;
 
-use Laravie\Codex\Discovery;
+use Laravie\Codex\Common\Discovery;
 use Laravie\Codex\Client as BaseClient;
 use Http\Client\Common\HttpMethodsClient as HttpClient;
 

@@ -6,7 +6,7 @@ use InvalidArgumentException;
 
 abstract class Client implements Contracts\Client
 {
-    use Support\HttpClient;
+    use Common\HttpClient;
 
     /**
      * The API endpoint.

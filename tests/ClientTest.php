@@ -3,9 +3,9 @@
 namespace Laravie\Codex\TestCase;
 
 use Mockery as m;
-use Laravie\Codex\Discovery;
 use PHPUnit\Framework\TestCase;
 use Laravie\Codex\Testing\Faker;
+use Laravie\Codex\Common\Discovery;
 use Laravie\Codex\TestCase\Acme\Client;
 
 class ClientTest extends TestCase
