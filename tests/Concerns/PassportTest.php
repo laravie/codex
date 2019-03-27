@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Codex\TestCase\Concerns;
+namespace Laravie\Codex\Tests\Concerns;
 
 use PHPUnit\Framework\TestCase;
 use Laravie\Codex\Concerns\Passport;

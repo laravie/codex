@@ -1,11 +1,11 @@
 <?php
 
-namespace Laravie\Codex\TestCase;
+namespace Laravie\Codex\Tests;
 
 use Laravie\Codex\Sanitizer;
 use PHPUnit\Framework\TestCase;
-use Laravie\Codex\TestCase\Acme\Casts\Arr;
-use Laravie\Codex\TestCase\Acme\Casts\Carbon;
+use Laravie\Codex\Tests\Acme\Casts\Arr;
+use Laravie\Codex\Tests\Acme\Casts\Carbon;
 
 class SanitizerTest extends TestCase
 {

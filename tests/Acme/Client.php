@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Codex\TestCase\Acme;
+namespace Laravie\Codex\Tests\Acme;
 
 use Laravie\Codex\Discovery;
 use Laravie\Codex\Client as BaseClient;

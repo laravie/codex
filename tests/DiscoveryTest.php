@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Codex\TestCase;
+namespace Laravie\Codex\Tests;
 
 use Laravie\Codex\Discovery;
 use PHPUnit\Framework\TestCase;
