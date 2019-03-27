@@ -3,8 +3,10 @@
 namespace Laravie\Codex;
 
 use InvalidArgumentException;
+use Laravie\Codex\Contracts\Client as ClientContract;
+use Laravie\Codex\Contracts\Request as RequestContract;
 
-abstract class Client implements Contracts\Client
+abstract class Client implements ClientContract
 {
     use Common\HttpClient;
 
@@ -103,7 +105,7 @@ abstract class Client implements Contracts\Client
      *
      * @return \Laravie\Codex\Contracts\Request
      */
-    public function uses(string $service, ?string $version = null): Contracts\Request
+    public function uses(string $service, ?string $version = null): RequestContract
     {
         if (\is_null($version) || ! \array_key_exists($version, $this->supportedVersions)) {
             $version = $this->defaultVersion;
@@ -126,7 +128,7 @@ abstract class Client implements Contracts\Client
      *
      * @return \Laravie\Codex\Contracts\Request
      */
-    public function via(Contracts\Request $request): Contracts\Request
+    public function via(RequestContract $request): RequestContract
     {
         $request->setClient($this);
 

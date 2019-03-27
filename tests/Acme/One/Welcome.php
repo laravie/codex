@@ -3,8 +3,8 @@
 namespace Laravie\Codex\TestCase\Acme\One;
 
 use Laravie\Codex\Request;
-use Laravie\Codex\Endpoint;
 use Laravie\Codex\Sanitizer;
+use Laravie\Codex\Common\Endpoint;
 use Laravie\Codex\Concerns\Request\Json;
 use Laravie\Codex\Concerns\Request\Multipart;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;

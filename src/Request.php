@@ -2,9 +2,14 @@
 
 namespace Laravie\Codex;
 
+use Laravie\Codex\Common\Endpoint;
 use Psr\Http\Message\ResponseInterface;
+use Laravie\Codex\Contracts\Client as ClientContract;
+use Laravie\Codex\Contracts\Request as RequestContract;
+use Laravie\Codex\Contracts\Endpoint as EndpointContract;
+use Laravie\Codex\Contracts\Response as ResponseContract;
 
-abstract class Request implements Contracts\Request
+abstract class Request implements RequestContract
 {
     use Support\Responsable,
         Support\Versioning,
@@ -50,7 +55,7 @@ abstract class Request implements Contracts\Request
      *
      * @return \Laravie\Codex\Contracts\Endpoint
      */
-    public static function to(string $uri, $path = [], array $query = []): Contracts\Endpoint
+    public static function to(string $uri, $path = [], array $query = []): EndpointContract
     {
         return new Endpoint($uri, $path, $query);
     }
@@ -62,7 +67,7 @@ abstract class Request implements Contracts\Request
      *
      * @return $this
      */
-    final public function setClient(Contracts\Client $client): self
+    final public function setClient(ClientContract $client): self
     {
         $this->client = $client;
 
@@ -79,11 +84,11 @@ abstract class Request implements Contracts\Request
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function send(string $method, $path, array $headers = [], $body = []): Contracts\Response
+    protected function send(string $method, $path, array $headers = [], $body = []): ResponseContract
     {
         $body = $this->sanitizeFrom($body);
 
-        $endpoint = ($path instanceof Contracts\Endpoint)
+        $endpoint = ($path instanceof EndpointContract)
                         ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
                         : $this->getApiEndpoint($path);
 
@@ -101,7 +106,7 @@ abstract class Request implements Contracts\Request
      *
      * @return \Laravie\Codex\Contracts\Response
      */
-    protected function responseWith(ResponseInterface $message): Contracts\Response
+    protected function responseWith(ResponseInterface $message): ResponseContract
     {
         return new Response($message);
     }
@@ -157,7 +162,7 @@ abstract class Request implements Contracts\Request
      *
      * @return \Laravie\Codex\Contracts\Endpoint
      */
-    protected function getApiEndpoint($path = []): Contracts\Endpoint
+    protected function getApiEndpoint($path = []): EndpointContract
     {
         return new Endpoint($this->client->getApiEndpoint(), $path);
     }

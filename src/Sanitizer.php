@@ -2,7 +2,10 @@
 
 namespace Laravie\Codex;
 
-class Sanitizer implements Contracts\Sanitizer
+use Laravie\Codex\Contracts\Cast as CastContract;
+use Laravie\Codex\Contracts\Sanitizer as SanitizerContract;
+
+class Sanitizer implements SanitizerContract
 {
     /**
      * Sanitization rules.
@@ -19,7 +22,7 @@ class Sanitizer implements Contracts\Sanitizer
      *
      * @return $this
      */
-    public function add($group, Contracts\Cast $cast)
+    public function add($group, CastContract $cast)
     {
         $this->casts = \igorw\assoc_in($this->casts, (array) $group, $cast);
 
@@ -119,11 +122,11 @@ class Sanitizer implements Contracts\Sanitizer
      *
      * @return \Laravie\Codex\Contracts\Cast|null
      */
-    protected function getCaster($group): ?Contracts\Cast
+    protected function getCaster($group): ?CastContract
     {
         $cast = \igorw\get_in($this->casts, (array) $group);
 
-        if (\is_subclass_of($cast, Contracts\Cast::class)) {
+        if (\is_subclass_of($cast, CastContract::class)) {
             return \is_string($cast) ? new $cast() : $cast;
         }
 
