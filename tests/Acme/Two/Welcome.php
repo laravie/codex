@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Codex\TestCase\Acme\Two;
+namespace Laravie\Codex\Tests\Acme\Two;
 
 use Laravie\Codex\Request;
 use Laravie\Codex\Endpoint;
