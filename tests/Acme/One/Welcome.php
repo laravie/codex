@@ -7,9 +7,11 @@ use Laravie\Codex\Endpoint;
 use Laravie\Codex\Filter\Sanitizer;
 use Laravie\Codex\Contracts\Filterable;
 use Laravie\Codex\Filter\WithSanitizer;
+use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Concerns\Request\Json;
 use Laravie\Codex\Concerns\Request\Multipart;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
+use Laravie\Codex\Contracts\Response as ResponseContract;
 use Laravie\Codex\Contracts\Sanitizer as SanitizerContract;
 
 class Welcome extends Request implements Filterable
@@ -89,6 +91,19 @@ class Welcome extends Request implements Filterable
         }
 
         return parent::getApiEndpoint($path);
+    }
+
+
+    /**
+     * Resolve the responder class.
+     *
+     * @param  \Psr\Http\Message\ResponseInterface  $message
+     *
+     * @return \Laravie\Codex\Contracts\Response
+     */
+    protected function responseWith(ResponseInterface $message): ResponseContract
+    {
+        return new Response($message);
     }
 
     /**
