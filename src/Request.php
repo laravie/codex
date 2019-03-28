@@ -4,7 +4,7 @@ namespace Laravie\Codex;
 
 use Psr\Http\Message\ResponseInterface;
 
-abstract class Request implements Contracts\Request
+abstract class Request extends \Laravie\Codex\Common\Request
 {
     use Support\Responsable,
         Support\Versioning;
@@ -15,13 +15,6 @@ abstract class Request implements Contracts\Request
      * @var string
      */
     protected $version;
-
-    /**
-     * The Codex client.
-     *
-     * @var \Laravie\Codex\Contracts\Client
-     */
-    protected $client;
 
     /**
      * Automatically validate response.
@@ -52,20 +45,6 @@ abstract class Request implements Contracts\Request
     public static function to(string $uri, $path = [], array $query = []): Contracts\Endpoint
     {
         return new Common\Endpoint($uri, $path, $query);
-    }
-
-    /**
-     * Set Codex Client.
-     *
-     * @param  \Laravie\Codex\Contracts\Client  $client
-     *
-     * @return $this
-     */
-    final public function setClient(Contracts\Client $client): self
-    {
-        $this->client = $client;
-
-        return $this;
     }
 
     /**
