@@ -43,6 +43,28 @@ class RequestTest extends TestCase
     }
 
     /** @test */
+    public function it_can_send_request()
+    {
+        $faker = Faker::create()
+                    ->send('GET', [])
+                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
+                    ->shouldResponseWith(200, '{"success":true}');
+
+        $welcome = (new Acme\Client($faker->http(), 'abc'))
+                            ->useVersion('v1')
+                            ->uses('Welcome');
+
+        $response = $welcome->show();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('{"success":true}', $response->getBody());
+        $this->assertSame(['success' => true], $response->getContent());
+        $this->assertSame(['success' => true], $response->toArray());
+
+        $this->assertSame('v1', $welcome->getVersion());
+    }
+
+    /** @test */
     public function it_can_proxy_request_via_different_version()
     {
         $faker = Faker::create()
