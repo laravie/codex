@@ -34,20 +34,6 @@ abstract class Request extends \Laravie\Codex\Common\Request
     }
 
     /**
-     * Create Endpoint instance.
-     *
-     * @param  string $uri
-     * @param  string|array  $path
-     * @param  array  $query
-     *
-     * @return \Laravie\Codex\Contracts\Endpoint
-     */
-    public static function to(string $uri, $path = [], array $query = []): Contracts\Endpoint
-    {
-        return new Common\Endpoint($uri, $path, $query);
-    }
-
-    /**
      * Send API request.
      *
      * @param  string  $method
