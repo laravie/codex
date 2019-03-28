@@ -125,6 +125,6 @@ abstract class Request extends Common\Request
      */
     protected function getApiEndpoint($path = []): Contracts\Endpoint
     {
-        return new Common\Endpoint($this->client->getApiEndpoint(), $path);
+        return new Endpoint($this->client->getApiEndpoint(), $path);
     }
 }
