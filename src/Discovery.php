@@ -2,7 +2,7 @@
 
 namespace Laravie\Codex;
 
-final class Discovery extends \Laravie\Codex\Common\Discovery
+final class Discovery extends Common\Discovery
 {
     //
 }

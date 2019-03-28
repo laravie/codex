@@ -4,7 +4,7 @@ namespace Laravie\Codex;
 
 use Psr\Http\Message\ResponseInterface;
 
-abstract class Request extends \Laravie\Codex\Common\Request
+abstract class Request extends Common\Request
 {
     use Support\Responsable,
         Support\Versioning;
