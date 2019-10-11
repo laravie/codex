@@ -21,7 +21,7 @@
     },
     "require": {
         "php": ">=7.1",
-        "laravie/codex-common": "^1.0.1"
+        "laravie/codex-common": "^1.2"
     },
     "require-dev": {
         "laravie/codex-filter": "^1.0",
@@ -37,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.0-dev"
+            "dev-master": "5.1-dev"
         }
     },
     "config": {
