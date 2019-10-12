@@ -48,12 +48,12 @@ trait Multipart
      * Prepare multipart request payloads.
      *
      * @param  array  $headers
-     * @param  array  $body
+     * @param  \Psr\Http\Message\StreamInterface|array  $body
      * @param  array  $files
      *
      * @return array
      */
-    final public function prepareMultipartRequestPayloads(array $headers = [], array $body = [], array $files = []): array
+    final public function prepareMultipartRequestPayloads(array $headers = [], $body = [], array $files = []): array
     {
         $multipart = (($headers['Content-Type'] ?? null) == 'multipart/form-data');
 
@@ -77,12 +77,12 @@ trait Multipart
      * Add body to multipart stream builder.
      *
      * @param  \Http\Message\MultipartStream\MultipartStreamBuilder  $builder
-     * @param  array  $body
+     * @param  \Psr\Http\Message\StreamInterface|array  $body
      * @param  string|null  $prefix
      *
      * @return void
      */
-    final protected function addBodyToMultipartBuilder(Builder $builder, array $body, ?string $prefix = null): void
+    final protected function addBodyToMultipartBuilder(Builder $builder, $body, ?string $prefix = null): void
     {
         foreach ($body as $key => $value) {
             $name = $key;
