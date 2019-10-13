@@ -49,7 +49,7 @@ abstract class Request extends Common\Request
             $body = $this->filterRequest($body);
         }
 
-        $endpoint = ($path instanceof Contracts\Endpoint)
+        $endpoint = $path instanceof Contracts\Endpoint
             ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
             : $this->getApiEndpoint($path);
 

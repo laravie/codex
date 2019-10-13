@@ -26,7 +26,7 @@ trait Multipart
     {
         $headers['Content-Type'] = 'multipart/form-data';
 
-        $endpoint = ($path instanceof Endpoint)
+        $endpoint = $path instanceof Endpoint
             ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
             : $this->getApiEndpoint($path);
 
@@ -65,6 +65,7 @@ trait Multipart
         $builder = new Builder(StreamFactoryDiscovery::find());
 
         $this->addFilesToMultipartBuilder($builder, $files);
+
         $this->addBodyToMultipartBuilder(
             $builder, $this instanceof Filterable ? $this->filterRequest($body) : $body
         );
@@ -113,7 +114,7 @@ trait Multipart
     {
         foreach ($files as $key => $file) {
             if (! \is_null($file)) {
-                $builder->addResource($key, fopen($file, 'r'));
+                $builder->addResource($key, \fopen($file, 'r'));
             }
         }
     }
