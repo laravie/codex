@@ -4,6 +4,7 @@ namespace Laravie\Codex\Concerns\Request;
 
 use Laravie\Codex\Contracts\Endpoint;
 use Laravie\Codex\Contracts\Response;
+use Psr\Http\Message\StreamInterface;
 use Laravie\Codex\Contracts\Filterable;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder as Builder;
@@ -25,17 +26,17 @@ trait Multipart
     {
         $headers['Content-Type'] = 'multipart/form-data';
 
-        if ($this instanceof Filterable) {
-            $body = $this->filterRequest($body);
-        }
-
-        [$headers, $stream] = $this->prepareMultipartRequestPayloads(
-            $headers, $body, $files
-        );
-
         $endpoint = ($path instanceof Endpoint)
-                        ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
-                        : $this->getApiEndpoint($path);
+            ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
+            : $this->getApiEndpoint($path);
+
+        if ($body instanceof StreamInterface) {
+            $stream = $body;
+        } else {
+            [$headers, $stream] = $this->prepareMultipartRequestPayloads(
+                $headers, $body, $files
+            );
+        }
 
         $message = $this->responseWith(
             $this->client->stream($method, $endpoint, $headers, $stream)
