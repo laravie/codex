@@ -50,8 +50,8 @@ abstract class Request extends Common\Request
         }
 
         $endpoint = ($path instanceof Contracts\Endpoint)
-                        ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
-                        : $this->getApiEndpoint($path);
+            ? $this->getApiEndpoint($path->getPath())->addQuery($path->getQuery())
+            : $this->getApiEndpoint($path);
 
         $message = $this->responseWith(
             $this->client->send($method, $endpoint, $headers, $body)

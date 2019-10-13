@@ -93,7 +93,6 @@ class Welcome extends Request implements Filterable
         return parent::getApiEndpoint($path);
     }
 
-
     /**
      * Resolve the responder class.
      *
