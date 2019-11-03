@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 5.1.1
+
+Released: 2019-11-03
+
+### Fixes
+
+* Avoid trying to rebuild `Psr\Http\Message\StreamInterface` from `$body` when using `Laravie\Codex\Concerns\Request\Multipart::stream()`.
+
 ## 5.1.0
 
 Released: 2019-10-11
