@@ -26,9 +26,9 @@
     "require-dev": {
         "laravie/codex-filter": "^1.0",
         "mockery/mockery": "^1.0",
-        "php-http/curl-client": "^2.0",
         "php-http/multipart-stream-builder": "^1.0",
-        "phpunit/phpunit": "^7.5 || ^8.0"
+        "phpunit/phpunit": "^7.5 || ^8.0",
+        "symfony/http-client": "^4.3"
     },
     "suggest": {
         "laravie/codex-filter": "Content filtering for Laravie Codex (^1.0)",
