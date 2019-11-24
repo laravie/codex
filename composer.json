@@ -26,13 +26,13 @@
         "igorw/get-in": "^1.0",
         "php-http/client-common": "^2.0",
         "php-http/client-implementation": "^1.0",
-        "php-http/discovery": "^1.6"
+        "php-http/discovery": "^1.7"
     },
     "require-dev": {
         "mockery/mockery": "^1.0",
-        "php-http/curl-client": "^2.0",
         "php-http/multipart-stream-builder": "^1.0",
-        "phpunit/phpunit": "^7.5 || ^8.0"
+        "phpunit/phpunit": "^7.5 || ^8.0",
+        "symfony/http-client": "^4.3"
     },
     "suggest": {
         "php-http/multipart-stream-builder": "Allow to send multipart form request (^1.0)",
