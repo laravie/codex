@@ -21,7 +21,7 @@
     },
     "require": {
         "php": ">=7.2",
-        "laravie/codex-common": "dev-master as 1.3.0"
+        "laravie/codex-common": "^1.3"
     },
     "require-dev": {
         "laravie/codex-filter": "^1.0",
