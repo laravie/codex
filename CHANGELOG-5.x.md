@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 5.2.0
+
+Released: 2020-02-05
+
+### Changes 
+
+* Bump minimum PHP to 7.2+.
+* Add support for PHPUnit 9.
+
 ## 5.1.1
 
 Released: 2019-11-03
