@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 5.3.0
+
+Released: 2020-12-28
+
+### Changes
+
+* Add support for PHP 8.
+
 ## 5.2.0
 
 Released: 2020-02-05
