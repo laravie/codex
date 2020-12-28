@@ -2,6 +2,12 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 5.3.1
+
+### Fixes
+
+* Fixes method declaration on `Laravie\Codex\Common\HttpClient::stream()`.
+
 ## 5.3.0
 
 Released: 2020-12-28
