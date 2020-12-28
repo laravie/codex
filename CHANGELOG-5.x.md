@@ -4,6 +4,8 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 ## 5.3.1
 
+Released: 2020-12-28
+
 ### Fixes
 
 * Fixes method declaration on `Laravie\Codex\Common\HttpClient::stream()`.
