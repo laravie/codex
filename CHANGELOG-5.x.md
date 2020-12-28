@@ -7,6 +7,7 @@ This changelog references the relevant changes (bug and security fixes) done to 
 ### Fixes
 
 * Fixes method declaration on `Laravie\Codex\Common\HttpClient::stream()`.
+* Fixes `Laravie\Codex\Contracts\Client::stream()` contract.
 
 ## 5.3.0
 
