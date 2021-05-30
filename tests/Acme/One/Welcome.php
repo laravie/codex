@@ -84,7 +84,7 @@ class Welcome extends Request implements Filterable
      */
     protected function getApiEndpoint($path = []): EndpointContract
     {
-        if (is_array($path)) {
+        if (\is_array($path)) {
             array_unshift($path, $this->getVersion());
         } else {
             $path = [$this->getVersion(), $path];

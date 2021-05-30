@@ -109,10 +109,10 @@ abstract class Client implements Contracts\Client
             $version = $this->defaultVersion;
         }
 
-        $name = \str_replace('.', '\\', $service);
-        $class = \sprintf('%s\%s\%s', $this->getResourceNamespace(), $this->supportedVersions[$version], $name);
+        $name = str_replace('.', '\\', $service);
+        $class = sprintf('%s\%s\%s', $this->getResourceNamespace(), $this->supportedVersions[$version], $name);
 
-        if (! \class_exists($class)) {
+        if (! class_exists($class)) {
             throw new InvalidArgumentException("Resource [{$service}] for version [{$version}] is not available.");
         }
 

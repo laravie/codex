@@ -28,7 +28,7 @@ abstract class Request extends Common\Request
      */
     public function __construct()
     {
-        if (\method_exists($this, 'sanitizeWith') && $this instanceof Contracts\Filterable) {
+        if (method_exists($this, 'sanitizeWith') && $this instanceof Contracts\Filterable) {
             $this->setFilterable($this->sanitizeWith());
         }
     }
@@ -101,7 +101,7 @@ abstract class Request extends Common\Request
      */
     final protected function mergeApiHeaders(array $headers = []): array
     {
-        return \array_merge($this->getApiHeaders(), $headers);
+        return array_merge($this->getApiHeaders(), $headers);
     }
 
     /**
@@ -113,7 +113,7 @@ abstract class Request extends Common\Request
      */
     final protected function mergeApiBody(array $body = []): array
     {
-        return \array_merge($this->getApiBody(), $body);
+        return array_merge($this->getApiBody(), $body);
     }
 
     /**

@@ -114,7 +114,7 @@ trait Multipart
     {
         foreach ($files as $key => $file) {
             if (! \is_null($file)) {
-                $builder->addResource($key, \fopen($file, 'r'));
+                $builder->addResource($key, fopen($file, 'r'));
             }
         }
     }
