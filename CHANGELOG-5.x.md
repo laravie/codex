@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/codex`.
 
+## 5.3.2
+
+Released: 2021-08-01
+
+### Changes
+
+* Code styling changes.
+
 ## 5.3.1
 
 Released: 2020-12-28
