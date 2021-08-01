@@ -4,6 +4,9 @@ namespace Laravie\Codex;
 
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @property \Laravie\Codex\Client $client
+ */
 abstract class Request extends Common\Request
 {
     use Support\Responsable,
@@ -107,7 +110,7 @@ abstract class Request extends Common\Request
     /**
      * Merge API Body.
      *
-     * @param  array  $headers
+     * @param  array  $body
      *
      * @return array
      */
