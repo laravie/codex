@@ -20,6 +20,7 @@ jobs:
           - "7.3"
           - "7.4"
           - "8.0"
+          - "8.1"
         dependencies:
           - "locked"
           - "lowest"
@@ -45,5 +46,6 @@ jobs:
         with:
           dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "--prefer-dist --no-cache"
+
       - name: Execute tests
         run: vendor/bin/phpunit
