@@ -49,6 +49,7 @@ abstract class Request extends Common\Request
     protected function send(string $method, $path, array $headers = [], $body = []): Contracts\Response
     {
         if ($this instanceof Contracts\Filterable) {
+            /** @var \Psr\Http\Message\StreamInterface|\Laravie\Codex\Common\Payload|array|null $body */
             $body = $this->filterRequest($body);
         }
 

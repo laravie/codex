@@ -110,6 +110,8 @@ abstract class Client implements Contracts\Client
         }
 
         $name = str_replace('.', '\\', $service);
+
+        /** @var class-string<\Laravie\Codex\Contracts\Request> $class */
         $class = sprintf('%s\%s\%s', $this->getResourceNamespace(), $this->supportedVersions[$version], $name);
 
         if (! class_exists($class)) {

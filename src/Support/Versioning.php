@@ -31,7 +31,10 @@ trait Versioning
         try {
             $this->version = $swapVersion;
 
-            return \call_user_func($callback);
+            /** @var \Laravie\Codex\Contracts\Response $response */
+            $response = \call_user_func($callback);
+
+            return $response;
         } finally {
             $this->version = $version;
         }
