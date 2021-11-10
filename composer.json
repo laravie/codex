@@ -30,7 +30,7 @@
         "php-http/guzzle7-adapter": "^1.0",
         "php-http/multipart-stream-builder": "^1.0",
         "phpstan/phpstan": "^1.0",
-        "phpunit/phpunit": "^8.4 || ^9.3.3"
+        "phpunit/phpunit": "^8.5.21 || ^9.5.10"
     },
     "suggest": {
         "laravie/codex-filter": "Content filtering for Laravie Codex (^1.0)",
