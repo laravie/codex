@@ -16,7 +16,7 @@ trait Multipart
      *
      * @param  string  $method
      * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
-     * @param  array  $headers
+     * @param  array<string, mixed>  $headers
      * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Payload|array|null  $body
      * @param  array  $files
      *
@@ -48,9 +48,9 @@ trait Multipart
     /**
      * Prepare multipart request payloads.
      *
-     * @param  array  $headers
+     * @param  array<string, mixed>  $headers
      * @param  array  $body
-     * @param  array  $files
+     * @param  array<int, string>  $files
      *
      * @return array
      */
@@ -106,7 +106,7 @@ trait Multipart
      * Add files to multipart stream builder.
      *
      * @param  \Http\Message\MultipartStream\MultipartStreamBuilder  $builder
-     * @param  array  $files
+     * @param  array<int, string>  $files
      *
      * @return void
      */

@@ -41,7 +41,7 @@ abstract class Request extends Common\Request
      *
      * @param  string  $method
      * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
-     * @param  array  $headers
+     * @param  array<string, mixed>  $headers
      * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Common\Payload|array|null  $body
      *
      * @return \Laravie\Codex\Contracts\Response
@@ -79,7 +79,7 @@ abstract class Request extends Common\Request
     /**
      * Get API Header.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function getApiHeaders(): array
     {
@@ -99,9 +99,9 @@ abstract class Request extends Common\Request
     /**
      * Merge API Headers.
      *
-     * @param  array  $headers
+     * @param  array<string, mixed>  $headers
      *
-     * @return array
+     * @return array<string, mixed>
      */
     final protected function mergeApiHeaders(array $headers = []): array
     {
@@ -123,7 +123,7 @@ abstract class Request extends Common\Request
     /**
      * Get API Endpoint.
      *
-     * @param  string|array  $path
+     * @param  array<int, string>|string  $path
      *
      * @return \Laravie\Codex\Contracts\Endpoint
      */

@@ -33,10 +33,10 @@ trait Versioning
 
             /** @var \Laravie\Codex\Contracts\Response $response */
             $response = \call_user_func($callback);
-
-            return $response;
         } finally {
             $this->version = $version;
         }
+
+        return $response;
     }
 }

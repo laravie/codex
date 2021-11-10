@@ -25,7 +25,7 @@ abstract class Client implements Contracts\Client
     /**
      * List of supported API versions.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $supportedVersions = [];
 
@@ -138,9 +138,9 @@ abstract class Client implements Contracts\Client
     /**
      * Prepare request headers.
      *
-     * @param  array  $headers
+     * @param  array<string, mixed>  $headers
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function prepareRequestHeaders(array $headers = []): array
     {

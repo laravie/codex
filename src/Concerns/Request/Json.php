@@ -11,7 +11,7 @@ trait Json
      *
      * @param  string  $method
      * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
-     * @param  array  $headers
+     * @param  array<string, mixed>  $headers
      * @param  \Laravie\Codex\Common\Payload|array|null  $body
      *
      * @return \Laravie\Codex\Contracts\Response
@@ -28,7 +28,7 @@ trait Json
      *
      * @param  string  $method
      * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
-     * @param  array  $headers
+     * @param  array<string, mixed>  $headers
      * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Common\Payload|array|null  $body
      *
      * @return \Laravie\Codex\Contracts\Response
