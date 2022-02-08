@@ -21,11 +21,11 @@
     },
     "require": {
         "php": "^7.2 || ^8.0",
-        "laravie/codex-common": "^1.4.3"
+        "laravie/codex-common": "^1.5.1"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravie/codex-filter": "^1.2.1",
+        "laravie/codex-filter": "^1.2.2",
         "mockery/mockery": "^1.3.1",
         "php-http/guzzle7-adapter": "^1.0",
         "php-http/multipart-stream-builder": "^1.0",
@@ -33,9 +33,9 @@
         "phpunit/phpunit": "^8.5.21 || ^9.5.10"
     },
     "suggest": {
-        "laravie/codex-filter": "Content filtering for Laravie Codex (^1.0)",
+        "laravie/codex-filter": "Content filtering for Laravie Codex (^1.2.2)",
         "php-http/multipart-stream-builder": "Allow to send multipart form request (^1.0)",
-        "phpunit/phpunit": "Allow to use Codex Faker request during testing (^8.4 || ^9.0)"
+        "phpunit/phpunit": "Allow to use Codex Faker request during testing (^8.5.21 || ^9.5.10)"
     },
     "extra": {
         "branch-alias": {
