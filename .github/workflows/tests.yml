@@ -22,11 +22,19 @@ jobs:
           - "8.0"
           - "8.1"
         dependencies:
-          - "locked"
-          - "lowest"
           - "highest"
+          - "lowest"
         experimental:
           - false
+        include:
+          - os: "ubuntu-latest"
+            php: "8.2"
+            dependencies: "highest"
+            experimental: true
+          - os: "windows-latest"
+            php: "8.2"
+            dependencies: "highest"
+            experimental: true
 
     name: PHP${{ matrix.php }} on ${{ matrix.os }} (${{ matrix.dependencies }})
 
@@ -46,5 +54,9 @@ jobs:
         with:
           dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "--prefer-dist --no-cache"
+
+      - name: Installed dependencies
+        run: composer show -D
+
       - name: Execute tests
         run: vendor/bin/phpunit
