@@ -21,7 +21,7 @@
     },
     "require": {
         "php": "^7.2 || ^8.0",
-        "laravie/codex-common": "^1.5.1"
+        "laravie/codex-common": "^1.5.2"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.0.1",
