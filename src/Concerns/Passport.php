@@ -27,8 +27,6 @@ trait Passport
 
     /**
      * Get Client ID.
-     *
-     * @return string|null
      */
     final public function getClientId(): ?string
     {
@@ -38,7 +36,6 @@ trait Passport
     /**
      * Set Client ID.
      *
-     * @param  string|null  $clientId
      *
      * @return $this
      */
@@ -51,8 +48,6 @@ trait Passport
 
     /**
      * Get Client Secret.
-     *
-     * @return string|null
      */
     final public function getClientSecret(): ?string
     {
@@ -62,7 +57,6 @@ trait Passport
     /**
      * Set Client Secret.
      *
-     * @param  string|null  $clientSecret
      *
      * @return $this
      */
@@ -75,8 +69,6 @@ trait Passport
 
     /**
      * Get access token.
-     *
-     * @return string|null
      */
     final public function getAccessToken(): ?string
     {
@@ -86,7 +78,6 @@ trait Passport
     /**
      * Set access token.
      *
-     * @param string|null $accessToken
      *
      * @return $this
      */

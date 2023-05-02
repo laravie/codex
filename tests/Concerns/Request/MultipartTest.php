@@ -2,14 +2,14 @@
 
 namespace Laravie\Codex\Tests\Concerns\Request;
 
-use Mockery as m;
-use Laravie\Codex\Request;
-use PHPUnit\Framework\TestCase;
+use Laravie\Codex\Concerns\Request\Multipart;
 use Laravie\Codex\Contracts\Client;
 use Laravie\Codex\Contracts\Endpoint;
-use Psr\Http\Message\StreamInterface;
+use Laravie\Codex\Request;
+use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use Laravie\Codex\Concerns\Request\Multipart;
+use Psr\Http\Message\StreamInterface;
 
 class MultipartTest extends TestCase
 {
@@ -30,15 +30,16 @@ class MultipartTest extends TestCase
         $client = m::mock(Client::class);
         $client->shouldReceive('getApiEndpoint')->once()->andReturn('https://laravel.com/')
             ->shouldReceive('stream')
-                ->once()
-                ->with('POST', m::type(Endpoint::class), m::type('Array'), m::type(StreamInterface::class))
-                ->andReturn($message);
+            ->once()
+            ->with('POST', m::type(Endpoint::class), m::type('Array'), m::type(StreamInterface::class))
+            ->andReturn($message);
 
         $endpoint = m::mock(Endpoint::class);
         $endpoint->shouldReceive('getPath')->andReturn(['docs', '5.5'])
             ->shouldReceive('getQuery')->andReturn(['search' => 'codex']);
 
-        $stub = new class() extends Request {
+        $stub = new class() extends Request
+        {
             use Multipart;
 
             public function ping($endpoint)
@@ -61,11 +62,12 @@ class MultipartTest extends TestCase
         $client = m::mock(Client::class);
         $client->shouldReceive('getApiEndpoint')->once()->andReturn('https://laravel.com/')
             ->shouldReceive('send')
-                ->once()
-                ->with('POST', m::type(Endpoint::class), ['Content-Type' => 'application/json'], ['search' => 'codex'])
-                ->andReturn($message);
+            ->once()
+            ->with('POST', m::type(Endpoint::class), ['Content-Type' => 'application/json'], ['search' => 'codex'])
+            ->andReturn($message);
 
-        $stub = new class() extends Request {
+        $stub = new class() extends Request
+        {
             use Multipart;
 
             public function ping()
@@ -92,20 +94,21 @@ class MultipartTest extends TestCase
         $client = m::mock(Client::class);
         $client->shouldReceive('getApiEndpoint')->once()->andReturn('https://laravel.com/')
             ->shouldReceive('stream')
-                ->once()
-                ->with('POST', m::type(Endpoint::class), m::type('Array'), m::type(StreamInterface::class))
-                ->andReturnUsing(function ($m, $u, $h, $b) use ($message) {
-                    $content = $b->getContents();
+            ->once()
+            ->with('POST', m::type(Endpoint::class), m::type('Array'), m::type(StreamInterface::class))
+            ->andReturnUsing(function ($m, $u, $h, $b) use ($message) {
+                $content = $b->getContents();
 
-                    $this->assertStringContainsString('Content-Disposition: form-data; name="search"', $content);
-                    $this->assertStringContainsString('Content-Disposition: form-data; name="project"', $content);
-                    $this->assertStringContainsString('Content-Disposition: form-data; name="developer[name]"', $content);
-                    $this->assertStringContainsString('Content-Disposition: form-data; name="developer[email]"', $content);
+                $this->assertStringContainsString('Content-Disposition: form-data; name="search"', $content);
+                $this->assertStringContainsString('Content-Disposition: form-data; name="project"', $content);
+                $this->assertStringContainsString('Content-Disposition: form-data; name="developer[name]"', $content);
+                $this->assertStringContainsString('Content-Disposition: form-data; name="developer[email]"', $content);
 
-                    return $message;
-                });
+                return $message;
+            });
 
-        $stub = new class() extends Request {
+        $stub = new class() extends Request
+        {
             use Multipart;
 
             public function ping()
@@ -137,23 +140,24 @@ class MultipartTest extends TestCase
         $client = m::mock(Client::class);
         $client->shouldReceive('getApiEndpoint')->once()->andReturn('https://laravel.com/')
             ->shouldReceive('stream')
-                ->once()
-                ->with('POST', m::type(Endpoint::class), m::type('Array'), m::type(StreamInterface::class))
-                ->andReturnUsing(function ($m, $u, $h, $b) use ($message) {
-                    $content = $b->getContents();
+            ->once()
+            ->with('POST', m::type(Endpoint::class), m::type('Array'), m::type(StreamInterface::class))
+            ->andReturnUsing(function ($m, $u, $h, $b) use ($message) {
+                $content = $b->getContents();
 
-                    $this->assertStringContainsString('Content-Disposition: form-data; name="hello"; filename="hello.txt"', $content);
-                    $this->assertStringContainsString('Content-Disposition: form-data; name="logo"; filename="logo.png"', $content);
+                $this->assertStringContainsString('Content-Disposition: form-data; name="hello"; filename="hello.txt"', $content);
+                $this->assertStringContainsString('Content-Disposition: form-data; name="logo"; filename="logo.png"', $content);
 
-                    $this->assertStringContainsString('Content-Disposition: form-data; name="search"', $content);
-                    $this->assertStringContainsString('Content-Disposition: form-data; name="project"', $content);
-                    $this->assertStringContainsString('Content-Disposition: form-data; name="developer[name]"', $content);
-                    $this->assertStringContainsString('Content-Disposition: form-data; name="developer[email]"', $content);
+                $this->assertStringContainsString('Content-Disposition: form-data; name="search"', $content);
+                $this->assertStringContainsString('Content-Disposition: form-data; name="project"', $content);
+                $this->assertStringContainsString('Content-Disposition: form-data; name="developer[name]"', $content);
+                $this->assertStringContainsString('Content-Disposition: form-data; name="developer[email]"', $content);
 
-                    return $message;
-                });
+                return $message;
+            });
 
-        $stub = new class() extends Request {
+        $stub = new class() extends Request
+        {
             use Multipart;
 
             public function ping()

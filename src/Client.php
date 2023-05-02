@@ -31,8 +31,6 @@ abstract class Client implements Contracts\Client
 
     /**
      * Dump HTTP requests for the client.
-     *
-     * @return array
      */
     public function queries(): array
     {
@@ -42,7 +40,6 @@ abstract class Client implements Contracts\Client
     /**
      * Use custom API Endpoint.
      *
-     * @param  string  $endpoint
      *
      * @return $this
      */
@@ -56,11 +53,10 @@ abstract class Client implements Contracts\Client
     /**
      * Use different API version.
      *
-     * @param  string  $version
-     *
-     * @throws \InvalidArgumentException
      *
      * @return $this
+     *
+     * @throws \InvalidArgumentException
      */
     public function useVersion(string $version)
     {
@@ -85,8 +81,6 @@ abstract class Client implements Contracts\Client
 
     /**
      * Get API default version.
-     *
-     * @return string
      */
     public function getApiVersion(): string
     {
@@ -96,12 +90,10 @@ abstract class Client implements Contracts\Client
     /**
      * Get versioned resource (service).
      *
-     * @param  string  $service
-     * @param  string|null  $version
-     *
-     * @throws \InvalidArgumentException
      *
      * @return \Laravie\Codex\Contracts\Request
+     *
+     * @throws \InvalidArgumentException
      */
     public function uses(string $service, ?string $version = null): Contracts\Request
     {
@@ -125,7 +117,6 @@ abstract class Client implements Contracts\Client
      * Handle uses using via.
      *
      * @param  \Laravie\Codex\Contracts\Request  $request
-     *
      * @return \Laravie\Codex\Contracts\Request
      */
     public function via(Contracts\Request $request): Contracts\Request
@@ -139,7 +130,6 @@ abstract class Client implements Contracts\Client
      * Prepare request headers.
      *
      * @param  array<string, mixed>  $headers
-     *
      * @return array<string, mixed>
      */
     protected function prepareRequestHeaders(array $headers = []): array
@@ -149,8 +139,6 @@ abstract class Client implements Contracts\Client
 
     /**
      * Get resource default namespace.
-     *
-     * @return string
      */
     abstract protected function getResourceNamespace(): string;
 }

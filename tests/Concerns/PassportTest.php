@@ -2,15 +2,16 @@
 
 namespace Laravie\Codex\Tests\Concerns;
 
-use PHPUnit\Framework\TestCase;
 use Laravie\Codex\Concerns\Passport;
+use PHPUnit\Framework\TestCase;
 
 class PassportTest extends TestCase
 {
     /** @test */
     public function it_can_uses_client_id()
     {
-        $passport = new class() {
+        $passport = new class()
+        {
             use Passport;
         };
 
@@ -24,7 +25,8 @@ class PassportTest extends TestCase
     /** @test */
     public function it_can_uses_client_secret()
     {
-        $passport = new class() {
+        $passport = new class()
+        {
             use Passport;
         };
 
@@ -38,7 +40,8 @@ class PassportTest extends TestCase
     /** @test */
     public function it_can_uses_access_token()
     {
-        $passport = new class() {
+        $passport = new class()
+        {
             use Passport;
         };
 

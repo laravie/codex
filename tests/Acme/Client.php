@@ -2,9 +2,9 @@
 
 namespace Laravie\Codex\Tests\Acme;
 
-use Laravie\Codex\Discovery;
-use Laravie\Codex\Client as BaseClient;
 use Http\Client\Common\HttpMethodsClient as HttpClient;
+use Laravie\Codex\Client as BaseClient;
+use Laravie\Codex\Discovery;
 
 class Client extends BaseClient
 {
@@ -35,8 +35,7 @@ class Client extends BaseClient
     /**
      * Construct a new Billplz Client.
      *
-     * @param \Http\Client\Common\HttpMethodsClient  $http
-     * @param string  $apiKey
+     * @param  string  $apiKey
      */
     public function __construct(HttpClient $http, $apiKey)
     {
@@ -47,8 +46,7 @@ class Client extends BaseClient
     /**
      * Make a client.
      *
-     * @param string  $apiKey
-     *
+     * @param  string  $apiKey
      * @return $this
      */
     public static function make($apiKey)
@@ -68,8 +66,6 @@ class Client extends BaseClient
 
     /**
      * Get resource default namespace.
-     *
-     * @return string
      */
     protected function getResourceNamespace(): string
     {

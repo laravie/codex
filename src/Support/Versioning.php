@@ -8,8 +8,6 @@ trait Versioning
 {
     /**
      * Get API version.
-     *
-     * @return string
      */
     final public function getVersion(): string
     {
@@ -18,11 +16,6 @@ trait Versioning
 
     /**
      * Proxy route to response via other version.
-     *
-     * @param  string   $swapVersion
-     * @param  callable $callback
-     *
-     * @return \Laravie\Codex\Contracts\Response
      */
     protected function proxyRequestViaVersion(string $swapVersion, callable $callback): Response
     {

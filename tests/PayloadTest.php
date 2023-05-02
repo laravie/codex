@@ -2,8 +2,8 @@
 
 namespace Laravie\Codex\Tests;
 
-use Mockery as m;
 use Laravie\Codex\Payload;
+use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 

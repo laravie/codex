@@ -2,14 +2,14 @@
 
 namespace Laravie\Codex\Tests;
 
-use Mockery as m;
-use Laravie\Codex\Request;
-use PHPUnit\Framework\TestCase;
-use Laravie\Codex\Testing\Faker;
 use Laravie\Codex\Contracts\Client;
 use Laravie\Codex\Contracts\Endpoint;
-use Laravie\Codex\Tests\Acme\One\Welcome;
 use Laravie\Codex\Contracts\Request as RequestContract;
+use Laravie\Codex\Request;
+use Laravie\Codex\Testing\Faker;
+use Laravie\Codex\Tests\Acme\One\Welcome;
+use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase
 {
@@ -46,13 +46,13 @@ class RequestTest extends TestCase
     public function it_can_send_request()
     {
         $faker = Faker::create()
-                    ->send('GET', [])
-                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
-                    ->shouldResponseWith(200, '{"success":true}');
+            ->send('GET', [])
+            ->expectEndpointIs('https://acme.laravie/v1/welcome')
+            ->shouldResponseWith(200, '{"success":true}');
 
         $welcome = (new Acme\Client($faker->http(), 'abc'))
-                            ->useVersion('v1')
-                            ->uses('Welcome');
+            ->useVersion('v1')
+            ->uses('Welcome');
 
         $response = $welcome->show();
 
@@ -68,13 +68,13 @@ class RequestTest extends TestCase
     public function it_can_proxy_request_via_different_version()
     {
         $faker = Faker::create()
-                    ->send('GET', ['Authorization' => 'Bearer abc'])
-                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
-                    ->shouldResponseWith(200, '{"success":true}');
+            ->send('GET', ['Authorization' => 'Bearer abc'])
+            ->expectEndpointIs('https://acme.laravie/v1/welcome')
+            ->shouldResponseWith(200, '{"success":true}');
 
         $welcome = (new Acme\Client($faker->http(), 'abc'))
-                            ->useVersion('v2')
-                            ->uses('Welcome');
+            ->useVersion('v2')
+            ->uses('Welcome');
 
         $response = $welcome->legacyShow();
 

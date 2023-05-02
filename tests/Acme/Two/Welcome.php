@@ -2,9 +2,9 @@
 
 namespace Laravie\Codex\Tests\Acme\Two;
 
-use Laravie\Codex\Request;
-use Laravie\Codex\Endpoint;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
+use Laravie\Codex\Endpoint;
+use Laravie\Codex\Request;
 
 class Welcome extends Request
 {
@@ -49,8 +49,6 @@ class Welcome extends Request
 
     /**
      * Get API Header.
-     *
-     * @return array
      */
     protected function getApiHeaders(): array
     {
@@ -63,8 +61,6 @@ class Welcome extends Request
      * Get API Endpoint.
      *
      * @param  string|array  $path
-     *
-     * @return \Laravie\Codex\Contracts\Endpoint
      */
     protected function getApiEndpoint($path = []): EndpointContract
     {

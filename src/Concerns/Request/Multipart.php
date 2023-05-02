@@ -2,25 +2,22 @@
 
 namespace Laravie\Codex\Concerns\Request;
 
-use Laravie\Codex\Contracts\Endpoint;
-use Laravie\Codex\Contracts\Response;
-use Psr\Http\Message\StreamInterface;
-use Laravie\Codex\Contracts\Filterable;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder as Builder;
+use Laravie\Codex\Contracts\Endpoint;
+use Laravie\Codex\Contracts\Filterable;
+use Laravie\Codex\Contracts\Response;
+use Psr\Http\Message\StreamInterface;
 
 trait Multipart
 {
     /**
      * Stream (multipart) the HTTP request.
      *
-     * @param  string  $method
      * @param  \Laravie\Codex\Contracts\Endpoint|string  $path
      * @param  array<string, mixed>  $headers
      * @param  \Psr\Http\Message\StreamInterface|\Laravie\Codex\Payload|array|null  $body
      * @param  array<string, string>  $files
-     *
-     * @return \Laravie\Codex\Contracts\Response
      */
     public function stream(string $method, $path, array $headers = [], $body = [], array $files = []): Response
     {
@@ -49,10 +46,7 @@ trait Multipart
      * Prepare multipart request payloads.
      *
      * @param  array<string, mixed>  $headers
-     * @param  array  $body
      * @param  array<string, string>  $files
-     *
-     * @return array
      */
     final public function prepareMultipartRequestPayloads(array $headers = [], array $body = [], array $files = []): array
     {
@@ -77,12 +71,6 @@ trait Multipart
 
     /**
      * Add body to multipart stream builder.
-     *
-     * @param  \Http\Message\MultipartStream\MultipartStreamBuilder  $builder
-     * @param  array  $body
-     * @param  string|null  $prefix
-     *
-     * @return void
      */
     final protected function addBodyToMultipartBuilder(Builder $builder, array $body, ?string $prefix = null): void
     {
@@ -95,6 +83,7 @@ trait Multipart
 
             if (\is_array($value)) {
                 $this->addBodyToMultipartBuilder($builder, $value, $name);
+
                 continue;
             }
 
@@ -105,10 +94,7 @@ trait Multipart
     /**
      * Add files to multipart stream builder.
      *
-     * @param  \Http\Message\MultipartStream\MultipartStreamBuilder  $builder
      * @param  array<string, string>  $files
-     *
-     * @return void
      */
     final protected function addFilesToMultipartBuilder(Builder $builder, array $files = []): void
     {

@@ -2,17 +2,17 @@
 
 namespace Laravie\Codex\Tests\Acme\One;
 
-use Laravie\Codex\Request;
-use Laravie\Codex\Endpoint;
-use Laravie\Codex\Filter\Sanitizer;
-use Laravie\Codex\Contracts\Filterable;
-use Laravie\Codex\Filter\WithSanitizer;
-use Psr\Http\Message\ResponseInterface;
 use Laravie\Codex\Concerns\Request\Json;
 use Laravie\Codex\Concerns\Request\Multipart;
 use Laravie\Codex\Contracts\Endpoint as EndpointContract;
+use Laravie\Codex\Contracts\Filterable;
 use Laravie\Codex\Contracts\Response as ResponseContract;
 use Laravie\Codex\Contracts\Sanitizer as SanitizerContract;
+use Laravie\Codex\Endpoint;
+use Laravie\Codex\Filter\Sanitizer;
+use Laravie\Codex\Filter\WithSanitizer;
+use Laravie\Codex\Request;
+use Psr\Http\Message\ResponseInterface;
 
 class Welcome extends Request implements Filterable
 {
@@ -79,8 +79,6 @@ class Welcome extends Request implements Filterable
      * Get API Endpoint.
      *
      * @param  string|array  $path
-     *
-     * @return \Laravie\Codex\Contracts\Endpoint
      */
     protected function getApiEndpoint($path = []): EndpointContract
     {
@@ -95,10 +93,6 @@ class Welcome extends Request implements Filterable
 
     /**
      * Resolve the responder class.
-     *
-     * @param  \Psr\Http\Message\ResponseInterface  $message
-     *
-     * @return \Laravie\Codex\Contracts\Response
      */
     protected function responseWith(ResponseInterface $message): ResponseContract
     {

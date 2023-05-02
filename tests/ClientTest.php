@@ -2,11 +2,11 @@
 
 namespace Laravie\Codex\Tests;
 
-use Mockery as m;
 use Laravie\Codex\Discovery;
-use PHPUnit\Framework\TestCase;
 use Laravie\Codex\Testing\Faker;
 use Laravie\Codex\Tests\Acme\Client;
+use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
 class ClientTest extends TestCase
 {
@@ -45,13 +45,13 @@ class ClientTest extends TestCase
     public function it_can_send_api_request_on_version_one()
     {
         $faker = Faker::create()
-                    ->send('GET', [])
-                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
-                    ->shouldResponseWith(200, '{"success":true}');
+            ->send('GET', [])
+            ->expectEndpointIs('https://acme.laravie/v1/welcome')
+            ->shouldResponseWith(200, '{"success":true}');
 
         $response = (new Client($faker->http(), 'abc'))
-                            ->uses('Welcome')
-                            ->show();
+            ->uses('Welcome')
+            ->show();
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -63,14 +63,14 @@ class ClientTest extends TestCase
     public function it_can_send_api_request_on_version_two()
     {
         $faker = Faker::create()
-                    ->send('GET', ['Authorization' => 'Bearer abc'])
-                    ->expectEndpointIs('https://acme.laravie/v2/welcome')
-                    ->shouldResponseWith(200, '{"success":true}');
+            ->send('GET', ['Authorization' => 'Bearer abc'])
+            ->expectEndpointIs('https://acme.laravie/v2/welcome')
+            ->shouldResponseWith(200, '{"success":true}');
 
         $response = (new Client($faker->http(), 'abc'))
-                            ->useVersion('v2')
-                            ->uses('Welcome')
-                            ->show();
+            ->useVersion('v2')
+            ->uses('Welcome')
+            ->show();
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -87,13 +87,13 @@ class ClientTest extends TestCase
         ];
 
         $faker = Faker::create()
-                    ->send('POST', [], http_build_query($payload, '', '&'))
-                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
-                    ->shouldResponseWith(200, '{"success":true}');
+            ->send('POST', [], http_build_query($payload, '', '&'))
+            ->expectEndpointIs('https://acme.laravie/v1/welcome')
+            ->shouldResponseWith(200, '{"success":true}');
 
         $response = (new Client($faker->http(), 'abc'))
-                        ->uses('Welcome')
-                        ->ping($payload);
+            ->uses('Welcome')
+            ->ping($payload);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -105,13 +105,13 @@ class ClientTest extends TestCase
     public function it_can_send_api_request_by_streaming()
     {
         $faker = Faker::create()
-                    ->stream('POST', ['Accept' => 'application/json'])
-                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
-                    ->shouldResponseWith(200, '{"success":true}');
+            ->stream('POST', ['Accept' => 'application/json'])
+            ->expectEndpointIs('https://acme.laravie/v1/welcome')
+            ->shouldResponseWith(200, '{"success":true}');
 
         $response = (new Client($faker->http(), 'abc'))
-                            ->uses('Welcome')
-                            ->streamPing([], ['Accept' => 'application/json']);
+            ->uses('Welcome')
+            ->streamPing([], ['Accept' => 'application/json']);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -125,13 +125,13 @@ class ClientTest extends TestCase
         $payload = ['meta' => ['foo', 'bar']];
 
         $faker = Faker::create()
-                    ->sendJson('POST', [], json_encode($payload))
-                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
-                    ->shouldResponseWith(200, '{"success":true}');
+            ->sendJson('POST', [], json_encode($payload))
+            ->expectEndpointIs('https://acme.laravie/v1/welcome')
+            ->shouldResponseWith(200, '{"success":true}');
 
         $response = (new Client($faker->http(), 'abc'))
-                        ->uses('Welcome')
-                        ->jsonPing($payload, []);
+            ->uses('Welcome')
+            ->jsonPing($payload, []);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -145,13 +145,13 @@ class ClientTest extends TestCase
         $payload = ['meta' => ['foo', 'bar']];
 
         $faker = Faker::create()
-                    ->sendJson('POST', [], $payload)
-                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
-                    ->shouldResponseWith(200, '{"success":true}');
+            ->sendJson('POST', [], $payload)
+            ->expectEndpointIs('https://acme.laravie/v1/welcome')
+            ->shouldResponseWith(200, '{"success":true}');
 
         $response = (new Client($faker->http(), 'abc'))
-                        ->uses('Welcome')
-                        ->jsonPing($payload, []);
+            ->uses('Welcome')
+            ->jsonPing($payload, []);
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -163,13 +163,13 @@ class ClientTest extends TestCase
     public function it_can_send_api_request_by_providing_endpoint()
     {
         $faker = Faker::create()
-                    ->call('GET', [], '')
-                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
-                    ->shouldResponseWith(200, '{"success":true}');
+            ->call('GET', [], '')
+            ->expectEndpointIs('https://acme.laravie/v1/welcome')
+            ->shouldResponseWith(200, '{"success":true}');
 
         $response = (new Client($faker->http(), 'abc'))
-                        ->uses('Welcome')
-                        ->pong();
+            ->uses('Welcome')
+            ->pong();
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('{"success":true}', $response->getBody());
@@ -184,14 +184,14 @@ class ClientTest extends TestCase
         $this->expectExceptionMessage('Not Authorized!');
 
         $faker = Faker::create()
-                    ->call('GET', [], '')
-                    ->expectEndpointIs('https://acme.laravie/v1/welcome')
-                    ->shouldResponseWith(401)
-                    ->expectReasonPhraseIs('Not Authorized!');
+            ->call('GET', [], '')
+            ->expectEndpointIs('https://acme.laravie/v1/welcome')
+            ->shouldResponseWith(401)
+            ->expectReasonPhraseIs('Not Authorized!');
 
         $response = (new Client($faker->http(), 'abc'))
-                        ->uses('Welcome')
-                        ->pong();
+            ->uses('Welcome')
+            ->pong();
     }
 
     /** @test */
