@@ -87,7 +87,7 @@ class ClientTest extends TestCase
         ];
 
         $faker = Faker::create()
-                    ->send('POST', [], http_build_query($payload, null, '&'))
+                    ->send('POST', [], http_build_query($payload, '', '&'))
                     ->expectEndpointIs('https://acme.laravie/v1/welcome')
                     ->shouldResponseWith(200, '{"success":true}');
 

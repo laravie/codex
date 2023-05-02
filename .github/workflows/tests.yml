@@ -16,11 +16,19 @@ jobs:
           - "ubuntu-latest"
           - "windows-latest"
         php:
+<<<<<<< HEAD
           - 7.2
           - 7.3
           - 7.4
           - '8.0'
           - 8.1
+=======
+          - "7.2"
+          - "7.3"
+          - "7.4"
+          - "8.0"
+          - "8.1"
+>>>>>>> origin/master
         dependencies:
           - "highest"
           - "lowest"
@@ -55,8 +63,11 @@ jobs:
           dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "--prefer-dist --no-cache"
 
+<<<<<<< HEAD
       - name: Installed dependencies
         run: composer show -D
 
+=======
+>>>>>>> origin/master
       - name: Execute tests
         run: vendor/bin/phpunit
