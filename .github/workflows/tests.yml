@@ -16,33 +16,14 @@ jobs:
           - "ubuntu-latest"
           - "windows-latest"
         php:
-<<<<<<< HEAD
-          - 7.2
-          - 7.3
-          - 7.4
           - '8.0'
           - 8.1
-=======
-          - "7.2"
-          - "7.3"
-          - "7.4"
-          - "8.0"
-          - "8.1"
->>>>>>> origin/master
+          - 8.2
         dependencies:
           - "highest"
           - "lowest"
         experimental:
           - false
-        include:
-          - os: "ubuntu-latest"
-            php: 8.2
-            dependencies: "highest"
-            experimental: true
-          - os: "windows-latest"
-            php: 8.2
-            dependencies: "highest"
-            experimental: true
 
     name: PHP${{ matrix.php }} on ${{ matrix.os }} (${{ matrix.dependencies }})
 
@@ -63,11 +44,8 @@ jobs:
           dependency-versions: "${{ matrix.dependencies }}"
           composer-options: "--prefer-dist --no-cache"
 
-<<<<<<< HEAD
       - name: Installed dependencies
         run: composer show -D
 
-=======
->>>>>>> origin/master
       - name: Execute tests
         run: vendor/bin/phpunit
