@@ -21,10 +21,7 @@
     },
     "require": {
         "php": ">=8.0.0 <8.3.0",
-        "guzzlehttp/psr7": "2.6.x-dev",
-        "laravie/codex-common": "^2.0",
-        "php-http/message": "1.x-dev",
-        "php-http/message-factory": "^1.0@dev"
+        "laravie/codex-common": "^2.1"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.0.1",
