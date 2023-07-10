@@ -24,7 +24,6 @@
         "laravie/codex-common": "^2.1"
     },
     "require-dev": {
-        "guzzlehttp/guzzle": "^7.0.1",
         "laravel/pint": "^1.1",
         "laravie/codex-filter": "^2.0",
         "mockery/mockery": "^1.4.4",
